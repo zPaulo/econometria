@@ -3,12 +3,11 @@ import fs from 'fs';
 import path from 'path';
 
 const db = createClient({
-  url: 'libsql://econometria-zpaulo.aws-us-east-2.turso.io',
-  authToken: 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlSmNuZW1pX0VmR1hzMWJ3QTJWU2pnIiwib3JnX2lkIjoxMDAwMTIwNzA2fQ.9zT-f4QG1kY28Q1auNa-BiU2gBd06ygPc7-qfNLPMLPgKDQBKnx6WBD0H_lOOoDmXJL7dvcHtvuyyZbM76J2Dw',
+  url: 'file:econometria.db',
 });
 
 async function main() {
-  console.log('Iniciando seed do banco de dados Turso...');
+  console.log('Iniciando seed do banco de dados (SQLite local)...');
 
   // Criar tabelas
   await db.execute(`
@@ -16,6 +15,15 @@ async function main() {
       id INTEGER PRIMARY KEY,
       name TEXT NOT NULL,
       description TEXT
+    );
+  `);
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS lessons (
+      theme_id INTEGER PRIMARY KEY,
+      video_url TEXT,
+      content_md TEXT NOT NULL,
+      FOREIGN KEY (theme_id) REFERENCES themes (id)
     );
   `);
 
@@ -85,7 +93,8 @@ async function main() {
     { term: 'raiz unitária', definition: 'Um processo estocástico com raiz unitária é não-estacionário. O teste de Dickey-Fuller (ADF) é usado para verificar a existência.' },
     { term: 'sazonalidade', definition: 'Padrões de variação em uma série temporal que se repetem em intervalos regulares de tempo (ex: estações do ano, meses).' },
     { term: 'holt-winters', definition: 'Método de suavização exponencial que lida com séries que possuem nível, tendência e sazonalidade.' },
-    { term: 'ARIMA', definition: 'Modelo Autorregressivo Integrado de Médias Móveis. Usado para prever valores futuros em séries não-estacionárias que precisam ser diferenciadas.' }
+    { term: 'arima', definition: 'Modelo Autorregressivo Integrado de Médias Móveis. Usado para prever valores futuros em séries não-estacionárias.' },
+    { term: 'bjr', definition: 'Metodologia Box-Jenkins-Reinsel para identificação, estimação, diagnóstico e previsão de séries temporais.' }
   ];
 
   for (const t of terms) {
@@ -97,26 +106,75 @@ async function main() {
 
   console.log('Temas e Glossário inseridos.');
 
+  // Inserir Aulas Básicas
+  const lessons = [
+    {
+      theme_id: 1,
+      video_url: 'https://www.youtube.com/embed/jZ_y8qU5T1I', // Econometrics intro video example
+      content_md: `## Introdução à Econometria 2
+
+Neste módulo inicial, relembramos a história da **Cowles Commission for Research in Economics**, fundada em 1932 por Alfred Cowles. Seu principal lema era *Science is Measurement*, buscando aplicar técnicas matemáticas e estatísticas na economia.
+
+A econometria moderna deve muito a esses debates iniciais sobre se a economia poderia prever os mercados com a mesma precisão que a física prevê os movimentos estelares.
+
+### Principais Tópicos:
+- A crítica das "Medidas sem Teoria".
+- O papel da Teoria Econômica na restrição e formulação dos modelos.
+- Concursos de Previsão M (Makridakis Competitions) que comparam modelos simples contra modelos de Machine Learning super complexos na análise de séries temporais.
+
+> Lembre-se: Nem sempre o modelo mais complexo é o melhor em prever o futuro "fora da amostra" (out-of-sample).`
+    },
+    {
+      theme_id: 2,
+      video_url: 'https://www.youtube.com/embed/8FzwRXjvsqI', // Dummy variables/extrapolation
+      content_md: `## Modelos Determinísticos e Extrapolação
+
+A Extrapolação Simples envolve prever o futuro assumindo que a série temporal se move em torno de uma tendência determinística, como uma linha reta ($y_t = a + bt$) ou curva ($y_t = e^{a+bt}$).
+
+### O problema das Dummies
+Quando a economia sofre choques (como o Plano Real, Covid-19, Crise de 2008), ocorrem *quebras estruturais*. Se usarmos a extrapolação simples, precisamos de variáveis **Dummy** para capturar essas quebras:
+- **Dummies de Intercepto**: Alteram o patamar da série.
+- **Dummies de Inclinação**: Alteram a velocidade/tendência da série.
+
+No entanto, adicionar muitas Dummies corrói os *graus de liberdade* do modelo, o que é altamente indesejado em econometria.`
+    }
+  ];
+
+  for (const lesson of lessons) {
+    await db.execute({
+      sql: 'INSERT OR IGNORE INTO lessons (theme_id, video_url, content_md) VALUES (?, ?, ?)',
+      args: [lesson.theme_id, lesson.video_url, lesson.content_md]
+    });
+  }
+  console.log('Aulas inseridas.');
+
   try {
     const questionsFile = path.join(process.cwd(), 'questions.json');
     if (fs.existsSync(questionsFile)) {
       const qData = JSON.parse(fs.readFileSync(questionsFile, 'utf8'));
       console.log(`Encontradas ${qData.length} questões no arquivo questions.json`);
       for (const q of qData) {
-        const qRes = await db.execute({
-          sql: 'INSERT INTO questions (theme_id, text, image_url, general_explanation) VALUES (?, ?, ?, ?) RETURNING id',
-          args: [q.theme_id, q.text, q.image_url || null, q.general_explanation]
+        // Verificar se já existe (evitar duplicação em múltiplos seeds)
+        const exist = await db.execute({
+          sql: 'SELECT id FROM questions WHERE text = ?',
+          args: [q.text]
         });
-        const qId = qRes.rows[0].id;
-
-        for (const opt of q.options) {
-          await db.execute({
-            sql: 'INSERT INTO options (question_id, text, is_correct, specific_explanation) VALUES (?, ?, ?, ?)',
-            args: [qId, opt.text, opt.is_correct ? 1 : 0, opt.specific_explanation]
+        if (exist.rows.length === 0) {
+          const qRes = await db.execute({
+            sql: 'INSERT INTO questions (theme_id, text, image_url, general_explanation) VALUES (?, ?, ?, ?) RETURNING id',
+            args: [q.theme_id, q.text, q.image_url || null, q.general_explanation]
           });
+          const qId = qRes.rows[0].id;
+
+          for (const opt of q.options) {
+            await db.execute({
+              sql: 'INSERT INTO options (question_id, text, is_correct, specific_explanation) VALUES (?, ?, ?, ?)',
+              args: [qId, opt.text, opt.is_correct ? 1 : 0, opt.specific_explanation]
+            });
+          }
         }
       }
-      console.log('Questões do JSON inseridas com sucesso!');
+      console.log('Questões do JSON processadas com sucesso!');
     }
   } catch (e) {
     console.error('Erro ao inserir questions.json:', e);

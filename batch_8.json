@@ -1,0 +1,872 @@
+[
+  {
+    "theme_id": 7,
+    "text": "O teste Kwiatkowski-Phillips-Schmidt-Shin (KPSS) é uma ferramenta essencial para analisar a estacionariedade de séries temporais. Em relação à hipótese nula do teste KPSS e à sua interpretação, assinale a alternativa correta:",
+    "image_url": null,
+    "general_explanation": "O teste KPSS postula a estacionariedade (seja em nível ou em torno de uma tendência) como hipótese nula. Isso o distingue de testes como o Dickey-Fuller Aumentado (ADF), que postulam a raiz unitária como hipótese nula.",
+    "concept_slug": "teste-kpss",
+    "options": [
+      {
+        "text": "A hipótese nula do KPSS é a presença de uma raiz unitária, e a rejeição implica que a série é estacionária.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Essa é a formulação dos testes ADF e PP, não do KPSS."
+      },
+      {
+        "text": "A hipótese nula do KPSS é a estacionariedade. Se a estatística de teste for maior que o valor crítico tabelado, rejeita-se a estacionariedade.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O KPSS inverte as hipóteses clássicas de raiz unitária. Estatísticas altas levam à rejeição de H0 (estacionariedade)."
+      },
+      {
+        "text": "O teste KPSS assume a não estacionariedade sob a hipótese alternativa, mas exige que os resíduos sigam distribuição normal estrita.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste baseia-se em um estimador consistente de variância de longo prazo (HAC) e não exige normalidade estrita dos erros."
+      },
+      {
+        "text": "A aceitação da hipótese nula no KPSS indica, com 100% de certeza, que a série não possui quebras estruturais.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O KPSS padrão não é desenhado para testar ou descartar quebras estruturais, o que requer testes específicos (ex: Zivot-Andrews)."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "Ao aplicar o teste KPSS em uma série temporal de vendas no varejo, o estatístico obteve o valor de 3,1948, enquanto o valor crítico para 1% de significância era 0,739. Qual é a conclusão adequada para este cenário?",
+    "image_url": null,
+    "general_explanation": "No teste KPSS, a estatística de teste é comparada com os valores críticos (geralmente da distribuição assintótica derivada por Kwiatkowski et al.). Se o valor calculado for superior ao crítico, rejeitamos a hipótese nula de estacionariedade.",
+    "concept_slug": "teste-kpss",
+    "options": [
+      {
+        "text": "A hipótese nula de raiz unitária é rejeitada, concluindo-se que a série é estacionária.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A hipótese nula do KPSS não é a de raiz unitária."
+      },
+      {
+        "text": "Como a estatística calculada (3,1948) supera o valor crítico (0,739), não podemos rejeitar a hipótese nula.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O critério de rejeição é exatamente quando a estatística supera o valor crítico."
+      },
+      {
+        "text": "Rejeita-se a hipótese nula de estacionariedade a 1% de significância, inferindo-se que a série é não estacionária.",
+        "is_correct": true,
+        "specific_explanation": "Correto. A estatística muito superior ao valor crítico fornece forte evidência contra a estacionariedade da série."
+      },
+      {
+        "text": "A série apresenta estacionariedade em tendência, pois a estatística de teste é positiva e elevada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Estatísticas elevadas no KPSS indicam não estacionariedade, independentemente de ser o modelo com ou sem tendência."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "Em análises de séries temporais, é comum empregar a 'análise confirmatória' utilizando os testes ADF e KPSS conjuntamente. Se o teste ADF não rejeita a sua hipótese nula e o teste KPSS rejeita a sua hipótese nula, o que se pode concluir sobre a série?",
+    "image_url": null,
+    "general_explanation": "A análise confirmatória combina ADF (H0: Raiz Unitária) e KPSS (H0: Estacionária). Se o ADF não rejeita (sugerindo raiz unitária) e o KPSS rejeita (sugerindo não estacionária), ambos os testes concordam que a série é integrada/não estacionária.",
+    "concept_slug": "teste-kpss",
+    "options": [
+      {
+        "text": "Os testes fornecem resultados conflitantes, indicando que a série não possui estrutura linear.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Os resultados são consistentes entre si."
+      },
+      {
+        "text": "A série é, de forma consistente e robusta, considerada estacionária.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A não rejeição no ADF e a rejeição no KPSS indicam não estacionariedade."
+      },
+      {
+        "text": "Há forte evidência de que a série é não estacionária (possui raiz unitária).",
+        "is_correct": true,
+        "specific_explanation": "Correto. O ADF sugere a presença de raiz unitária, e o KPSS confirma que a série não é estacionária."
+      },
+      {
+        "text": "A série é fracionariamente integrada, uma vez que o KPSS rejeita H0 devido à variância infinita.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Embora processos fracionários possam causar rejeição, a conclusão padrão para essa combinação é que a série é I(1) ou possui raiz unitária."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "O cálculo da estatística do teste KPSS depende fortemente da estimativa da variância de longo prazo da série. Qual é o papel dessa estimativa no teste?",
+    "image_url": null,
+    "general_explanation": "O teste KPSS emprega um estimador consistente da variância de longo prazo (HAC, como o de Newey-West com kernel de Bartlett) para corrigir a autocorrelação e a heterocedasticidade nos resíduos ao construir a estatística de teste.",
+    "concept_slug": "teste-kpss",
+    "options": [
+      {
+        "text": "Garantir que a série seja normalmente distribuída, ajustando a curtose dos dados.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A variância de longo prazo não ajusta os dados para obter normalidade."
+      },
+      {
+        "text": "Corrigir a autocorrelação e heterocedasticidade presentes nos erros, utilizando estimadores como Newey-West.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Sem essa correção, a estatística do KPSS poderia rejeitar indevidamente a hipótese nula devido à autocorrelação de curto prazo."
+      },
+      {
+        "text": "Remover a tendência determinística da série antes do cálculo do passeio aleatório.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A remoção da tendência determinística é feita através dos resíduos da regressão inicial, não pelo estimador da variância de longo prazo."
+      },
+      {
+        "text": "Penalizar a inclusão de defasagens excessivas, semelhante aos critérios AIC e BIC.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A variância de longo prazo é um parâmetro de escala para o denominador do teste, não um critério de informação."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "Para lidar com diferentes comportamentos nas séries temporais, o teste KPSS pode ser executado em duas versões básicas: em torno de uma média (nível) e em torno de uma tendência. Se aplicarmos a versão com tendência em uma série que apenas possui mudança de nível, qual o risco associado?",
+    "image_url": null,
+    "general_explanation": "A especificação correta do modelo determinístico subjacente no KPSS é crucial. Incluir uma tendência determinística quando ela não existe resulta em perda de poder do teste e em estimativas inconsistentes do componente de passeio aleatório.",
+    "concept_slug": "teste-kpss",
+    "options": [
+      {
+        "text": "Pode haver redução no poder do teste, dificultando a rejeição da hipótese nula quando a série é de fato não estacionária.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Especificar uma tendência desnecessária absorve parte da variação, podendo levar à falsa aceitação de estacionariedade."
+      },
+      {
+        "text": "O teste se torna inválido, pois a estatística seguirá uma distribuição t de Student e não a distribuição de KPSS.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A estatística ainda segue a distribuição do KPSS correspondente (com tendência), mas é uma má especificação teórica."
+      },
+      {
+        "text": "Não há impacto prático, pois os valores críticos são os mesmos para ambas as versões do teste.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Os valores críticos do KPSS para nível e para tendência são diferentes."
+      },
+      {
+        "text": "A estatística do teste tenderá sempre ao infinito, garantindo a rejeição da hipótese nula independentemente dos dados.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A estatística não tende automaticamente ao infinito por essa má especificação."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Ljung e Box propuseram uma modificação ao teste de Portmanteau (Box-Pierce) argumentando problemas em pequenas amostras. Qual foi a justificativa matemática para essa alteração?",
+    "image_url": null,
+    "general_explanation": "A estatística de Box-Pierce tende a subestimar o verdadeiro valor em pequenas amostras. Ljung e Box introduziram uma correção no peso de cada autocorrelação (fator (n+2)/(n-k)) para que a estatística se aproximasse mais fidedignamente da distribuição qui-quadrado.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "O teste Box-Pierce assumia que os resíduos tinham distribuição t, enquanto Ljung e Box provaram que eles seguem uma Normal Padrão.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Ambos os testes avaliam uma estatística que assintoticamente segue uma distribuição qui-quadrado."
+      },
+      {
+        "text": "A estatística original era muito sensível a quebras estruturais, o que foi resolvido aplicando-se a diferença das variâncias ao quadrado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O problema não era de quebra estrutural, mas de aproximação assintótica em pequenas amostras."
+      },
+      {
+        "text": "A variância das autocorrelações amostrais não é perfeitamente 1/n em amostras finitas, sendo que a formulação de Ljung-Box corrige essa variância ponderando as defasagens pelo fator (n+2)/(n-k).",
+        "is_correct": true,
+        "specific_explanation": "Correto. Esta correção melhora drasticamente o tamanho do teste para pequenas e médias amostras."
+      },
+      {
+        "text": "Box e Pierce exigiam resíduos não correlacionados, enquanto Ljung e Box permitiram que os resíduos apresentassem raiz unitária.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Se os resíduos possuírem raiz unitária, o modelo ARIMA foi mal especificado. Ambos os testes assumem resíduos sem estrutura sob H0."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Ao analisar os resíduos de um modelo ARIMA estimado, aplica-se o teste de Ljung-Box até a defasagem k. Qual é a hipótese nula avaliada por este teste?",
+    "image_url": null,
+    "general_explanation": "O teste de Ljung-Box é um teste global (Portmanteau) que verifica se um conjunto de autocorrelações até um lag específico 'k' é conjuntamente igual a zero. Se H0 for aceita, os resíduos se comportam como ruído branco.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "A variância dos resíduos é homocedástica até a defasagem k.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Este seria o objetivo de um teste ARCH-LM."
+      },
+      {
+        "text": "As autocorrelações dos resíduos, da defasagem 1 até k, são simultaneamente nulas.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Esta hipótese define que não existe estrutura linear remanescente nos resíduos até a ordem k."
+      },
+      {
+        "text": "A série temporal original é estacionária em covariância.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste de Ljung-Box é aplicado aos resíduos do modelo para testar autocorrelação, não à série para testar estacionariedade."
+      },
+      {
+        "text": "Os coeficientes AR e MA estimados não são estatisticamente diferentes de zero.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste sobre coeficientes individuais do modelo é feito via teste t, não pelo teste Ljung-Box."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Seja um modelo ARIMA(2,1,1) ajustado a uma série de tamanho n. Ao aplicar o teste de Ljung-Box nos resíduos considerando k=10 defasagens, os graus de liberdade da distribuição Qui-quadrado de referência serão:",
+    "image_url": null,
+    "general_explanation": "Para resíduos de modelos ARIMA(p,d,q), a distribuição assintótica da estatística de Ljung-Box sob a hipótese nula é uma Qui-quadrado com k - p - q graus de liberdade, onde p e q são os parâmetros AR e MA estimados. A diferenciação (d) não afeta os graus de liberdade.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "10 graus de liberdade, independentemente do modelo estimado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Ao aplicar em resíduos de um modelo, os graus de liberdade devem ser ajustados subtraindo o número de parâmetros estimados."
+      },
+      {
+        "text": "6 graus de liberdade.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A fórmula é k - p - q = 10 - 2 - 1 = 7."
+      },
+      {
+        "text": "7 graus de liberdade.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O número de graus de liberdade é k - p - q = 10 - 2 - 1 = 7."
+      },
+      {
+        "text": "8 graus de liberdade.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Isso assumiria que apenas p ou q seria 2."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Um analista constrói um modelo para prever a inflação. Após estimar os parâmetros, ele executa o teste Ljung-Box nos resíduos e obtém um p-valor de 0,02 (para k=12). A um nível de significância de 5%, o que o analista deve concluir?",
+    "image_url": null,
+    "general_explanation": "Um p-valor menor que o nível de significância adotado indica que a hipótese nula deve ser rejeitada. No caso do Ljung-Box, isso significa que há autocorrelação residual, e o modelo atual não capturou toda a estrutura dos dados.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "O modelo está bem especificado, pois os resíduos se assemelham a um ruído branco.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O p-valor de 0,02 < 0,05 implica rejeição de ruído branco."
+      },
+      {
+        "text": "Há evidência de autocorrelação residual, sugerindo que o modelo deve ser reespecificado, pois não capturou toda a dinâmica linear.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Rejeitar a hipótese nula no Ljung-Box é um sinal claro de que o modelo estimado deixou informação não explicada nos resíduos."
+      },
+      {
+        "text": "A inflação é não estacionária e requer uma diferenciação adicional.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Embora uma diferenciação ausente possa causar autocorrelação, a autocorrelação residual em si não determina univocamente a necessidade de diferenciação."
+      },
+      {
+        "text": "Os resíduos apresentam heterocedasticidade condicional (efeitos ARCH), invalidando os testes t.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste avalia autocorrelação, não heterocedasticidade condicional."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "A metodologia iterativa proposta por Box, Jenkins e Reinsel consiste classicamente em três estágios principais antes da fase de previsão. Quais são esses estágios, na ordem em que devem ser executados?",
+    "image_url": null,
+    "general_explanation": "A abordagem Box-Jenkins segue o ciclo iterativo de: 1. Identificação (estacionariedade, determinar p, d, q preliminares via ACF/PACF); 2. Estimação (calcular coeficientes via máxima verossimilhança/MQ); 3. Diagnóstico (verificar ruído branco dos resíduos).",
+    "concept_slug": "box-jenkins-selecao",
+    "options": [
+      {
+        "text": "Identificação, Diagnóstico e Estimação.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Não se pode realizar diagnóstico (testes em resíduos) antes de estimar o modelo."
+      },
+      {
+        "text": "Estimação, Identificação e Diagnóstico.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. É preciso identificar ordens p, d, q candidatas antes de estimar."
+      },
+      {
+        "text": "Identificação, Estimação e Diagnóstico.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Este é o fluxo clássico Box-Jenkins, que pode retornar à identificação caso o diagnóstico falhe."
+      },
+      {
+        "text": "Previsão, Estimação e Identificação.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A previsão é o objetivo final, ocorrendo após a seleção de um modelo adequado no ciclo."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "No contexto da escolha entre vários modelos candidatos na metodologia Box-Jenkins, o Princípio da Parcimônia afirma que:",
+    "image_url": null,
+    "general_explanation": "O Princípio da Parcimônia prescreve que o analista deve preferir modelos mais simples, ou seja, modelos com o menor número de parâmetros possível que consigam representar adequadamente as propriedades dos dados e gerem resíduos de ruído branco.",
+    "concept_slug": "box-jenkins-selecao",
+    "options": [
+      {
+        "text": "Deve-se escolher sempre modelos puramente AR em detrimento de modelos MA, pois são mais fáceis de interpretar.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A parcimônia se aplica ao número total de parâmetros e não a uma preferência teórica por componentes AR ou MA."
+      },
+      {
+        "text": "Entre modelos que ajustam razoavelmente bem os dados e cujos resíduos não apresentam autocorrelação, deve-se selecionar aquele com menor número de parâmetros estimados.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Modelos com muitos parâmetros (overfitting) tendem a performar mal em amostras fora da amostra de estimação (previsão)."
+      },
+      {
+        "text": "É preferível superparametrizar o modelo (adicionar mais componentes p e q) para garantir que a soma dos quadrados dos resíduos seja minimizada a zero.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Superparametrizar vai contra o princípio da parcimônia e gera previsões instáveis."
+      },
+      {
+        "text": "Modelos estacionários são parcimoniosos por definição, dispensando testes adicionais de diagnóstico.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Estacionariedade e parcimônia são conceitos distintos e independentes."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Os Critérios de Informação de Akaike (AIC) e Bayesiano de Schwarz (BIC) são ferramentas padrão para a seleção do melhor modelo ARIMA. O BIC penaliza a inclusão de parâmetros adicionais de forma:",
+    "image_url": null,
+    "general_explanation": "Ambos os critérios penalizam a perda de graus de liberdade pela inclusão de parâmetros. O AIC usa uma penalidade de 2k, enquanto o BIC usa k*ln(n), onde n é o tamanho da amostra. Para n >= 8, o termo ln(n) é maior que 2, tornando o BIC mais severo com modelos grandes.",
+    "concept_slug": "box-jenkins-selecao",
+    "options": [
+      {
+        "text": "Mais branda do que o AIC, tendendo a escolher modelos sobreparametrizados em amostras grandes.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O BIC é mais severo do que o AIC para tamanhos amostrais usuais."
+      },
+      {
+        "text": "Exatamente igual ao AIC, mas é derivado de fundamentos bayesianos enquanto o AIC vem da teoria da informação.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. As penalizações matemáticas são quantitativamente diferentes."
+      },
+      {
+        "text": "Mais severa do que o AIC em amostras com mais de 8 observações, resultando, frequentemente, em modelos mais parcimoniosos.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Como a penalidade do BIC cresce com o logaritmo do tamanho da amostra, ele favorece fortemente a parcimônia em amostras grandes."
+      },
+      {
+        "text": "Nula, uma vez que o BIC foca apenas no valor final da log-verossimilhança sem levar em conta o número de parâmetros.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O BIC contém explicitamente um termo de penalização em sua fórmula."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "Considere que um processo estocástico siga um modelo AR(1). Um aluno tenta superajustar a série especificando um modelo ARMA(2,1). O que é esperado ocorrer na estimação devido a raízes comuns (ou parâmetros redundantes)?",
+    "image_url": null,
+    "general_explanation": "Quando um modelo ARMA é sobreparametrizado adicionando-se polinômios AR e MA na mesma proporção (como passar de AR(1) para ARMA(2,1)), podem surgir raízes comuns nos polinômios característicos, tornando os coeficientes não identificáveis e resultando em erros padrão extremamente altos para os parâmetros adicionados.",
+    "concept_slug": "box-jenkins-selecao",
+    "options": [
+      {
+        "text": "O AIC apresentará uma melhoria significativa devido ao aumento irrestrito na verossimilhança.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A verossimilhança marginal melhora pouquíssimo com raízes comuns, não compensando a penalização do AIC/BIC."
+      },
+      {
+        "text": "Os coeficientes estimados para as partes AR e MA adicionais podem apresentar quase-cancelamento e alta variância (erros padrão inflados), revelando a sobreparametrização.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O fenômeno de 'common factors' leva a uma estrutura não identificável e incerteza computacional refletida em altos erros padrão."
+      },
+      {
+        "text": "O software será incapaz de executar o algoritmo de Mínimos Quadrados Condicionais e travará inevitavelmente.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Algoritmos modernos comumente convergem ou emitem avisos, ainda fornecendo estimativas numéricas, embora de baixa precisão."
+      },
+      {
+        "text": "O modelo ajustado deixará de ser invertível, garantindo que os resíduos se tornem auto correlacionados.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Raízes comuns não causam obrigatoriamente violação das condições de estacionariedade e invertibilidade."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "Além do AIC e diagnóstico de resíduos, verificar a estacionariedade e invertibilidade do modelo final é essencial. O que deve ser avaliado nas raízes dos polinômios AR e MA estimados?",
+    "image_url": null,
+    "general_explanation": "Para que um processo ARMA(p,q) seja causal (estacionário) e invertível, todas as raízes do polinômio autorregressivo (para estacionariedade) e do polinômio de médias móveis (para invertibilidade) devem estar localizadas fora do círculo unitário complexo (ou seus inversos dentro do círculo).",
+    "concept_slug": "box-jenkins-selecao",
+    "options": [
+      {
+        "text": "Todas as raízes devem ser exatas e reais, não podendo assumir valores no plano complexo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Raízes complexas são perfeitamente aceitáveis e refletem comportamentos oscilatórios/cíclicos."
+      },
+      {
+        "text": "As raízes de ambos os polinômios devem ser idênticas para garantir que o modelo seja equilibrado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Raízes idênticas entre AR e MA representam redundância (cancelamento), um sinal de má especificação."
+      },
+      {
+        "text": "As raízes características de ambos os polinômios devem estar situadas estritamente fora do círculo unitário.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Condição fundamental da teoria de séries temporais para que o processo seja estacionário e invertível."
+      },
+      {
+        "text": "O somatório das raízes deve ser igual a um, sinalizando que a variância do processo é finita.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Não há exigência de que a soma das raízes seja igual a um."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "A fase de identificação da metodologia Box-Jenkins depende intensamente da Função de Autocorrelação (FAC/ACF). Qual é o comportamento teórico da FAC de um processo de médias móveis de ordem pura, MA(q)?",
+    "image_url": null,
+    "general_explanation": "Em um modelo MA(q), a observação atual depende dos q choques aleatórios anteriores. Devido a essa memória de curto prazo limitada, a correlação entre Y_t e Y_{t-k} cai subitamente para zero para qualquer defasagem k > q.",
+    "concept_slug": "fac-facp-identificacao",
+    "options": [
+      {
+        "text": "Apresenta um decaimento exponencial ou oscilatório gradual para todas as defasagens.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Esse é o comportamento típico da FAC em modelos AR(p) ou ARMA(p,q)."
+      },
+      {
+        "text": "É estritamente positiva, crescendo linearmente conforme as defasagens aumentam.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Tal comportamento não reflete nenhum processo estacionário padronizado."
+      },
+      {
+        "text": "Corta abruptamente para zero (não sendo significativamente diferente de zero) após a defasagem q.",
+        "is_correct": true,
+        "specific_explanation": "Correto. A 'assinatura' primária de um modelo MA(q) é uma FAC truncada (cutoff) no lag q."
+      },
+      {
+        "text": "Permanece em níveis elevados em torno de 1, independentemente da defasagem observada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. FAC alta persistente é característica de séries não estacionárias (I(1))."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "A Função de Autocorrelação Parcial (FACP/PACF) é crucial para a determinação da ordem 'p' em modelos autorregressivos. Qual propriedade matemática define a FACP na defasagem k?",
+    "image_url": null,
+    "general_explanation": "A correlação parcial na defasagem k mede o grau de associação entre Y_t e Y_{t-k} após remover (filtrar) o efeito linear das defasagens intermediárias (Y_{t-1}, ..., Y_{t-k+1}). É por isso que ela trunca após a ordem 'p' em um modelo AR(p).",
+    "concept_slug": "fac-facp-identificacao",
+    "options": [
+      {
+        "text": "É a correlação simples entre Y_t e o termo de erro estocástico do modelo no instante t-k.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A correlação de Y_t com e_{t-k} não é o que define a FACP."
+      },
+      {
+        "text": "É a correlação entre Y_t e Y_{t-k}, mantendo constante a influência das variáveis intermediárias Y_{t-1} a Y_{t-k+1}.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O uso do conceito de correlação parcial exata garante que efeitos em cadeia de lags anteriores sejam removidos."
+      },
+      {
+        "text": "Corresponde às raízes do polinômio de médias móveis do modelo estimado por Yule-Walker.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. FACP não é raiz de polinômio, é uma métrica de correlação ajustada. Yule-Walker estima componentes AR, não MA."
+      },
+      {
+        "text": "Mede a variação explicada conjunta de todos os lags anteriores sobre o valor presente da série.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Esta definição aproxima-se do R² de uma regressão múltipla, não da métrica individualizada da FACP na defasagem k."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Ao analisar visualmente o correlograma de uma série que registra o número mensal de passageiros de uma companhia aérea ao longo de dez anos, você nota picos significativos e lentos na FAC nas defasagens 12, 24 e 36. O que este comportamento indica predominantemente?",
+    "image_url": null,
+    "general_explanation": "Em dados mensais (periodicidade s=12), correlações altas e decaindo lentamente nas defasagens sazonais (12, 24, 36...) são sintomas claros de sazonalidade persistente (raiz unitária sazonal), exigindo uma diferenciação sazonal.",
+    "concept_slug": "fac-facp-identificacao",
+    "options": [
+      {
+        "text": "Que a série deve ser modelada exclusivamente por um processo AR(3) de curto prazo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A periodicidade em 12, 24 e 36 indica dinâmica sazonal anual, não um AR(3) regular."
+      },
+      {
+        "text": "Sinaliza a presença de um forte padrão sazonal com raiz unitária na frequência sazonal, sugerindo a aplicação de diferenciação sazonal (d_s=1).",
+        "is_correct": true,
+        "specific_explanation": "Correto. Picos persistentes nessas defasagens múltiplas de 12 apontam forte memória sazonal não estacionária."
+      },
+      {
+        "text": "Indica que o processo é um ruído branco contínuo, porém com variância instável (efeito ARCH) apenas no final de cada ano.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. FAC mede dependência linear, não variância ou efeitos heterocedásticos."
+      },
+      {
+        "text": "Mostra que a série não apresenta nenhum componente autorregressivo, sendo puramente uma regressão tendencial determinística.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A FAC não descarta componentes AR, e uma tendência determinística pura se manifestaria de forma diferente na FAC de curto prazo."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "O comportamento clássico da Função de Autocorrelação (FAC) para detectar séries que não possuem média constante (necessitando da primeira diferença) é:",
+    "image_url": null,
+    "general_explanation": "Uma FAC que não decai rapidamente para zero, mantendo valores positivos altos em muitas defasagens e declinando lentamente de forma linear, é o indicador visual padrão de uma série com passeio aleatório (raiz unitária) ou tendência forte não estacionária em nível.",
+    "concept_slug": "fac-facp-identificacao",
+    "options": [
+      {
+        "text": "Corte agudo e imediato após a primeira defasagem.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Este é o comportamento de um processo estacionário MA(1)."
+      },
+      {
+        "text": "Oscilações senoidais amortecidas simetricamente ao redor de zero em um curto período.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Este comportamento indica um modelo AR estacionário com raízes complexas."
+      },
+      {
+        "text": "Decaimento extremamente lento, linear ou com altas autocorrelações remanescentes mesmo após dezenas de defasagens.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Essa alta persistência é o retrato de variância ilimitada/memória infinita típica de séries I(1)."
+      },
+      {
+        "text": "Nenhum valor excede os limites de Bartlett, provando que o primeiro momento não existe.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Se nada excede os limites de significância (Bartlett), é indício de ruído branco, não de não estacionariedade."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Identificar conjuntamente ordens mistas de processos ARMA(p,q) utilizando exclusivamente FAC e FACP pode ser bastante ambíguo, pois:",
+    "image_url": null,
+    "general_explanation": "Em modelos puros AR ou puros MA, as funções de autocorrelação e parcial têm cortes claros. Em processos mistos ARMA, tanto a FAC quanto a FACP decaem gradualmente (exponencialmente ou com oscilações) a partir da defasagem max(p,q), ocultando cortes óbvios para identificação da ordem exata.",
+    "concept_slug": "fac-facp-identificacao",
+    "options": [
+      {
+        "text": "Tanto a FAC quanto a FACP caem subitamente para zero na mesma defasagem.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Em processos ARMA, nenhuma das duas corta subitamente a zero; ambas têm cauda longa (tail off)."
+      },
+      {
+        "text": "Ambas as funções exibem um decaimento assintótico contínuo (tail off) que mistura os componentes autoregressivo e de média móvel, sem cortes distintos após p ou q.",
+        "is_correct": true,
+        "specific_explanation": "Correto. É por isso que, para modelos mistos, analistas testam múltiplas combinações p,q e usam critérios como AIC ou técnicas estendidas (EACF)."
+      },
+      {
+        "text": "A FACP de modelos mistos não pode ser computada matematicamente se p for diferente de q.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A FACP é sempre matematicamente definida para qualquer série estacionária usando as equações de Yule-Walker."
+      },
+      {
+        "text": "O pacote estatístico sempre subestima os coeficientes se a ordem for mista, distorcendo os gráficos independentemente das defasagens reais.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Os estimadores computacionais não causam essa ambiguidade inerente das propriedades teóricas de processos ARMA."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "Um modelo da família SARIMA é comumente representado pela notação ARIMA(p,d,q)(P,D,Q)[S]. O que o parâmetro 'd' indica estritamente sobre a série modelada?",
+    "image_url": null,
+    "general_explanation": "O parâmetro de integração d indica o número de diferenças ordinárias sucessivas (isto é, não sazonais, (1 - L)^d) aplicadas à série original para torná-la estacionária em sua média antes de ajustar os componentes AR e MA.",
+    "concept_slug": "arima-estimacao",
+    "options": [
+      {
+        "text": "Indica a presença de deriva determinística no modelo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A deriva (constante no modelo diferenciado) é um parâmetro à parte e não está explícita no d."
+      },
+      {
+        "text": "Representa o número de defasagens da variável dependente utilizadas na regressão.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Isso corresponde à ordem autorregressiva 'p'."
+      },
+      {
+        "text": "Reflete a ordem de diferenciação fracionária da série, permitindo a estimativa de memória longa no processo temporal.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Na notação padrão de Box-Jenkins, d assume valores inteiros não negativos. O caso fracionário denota a subclasse ARFIMA."
+      },
+      {
+        "text": "Representa o número de diferenças ordinárias sucessivas aplicadas para remover tendências estocásticas e alcançar estacionariedade em média.",
+        "is_correct": true,
+        "specific_explanation": "Correto. d é a ordem de integração do processo, denotando as transformações de diferenças requeridas."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "A equação ajustada para um modelo estimado indicou componentes ARIMA(1,1,1). O coeficiente AR(1) foi positivo e o coeficiente MA(1) foi negativo. Na formulação com o operador de defasagem (1 - \u03d5\u2081L)(1 - L)Y_t = (1 + \u03b8\u2081L)\u03b5_t, qual o impacto comportamental do termo AR(1) ser positivo?",
+    "image_url": null,
+    "general_explanation": "Um coeficiente AR(1) positivo (\u03d5\u2081 > 0) em um modelo para a série na primeira diferença (\u0394Y_t) implica inércia no curto prazo: variações passadas positivas tendem a ser seguidas por variações correntes também positivas. No caso de \u03d5\u2081 próximo de 1, o nível original Y_t exibiria trajetória altamente suave com tendência local.",
+    "concept_slug": "arima-estimacao",
+    "options": [
+      {
+        "text": "Indica que o valor contemporâneo da série em primeira diferença tende a se mover na direção oposta ao seu valor da observação imediatamente passada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Isso corresponderia a um coeficiente AR(1) negativo (reversão rápida à média)."
+      },
+      {
+        "text": "Reflete que a mudança ocorrida na série hoje é positivamente correlacionada com a mudança ocorrida no período imediatamente anterior.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Um \u03d5\u2081 positivo significa dependência positiva entre choques sucessivos na série já diferenciada (\u0394Y_t)."
+      },
+      {
+        "text": "Mostra que o resíduo passado tem influência direta e positiva sobre o valor não diferenciado da série no tempo t.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O impacto do erro passado imediato é comandado pelo coeficiente MA(1), não pelo AR(1)."
+      },
+      {
+        "text": "Significa que o modelo apresenta comportamento explosivo, devendo ser diferenciado mais uma vez (d=2).",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Um \u03d5\u2081 positivo menor que 1 (estacionário) não torna o modelo explosivo."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Em pacotes econométricos avançados, os modelos ARIMA são frequentemente estimados através de métodos baseados em Máxima Verossimilhança (ML) ao invés de Mínimos Quadrados Condicionais (CSS). Uma vantagem expressiva da estimação ML em modelos com componentes de Média Móvel (MA) é:",
+    "image_url": null,
+    "general_explanation": "A função condicional impõe premissas como e_0 = e_-1 = 0, o que cria viés em amostras pequenas, principalmente para raízes próximas a 1 e modelos MA. A Máxima Verossimilhança Exata (geralmente implementada com filtro de Kalman) acomoda corretamente as condições iniciais e produz estimadores mais eficientes.",
+    "concept_slug": "arima-estimacao",
+    "options": [
+      {
+        "text": "Calcular diretamente o p-valor usando estatísticas não paramétricas, evitando suposições sobre a distribuição do termo de erro.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A estimação ML tradicionalmente requer uma suposição explícita sobre a distribuição dos erros (comumente a normalidade gaussiana)."
+      },
+      {
+        "text": "Lidar mais eficientemente com as observações e erros iniciais, o que é crucial em amostras pequenas e coeficientes MA perto do limite de invertibilidade.",
+        "is_correct": true,
+        "specific_explanation": "Correto. A ML Exata não chuta as inovações (choques) pré-amostrais para zero ingenuamente, o que diminui vieses em relação à estimação CSS condicional."
+      },
+      {
+        "text": "Garantir que a série é tratada como estacionária em variância, dispensando a aplicação de transformação Logarítmica via filtro de Box-Cox.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O método ML de otimização de parâmetros não corrige instabilidades de variância (heterocedasticidade intrínseca da série) magicamente."
+      },
+      {
+        "text": "Permitir a inclusão de infinitas defasagens AR sem a necessidade de calcular matrizes invertíveis, minimizando erros de arredondamento computacional.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A estimação ML não permite infinitas defasagens e também envolve inversão intensiva de matrizes, sendo inclusive mais lenta computacionalmente."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "A condição de invertibilidade para um modelo de médias móveis de primeira ordem, MA(1) definido como Y_t = \u03b5_t + \u03b8\u2081\u03b5_{t-1}, exige que o parâmetro atenda à seguinte restrição matemática:",
+    "image_url": null,
+    "general_explanation": "Para que a série de inovações (\u03b5) possua representação como uma soma infinita de observações passadas (AR(\u221e)), a raiz do polinômio de médias móveis 1 + \u03b8\u2081L = 0 deve ser maior que 1 em módulo. Isto é equivalente a afirmar que o coeficiente \u03b8\u2081 deve satisfazer o intervalo de estabilidade estrito: -1 < \u03b8\u2081 < 1.",
+    "concept_slug": "arima-estimacao",
+    "options": [
+      {
+        "text": "O coeficiente \u03b8\u2081 deve ser estritamente maior que 1, para que os erros não explodam assintoticamente.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Se \u03b8\u2081 > 1 em módulo, a raiz característica estará dentro do círculo unitário, tornando o modelo não invertível."
+      },
+      {
+        "text": "O valor absoluto de \u03b8\u2081 deve ser menor que 1, ou seja, -1 < \u03b8\u2081 < 1.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Esta restrição garante que os choques passados tenham impacto decrescente à medida que recuamos infinitamente no tempo, garantindo uma convergência única."
+      },
+      {
+        "text": "O parâmetro \u03b8\u2081 deve ser exatamente igual a zero para estabilizar a variância do modelo estocástico.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Se fosse zero, seria um ruído branco puro, anulando o propósito do componente MA."
+      },
+      {
+        "text": "A soma do quadrado das inovações deve ser inferior ao módulo do coeficiente \u03b8\u2081 estimado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A soma do quadrado das inovações não é um teste ou critério algébrico de invertibilidade para os coeficientes estruturais."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "Para um processo Autorregressivo de ordem 1, modelado por Y_t = \u03d5\u2081Y_{t-1} + \u03b5_t, a condição de estacionariedade forte (em covariância) prescreve qual das seguintes restrições ao parâmetro \u03d5\u2081?",
+    "image_url": null,
+    "general_explanation": "Em analogia à invertibilidade no MA(1), o processo AR(1) será fracamente estacionário se o impacto de um choque em t-j sobre o valor em t decair com j tendendo ao infinito. Matematicamente, a raiz da equação 1 - \u03d5\u2081L = 0, que é 1/\u03d5\u2081, deve exceder 1 em módulo. Logo, |\u03d5\u2081| < 1.",
+    "concept_slug": "arima-estimacao",
+    "options": [
+      {
+        "text": "O parâmetro \u03d5\u2081 deve igualar 1, indicando o comportamento de um passeio aleatório estrito.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Quando \u03d5\u2081 = 1, o processo tem uma raiz unitária, logo é fundamentalmente não estacionário."
+      },
+      {
+        "text": "O módulo de \u03d5\u2081 deve ser menor que 1, garantindo reversão à média e variância constante incondicional.",
+        "is_correct": true,
+        "specific_explanation": "Correto. |\u03d5\u2081| < 1 assegura que choques antigos têm sua importância dissipada exponencialmente."
+      },
+      {
+        "text": "O coeficiente \u03d5\u2081 precisa ser negativo, garantindo um padrão alternado oscilatório em torno de zero.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Embora processos alternados (oscilatórios rápidos) sejam representados por \u03d5\u2081 negativos, um \u03d5\u2081 positivo fracionário (ex: 0,5) também é estacionário e perfeitamente válido."
+      },
+      {
+        "text": "O parâmetro de autorregressão não influi na estacionariedade, apenas os componentes determinísticos de tendência importam.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. \u03d5\u2081 dita a dinâmica estocástica (estacionariedade inerente), algo completamente diferente da adição externa de tendências (não estacionariedade determinística)."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "Se um pesquisador inadvertidamente aplicar uma diferença extra (sobrediferenciação) a uma série temporal que já era estacionária, o modelo resultante introduzirá artificialmente qual característica nos dados transformados?",
+    "image_url": null,
+    "general_explanation": "Aplicar o operador (1 - L) a uma série ruído branco \u03b5_t gera w_t = \u03b5_t - \u03b5_{t-1}. Isso induz matematicamente um padrão de Média Móvel MA(1) onde \u03b8\u2081 = -1. Em casos gerais, a sobrediferenciação cria um componente de médias móveis não invertível com raiz exatamente no círculo unitário.",
+    "concept_slug": "arima-estimacao",
+    "options": [
+      {
+        "text": "Aumentará consideravelmente a média da série, criando um desvio padrão explosivo em amostras extensas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A diferenciação anula médias e tendências determinísticas lineares. Não tornará a série média-explosiva."
+      },
+      {
+        "text": "Ocorrerá a introdução de uma raiz autorregressiva explosiva, distorcendo irreversivelmente as previsões no longo prazo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A diferenciação extra não introduz raízes explosivas, pois não tem impacto no numerador da função de transferência (lado AR)."
+      },
+      {
+        "text": "Será induzido um processo de média móvel não invertível, caracterizado por uma raiz MA unitária (\u03b8 = -1), complicando a estimação e a interpretação.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O processo artificial criado terá uma autocorrelação forte de ordem 1 (negativa) originada pelo operador de diferença sem correspondência com o gerador verdadeiro dos dados."
+      },
+      {
+        "text": "A função de autocorrelação se tornará invariavelmente nula em todos os lags, forçando que apenas modelos log-lineares sejam testados.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Na verdade, a FAC não fica nula; ela introduzirá uma autocorrelação artificial muito clara no lag 1 (ρ\u2081 = -0,5)."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Na etapa final de validação do modelo, o diagnóstico dos resíduos é conduzido para garantir que não haja estrutura remanescente nos dados. Qual das seguintes declarações define a exigência fundamental de um resíduo de 'Ruído Branco Estrito' (Strict White Noise)?",
+    "image_url": null,
+    "general_explanation": "A pressuposição ideal de ruído branco estrito vai além de ausência de autocorrelação serial (ruído branco fraco). Requer que cada observação do termo de erro seja independentemente e identicamente distribuída (i.i.d.) com média zero e variância constante.",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "Os resíduos são ortogonais entre si, mas podem apresentar dependência não linear em sua variância temporal.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O ruído branco fraco permite essa dependência não linear. O ruído branco estrito não, sendo eles completamente independentes."
+      },
+      {
+        "text": "Os resíduos consistem em uma sequência de variáveis independentes e identicamente distribuídas (i.i.d.), garantindo ausência de qualquer forma de dependência.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Essa é a definição formal de ruído branco estrito ou forte, crucial para as propriedades ótimas de inferência estatística sem correções."
+      },
+      {
+        "text": "Os resíduos apresentam médias incondicionais cíclicas, desde que as autocorrelações amostrais não excedam as bandas de confiança pontuais.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Médias oscilando e violando a média nula contrariam a premissa fundamental dos resíduos das estimações Box-Jenkins."
+      },
+      {
+        "text": "Os termos de erro do modelo estimado formam um processo puramente autorregressivo de ordem 1 com raiz fracionária.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Se eles formam um processo AR(1), eles têm estrutura de dependência, ou seja, absolutamente não são ruído branco."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "A avaliação da normalidade dos resíduos não é exigida estritamente para a estacionariedade, porém ela assegura as propriedades assintóticas dos testes t e F em amostras finitas. Qual teste é classicamente empregado para checar normalidade dos resíduos combinando métricas do 3º e 4º momentos centrais?",
+    "image_url": null,
+    "general_explanation": "O teste de Jarque-Bera constrói uma estatística com base nos coeficientes amostrais de assimetria (skewness, 3º momento) e curtose (kurtosis, 4º momento). Sob a hipótese nula de normalidade, assimetria teórica = 0 e curtose teórica = 3.",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "Teste de Granger.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste de Granger verifica causalidade estatística entre pares de séries."
+      },
+      {
+        "text": "Teste de Durbin-Watson.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Durbin-Watson é direcionado especificamente para detectar autocorrelação de ordem 1, não normalidade."
+      },
+      {
+        "text": "Teste Jarque-Bera (JB).",
+        "is_correct": true,
+        "specific_explanation": "Correto. O teste JB é a ferramenta padrão em softwares de econometria para analisar se a distribuição dos resíduos é consistente com uma normal com base nos momentos descritos."
+      },
+      {
+        "text": "Teste LM para Heterocedasticidade Condicional Autoregressiva.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Como o nome sugere, este (o teste ARCH-LM) examina variância condicional variável no tempo, não a aderência à distribuição Normal em si."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Durante o diagnóstico do modelo estimado, o analista verifica os resíduos e conclui que há expressiva autocorrelação restante. Qual é a principal consequência de se utilizar um modelo ARIMA cujos resíduos não são ruído branco?",
+    "image_url": null,
+    "general_explanation": "Se a premissa de ruído branco é violada, os estimadores dos coeficientes AR e MA podem ser ineficientes (em MLE) ou enviesados em certos contextos. Fundamentalmente, os erros padrão estimados estarão incorretos, e as projeções pontuais (previsões) assim como os intervalos de confiança da previsão perdem precisão porque o modelo não utilizou todo o potencial informativo contido no histórico da série.",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "As raízes do polinômio autorregressivo serão invariavelmente empurradas para fora do círculo unitário, melhorando a estabilidade da previsão.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Autocorrelação nos resíduos não força as estimativas AR a se tornarem mais estacionárias, na verdade, aponta uma lacuna explicativa."
+      },
+      {
+        "text": "A variância estimada passa a ser negativa computacionalmente, provocando falha na geração das bandas de probabilidade de previsão.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Variâncias continuam sendo estritamente não-negativas na estimação."
+      },
+      {
+        "text": "Os intervalos de previsão e os erros padrão dos parâmetros estimados estarão incorretos, gerando ineficiência informacional das previsões.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Se o resíduo possui estrutura preenchível (autocorrelação), o modelo atual não é a especificação ótima, e sua incerteza aferida torna-se falaciosa."
+      },
+      {
+        "text": "O método Box-Jenkins impõe uma correção de autocorrelação automática (tipo Cochrane-Orcutt), sanando o problema instantaneamente nas versões mais recentes dos softwares.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A correção não é automática e a filosofia Box-Jenkins requer iteração manual para adicionar os coeficientes adequados (novo p ou q)."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Algumas séries temporais exibem alternâncias notórias entre períodos calmos e voláteis ('clusters de volatilidade'). Como se detecta essa instabilidade específica da variância através dos resíduos do ARIMA ajustado?",
+    "image_url": null,
+    "general_explanation": "Aglomerados de volatilidade são o traço central da heterocedasticidade condicional (efeitos ARCH). Podem ser avaliados inspecionando os correlogramas (FAC e FACP) dos resíduos ao quadrado, ou formalmente aplicando o teste de multiplicador de Lagrange ARCH (ARCH-LM).",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "Calculando a raiz quadrada simples de todos os coeficientes t individuais e garantindo que o seu somatório é homogêneo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Isso é um teste matemático sem sentido metodológico."
+      },
+      {
+        "text": "Submetendo a série residual ao teste Dickey-Fuller Aumentado para procurar agrupamentos unitários não estocásticos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O ADF checa existência de raiz unitária na média, não clusters de variância."
+      },
+      {
+        "text": "Aplicando testes de autocorrelação (como Ljung-Box ou o teste ARCH-LM) sobre os valores ao quadrado dos resíduos obtidos.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O resíduo ao quadrado foca na variância. Autocorrelação estatística no erro quadrático denota dependência na variabilidade ao longo do tempo (Heterocedasticidade Condicional)."
+      },
+      {
+        "text": "Aferindo a estacionariedade determinística via ajuste polinomial nos resíduos padronizados gerados por MLE iterativo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Isso investigaria tendências de média residual, e não oscilações e clusters característicos da variância local."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Em pacotes econométricos que plotam gráficos de diagnóstico para modelos de série temporal, um dos quadros mais comuns é o gráfico dos 'Resíduos Padronizados' (Standardized Residuals). Qual aspecto visual sinaliza anomalias significativas que invalidariam a confiança em um bom ajuste?",
+    "image_url": null,
+    "general_explanation": "Resíduos padronizados são os resíduos divididos pelo seu erro padrão estimado. Se o modelo está bem ajustado, eles devem se comportar como uma amostra i.i.d normal. Anomalias como grandes valores discrepantes (outliers além de ±3 desvios), tendências sistemáticas residuais na média, ou mudanças óbvias na amplitude da dispersão (heterocedasticidade) apontam para sérias deficiências do ajuste.",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "Um padrão majoritariamente aleatório centrado em zero ao longo de todo o comprimento da amostra sem padrões previsíveis.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Este é precisamente o padrão desejado de ruído branco de um bom modelo, e não uma anomalia."
+      },
+      {
+        "text": "As oscilações do gráfico se concentrando quase inteiramente dentro de uma faixa de ±2 desvios-padrão.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A ausência de violações massivas sugere adequação empírica (95% estarão nessa banda na distribuição normal)."
+      },
+      {
+        "text": "Valores que oscilam fortemente acompanhados de sequências em zigue-zague extremamente previsíveis ou faixas com súbitos e mantidos alargamentos de variância (funis não aleatórios).",
+        "is_correct": true,
+        "specific_explanation": "Correto. Dependências como sequências zigue-zague fortes (ACF alta) ou alterações de amplitude persistentes sinalizam que efeitos dinâmicos vitais da média ou variância ficaram de fora da especificação."
+      },
+      {
+        "text": "A ausência total de heterocedasticidade condicional quando analisada retrospectivamente, mostrando uma homogeneidade excessiva no longo prazo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A homogeneidade (homocedasticidade) é desejável e constitui premissa subjacente em modelos ARIMA não-voláteis clássicos."
+      }
+    ]
+  }
+]

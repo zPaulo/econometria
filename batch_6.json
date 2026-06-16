@@ -1,0 +1,872 @@
+[
+    {
+        "theme_id": 1,
+        "text": "A cointegração descreve uma relação de longo prazo entre duas ou mais séries temporais não estacionárias. Se duas séries $X_t$ e $Y_t$ são I(1) e cointegradas, qual das seguintes afirmações é verdadeira sobre a combinação linear $Z_t = Y_t - \\beta X_t$?",
+        "image_url": null,
+        "general_explanation": "A cointegração indica que, embora as séries individuais sejam não estacionárias, elas possuem uma tendência estocástica comum, tornando a combinação linear I(0).",
+        "concept_slug": "cointegracao",
+        "options": [
+            {
+                "text": "$Z_t$ é estacionária e integrada de ordem 0.",
+                "is_correct": true,
+                "specific_explanation": "Correto. O conceito de cointegração para séries I(1) é que existe uma combinação I(0)."
+            },
+            {
+                "text": "$Z_t$ é não estacionária e integrada de ordem 1.",
+                "is_correct": false,
+                "specific_explanation": "Incorreto. Isso ocorreria se não houvesse cointegração."
+            },
+            {
+                "text": "$Z_t$ exibe uma tendência determinística explosiva.",
+                "is_correct": false,
+                "specific_explanation": "Incorreto. A premissa informa que são I(1)."
+            },
+            {
+                "text": "$Z_t$ deve necessariamente possuir média nula.",
+                "is_correct": false,
+                "specific_explanation": "Incorreto. A série pode ser estacionária ao redor de uma média diferente de zero."
+            }
+        ]
+    },
+    {
+        "theme_id": 1,
+        "text": "O Teste de Engle-Granger é um método clássico em dois passos para testar cointegração. Qual é o procedimento exigido na segunda etapa deste teste?",
+        "image_url": null,
+        "general_explanation": "O teste envolve estimar a regressão de longo prazo por MQO e testar a estacionariedade dos resíduos (I(0)) via ADF.",
+        "concept_slug": "cointegracao",
+        "options": [
+            {
+                "text": "Testar a estacionariedade dos resíduos da regressão de longo prazo através de um teste de Dickey-Fuller Aumentado (ADF).",
+                "is_correct": true,
+                "specific_explanation": "Exatamente, a segunda etapa verifica se a combinação linear é estacionária."
+            },
+            {
+                "text": "Estimar um modelo VAR irrestrito com as séries originais não diferenciadas.",
+                "is_correct": false,
+                "specific_explanation": "Modelagem de Johansen, não Engle-Granger."
+            },
+            {
+                "text": "Verificar se os coeficientes da regressão de longo prazo são conjuntamente significantes via teste F.",
+                "is_correct": false,
+                "specific_explanation": "Estatística F é inválida para variáveis não estacionárias."
+            },
+            {
+                "text": "Diferenciar as séries até torná-las estacionárias e reestimar o modelo.",
+                "is_correct": false,
+                "specific_explanation": "Diferenciar eliminaria a relação de longo prazo."
+            }
+        ]
+    },
+    {
+        "theme_id": 1,
+        "text": "No VECM, como o mecanismo de ajustamento atua quando há cointegração? O que o coeficiente do termo de erro defasado representa?",
+        "image_url": null,
+        "general_explanation": "O VECM usa os resíduos defasados (ECT). O coeficiente mede a correção do desequilíbrio passado no período atual.",
+        "concept_slug": "cointegracao",
+        "options": [
+            {
+                "text": "A velocidade de ajustamento da variável dependente em direção ao seu equilíbrio de longo prazo após um choque exógeno.",
+                "is_correct": true,
+                "specific_explanation": "Mede quão rápido a variável retorna ao equilíbrio."
+            },
+            {
+                "text": "O impacto puro de curtíssimo prazo de uma variável exógena sobre a variável dependente.",
+                "is_correct": false,
+                "specific_explanation": "Impactos de curto prazo estão nas variáveis diferenciadas."
+            },
+            {
+                "text": "O número de defasagens necessárias para eliminar correlação serial.",
+                "is_correct": false,
+                "specific_explanation": "Seleção de defasagens é feita via critérios de informação."
+            },
+            {
+                "text": "A persistência de inovações de uma relação espúria.",
+                "is_correct": false,
+                "specific_explanation": "VECM assume relação não espúria."
+            }
+        ]
+    },
+    {
+        "theme_id": 2,
+        "text": "A causalidade de Granger difere de causalidade determinística. O que significa afirmar que a série X causa no sentido de Granger a série Y?",
+        "image_url": null,
+        "general_explanation": "Causalidade de Granger verifica precedência temporal. X causa Y se o passado de X ajuda a prever o futuro de Y.",
+        "concept_slug": "causalidade-granger",
+        "options": [
+            {
+                "text": "Valores passados de X contêm informações úteis para prever os valores futuros de Y, superando previsões baseadas apenas no passado de Y.",
+                "is_correct": true,
+                "specific_explanation": "Definição clássica baseada em previsão."
+            },
+            {
+                "text": "Qualquer alteração em X provoca instantaneamente alteração em Y.",
+                "is_correct": false,
+                "specific_explanation": "Não implica simultaneidade instantânea."
+            },
+            {
+                "text": "A correlação cruzada contemporânea entre X e Y é perfeitamente 1.",
+                "is_correct": false,
+                "specific_explanation": "Correlação contemporânea não estabelece direção causal."
+            },
+            {
+                "text": "Os valores futuros de X determinam o passado de Y.",
+                "is_correct": false,
+                "specific_explanation": "Inverte a lógica do tempo."
+            }
+        ]
+    },
+    {
+        "theme_id": 2,
+        "text": "Para utilizar testes F ou Wald associados à Causalidade de Granger em um VAR, qual condição deve ser imposta às séries?",
+        "image_url": null,
+        "general_explanation": "Para testes com distribuição padrão (F/Chi-quadrado) no VAR, as séries devem ser estacionárias.",
+        "concept_slug": "causalidade-granger",
+        "options": [
+            {
+                "text": "As séries incluídas devem ser estacionárias; séries com raiz unitária sem cointegração devem ser diferenciadas.",
+                "is_correct": true,
+                "specific_explanation": "O teste padrão de Granger perde validade em séries não estacionárias."
+            },
+            {
+                "text": "Ambas as séries devem ser modeladas com raízes explosivas.",
+                "is_correct": false,
+                "specific_explanation": "Raízes explosivas invalidam inferência estatística."
+            },
+            {
+                "text": "As séries devem ser idênticas.",
+                "is_correct": false,
+                "specific_explanation": "Causaria colinearidade perfeita."
+            },
+            {
+                "text": "Os erros residuais devem exibir severa heterocedasticidade condicional.",
+                "is_correct": false,
+                "specific_explanation": "Erros devem ser preferencialmente ruído branco."
+            }
+        ]
+    },
+    {
+        "theme_id": 2,
+        "text": "Ao testar se 'Câmbio não Granger-causa Exportações' em um VAR com p defasagens, qual é o critério para rejeitar a hipótese nula?",
+        "image_url": null,
+        "general_explanation": "Testa-se a restrição conjunta de que todos os coeficientes defasados de X na equação de Y são iguais a zero.",
+        "concept_slug": "causalidade-granger",
+        "options": [
+            {
+                "text": "A estatística de teste para a hipótese conjunta de coeficientes das defasagens do Câmbio nulos apresentar p-valor inferior a alfa.",
+                "is_correct": true,
+                "specific_explanation": "Rejeitar a nula indica que pelo menos uma defasagem de X tem poder preditivo."
+            },
+            {
+                "text": "O Teste Dickey-Fuller rejeitar a não estacionariedade dos resíduos.",
+                "is_correct": false,
+                "specific_explanation": "Isso é diagnóstico do modelo ou teste de cointegração."
+            },
+            {
+                "text": "A variância do modelo irrestrito ser estatisticamente igual à do restrito.",
+                "is_correct": false,
+                "specific_explanation": "Deveria ser menor (modelo irrestrito explica melhor)."
+            },
+            {
+                "text": "Os coeficientes autorregressivos das Exportações serem nulos.",
+                "is_correct": false,
+                "specific_explanation": "A causalidade foca nos coeficientes da outra variável."
+            }
+        ]
+    },
+    {
+        "theme_id": 3,
+        "text": "Como um processo MA(q) puramente estruturado se comporta nos correlogramas (FAC e FACP)?",
+        "image_url": null,
+        "general_explanation": "Processo MA(q) tem autocovariâncias nulas após q. A FAC corta abruptamente, e a FACP decai gradualmente.",
+        "concept_slug": "modelos-arma",
+        "options": [
+            {
+                "text": "A FAC zera abruptamente após a defasagem q e a FACP decai exponencialmente ou de forma senoidal.",
+                "is_correct": true,
+                "specific_explanation": "Assinatura clássica de MA(q)."
+            },
+            {
+                "text": "A FAC decai exponencialmente e a FACP tem corte brusco em q.",
+                "is_correct": false,
+                "specific_explanation": "Comportamento de processo AR(p)."
+            },
+            {
+                "text": "Ambas exibem corte abrupto a partir de q.",
+                "is_correct": false,
+                "specific_explanation": "Raramente ocorre fora do ruído branco."
+            },
+            {
+                "text": "As duas caem vagarosamente para zero.",
+                "is_correct": false,
+                "specific_explanation": "Comportamento de processo ARMA(p,q)."
+            }
+        ]
+    },
+    {
+        "theme_id": 3,
+        "text": "Qual a justificativa primordial para requerer a invertibilidade de um modelo com componente MA?",
+        "image_url": null,
+        "general_explanation": "Invertibilidade permite representar o processo em função de observações passadas não-divergentes.",
+        "concept_slug": "modelos-arma",
+        "options": [
+            {
+                "text": "Garante que o MA possa ser escrito como AR(infinito) convergente, ligando inovações a choques do passado em ordem decrescente.",
+                "is_correct": true,
+                "specific_explanation": "Assegura representação única e pesos decrescentes para o passado."
+            },
+            {
+                "text": "Assegura que a variância não condicionada não caminhe para o infinito.",
+                "is_correct": false,
+                "specific_explanation": "Isto é estacionariedade do AR."
+            },
+            {
+                "text": "Permite que a série seja diferenciada infinitamente.",
+                "is_correct": false,
+                "specific_explanation": "Falso e teoricamente descabido."
+            },
+            {
+                "text": "Elimina a autocorrelação de longo prazo perfeitamente.",
+                "is_correct": false,
+                "specific_explanation": "Invertibilidade não garante eliminação de autocorrelação."
+            }
+        ]
+    },
+    {
+        "theme_id": 3,
+        "text": "Ao estimar parâmetros de modelos MA(q) ou ARMA(p,q), qual método é preferível em vez de MQO e por quê?",
+        "image_url": null,
+        "general_explanation": "Erros passados não são observados, exigindo estimação não linear.",
+        "concept_slug": "modelos-arma",
+        "options": [
+            {
+                "text": "Máxima Verossimilhança, pois termos de erro passados não são observáveis, tornando o modelo não linear nos parâmetros.",
+                "is_correct": true,
+                "specific_explanation": "Algoritmos iterativos são necessários devido à não linearidade."
+            },
+            {
+                "text": "Variáveis Instrumentais devido à endogeneidade natural.",
+                "is_correct": false,
+                "specific_explanation": "Não é a abordagem padrão para ARMA."
+            },
+            {
+                "text": "MQG para tratar variância inflacionada em pequenas amostras.",
+                "is_correct": false,
+                "specific_explanation": "Não resolve a inobservabilidade dos resíduos passados."
+            },
+            {
+                "text": "Estimador de Diferenças em Diferenças para retirar efeito exógeno.",
+                "is_correct": false,
+                "specific_explanation": "Técnica de inferência causal cruzada."
+            }
+        ]
+    },
+    {
+        "theme_id": 4,
+        "text": "Na notação ARIMA(p, d, q), o que representa o parâmetro 'd'?",
+        "image_url": null,
+        "general_explanation": "O parâmetro d é o grau de integração, referindo-se a quantas diferenciações a série necessita para se tornar estacionária.",
+        "concept_slug": "modelos-arima",
+        "options": [
+            {
+                "text": "A ordem de integração; o número de vezes que a série bruta foi diferenciada para se tornar estacionária.",
+                "is_correct": true,
+                "specific_explanation": "Define o número de aplicações do operador de primeira diferença."
+            },
+            {
+                "text": "O número de sazonalidades anuais capturadas.",
+                "is_correct": false,
+                "specific_explanation": "Isso estaria nos termos sazonais (SARIMA)."
+            },
+            {
+                "text": "O grau polinomial da tendência temporal determinística.",
+                "is_correct": false,
+                "specific_explanation": "Tendência é capturada pela constante na série estacionária."
+            },
+            {
+                "text": "A defasagem limite das autocorrelações parciais.",
+                "is_correct": false,
+                "specific_explanation": "Isso define a ordem p."
+            }
+        ]
+    },
+    {
+        "theme_id": 4,
+        "text": "Qual é uma das principais patologias provocadas pela super-diferenciação em uma série já estacionária?",
+        "image_url": null,
+        "general_explanation": "Diferenciar série estacionária induz raiz unitária no MA, tornando-o não-invertível.",
+        "concept_slug": "modelos-arima",
+        "options": [
+            {
+                "text": "A introdução artificial de uma raiz de magnitude unitária na parte de médias móveis, destruindo a invertibilidade.",
+                "is_correct": true,
+                "specific_explanation": "Cria um processo MA não invertível e com variância superestimada."
+            },
+            {
+                "text": "A criação de uma tendência puramente quadrática.",
+                "is_correct": false,
+                "specific_explanation": "Diferenciação remove tendência, não cria quadrática."
+            },
+            {
+                "text": "O colapso integral dos estimadores para zero.",
+                "is_correct": false,
+                "specific_explanation": "Estimadores não colapsam, mas se tornam redundantes/inconsistentes."
+            },
+            {
+                "text": "Transformação forçada de erro ARCH em puro ruído branco.",
+                "is_correct": false,
+                "specific_explanation": "Não altera o cluster de volatilidade intrínseco."
+            }
+        ]
+    },
+    {
+        "theme_id": 4,
+        "text": "Qual é a sequência correta de etapas da metodologia clássica Box-Jenkins?",
+        "image_url": null,
+        "general_explanation": "Identificação visual/correlograma, estimação dos parâmetros, verificação de diagnóstico, e uso preditivo.",
+        "concept_slug": "modelos-arima",
+        "options": [
+            {
+                "text": "Identificação, Estimação, Verificação de Diagnóstico, Previsão.",
+                "is_correct": true,
+                "specific_explanation": "Ciclo clássico estipulado por Box e Jenkins."
+            },
+            {
+                "text": "Estimação, Testes de Raiz Unitária, Identificação, Previsão.",
+                "is_correct": false,
+                "specific_explanation": "Identificação precede a estimação."
+            },
+            {
+                "text": "Verificação, Identificação, Estimação, Previsão.",
+                "is_correct": false,
+                "specific_explanation": "Não se verifica antes de estimar."
+            },
+            {
+                "text": "Previsão, Identificação, Verificação, Estimação.",
+                "is_correct": false,
+                "specific_explanation": "Ordem totalmente invertida."
+            }
+        ]
+    },
+    {
+        "theme_id": 5,
+        "text": "Na expressão polinomial $(1 - L)^2 y_t$, qual a equivalência nos dados observados?",
+        "image_url": null,
+        "general_explanation": "O operador $(1-L)^2$ aplica a primeira diferença duas vezes, gerando a segunda diferença da série.",
+        "concept_slug": "operador-defasagem",
+        "options": [
+            {
+                "text": "A segunda diferença estrita da série temporal original $y_t$.",
+                "is_correct": true,
+                "specific_explanation": "Equivale a $\\Delta^2 y_t$."
+            },
+            {
+                "text": "A taxa de crescimento quadrática periódica.",
+                "is_correct": false,
+                "specific_explanation": "Operadores L lidam com diferenças lineares, não potências ou taxas compostas."
+            },
+            {
+                "text": "O retrocesso exclusivo a $y_{t-2}$.",
+                "is_correct": false,
+                "specific_explanation": "Isso seria $L^2 y_t$, sem os termos cruzados."
+            },
+            {
+                "text": "A média normalizada do agrupamento defasado.",
+                "is_correct": false,
+                "specific_explanation": "O operador de média móvel não é o operador de diferença."
+            }
+        ]
+    },
+    {
+        "theme_id": 5,
+        "text": "Para um AR(2) $(1 - \\phi_1 L - \\phi_2 L^2)y_t = \\varepsilon_t$ ser estacionário, qual verificação se impõe às raízes?",
+        "image_url": null,
+        "general_explanation": "Estabilidade requer que as raízes da equação característica $\\Phi(z)=0$ fiquem fora do círculo unitário (|z| > 1).",
+        "concept_slug": "operador-defasagem",
+        "options": [
+            {
+                "text": "As raízes do polinômio autorregressivo devem localizar-se na região estritamente exterior ao círculo unitário (|z| > 1).",
+                "is_correct": true,
+                "specific_explanation": "Garante que o peso de choques passados dissipe."
+            },
+            {
+                "text": "As raízes precisam ser exclusivamente reais e positivas.",
+                "is_correct": false,
+                "specific_explanation": "Raízes complexas são aceitáveis (geram oscilações)."
+            },
+            {
+                "text": "Pelo menos uma raiz deve repousar sobre o círculo unitário.",
+                "is_correct": false,
+                "specific_explanation": "Isso define uma raiz unitária (série não estacionária)."
+            },
+            {
+                "text": "O determinante matricial do polinômio deve ser nulo.",
+                "is_correct": false,
+                "specific_explanation": "Incorreto do ponto de vista estrutural de raízes."
+            }
+        ]
+    },
+    {
+        "theme_id": 4,
+        "text": "No modelo ARMA(1,1), se $\\hat{\\phi}_1 = 0.52$ e $\\hat{\\theta}_1 = -0.50$, o que isso tipifica e qual a implicação?",
+        "image_url": null,
+        "general_explanation": "Aproximação $\\phi_1 \\approx -\\theta_1$ causa redundância/cancelamento de raízes. O modelo era provavelmente um simples ruído branco.",
+        "concept_slug": "reducao-ordem",
+        "options": [
+            {
+                "text": "Cancelamento analítico de raízes sugerindo redundância, indicando que a série se comporta como um modelo ruído branco ARMA(0,0).",
+                "is_correct": true,
+                "specific_explanation": "A superparametrização cria coeficientes de mesma magnitude nos dois lados."
+            },
+            {
+                "text": "Forte presença de cointegração endógena.",
+                "is_correct": false,
+                "specific_explanation": "Cointegração requer análise multivariada."
+            },
+            {
+                "text": "Oscilador harmônico perfeitamente balanceado.",
+                "is_correct": false,
+                "specific_explanation": "Termo não técnico."
+            },
+            {
+                "text": "Requer uso de volatilidade GARCH imediatamente.",
+                "is_correct": false,
+                "specific_explanation": "O problema está na equação da média condicional."
+            }
+        ]
+    },
+    {
+        "theme_id": 4,
+        "text": "Dada a equação defasada $(1 - 0.6L)(1 - 0.3L)y_t = (1 - 0.6L)\\varepsilon_t$, qual a redução matemática pertinente?",
+        "image_url": null,
+        "general_explanation": "Fatores polinomiais comuns $(1-0.6L)$ em ambos os lados podem ser simplificados, reduzindo a um AR(1).",
+        "concept_slug": "reducao-ordem",
+        "options": [
+            {
+                "text": "A presença da fração multiplicativa comum permite o cancelamento, resultando em um modelo simplificado AR(1) com equação $(1 - 0.3L)y_t = \\varepsilon_t$.",
+                "is_correct": true,
+                "specific_explanation": "Isso remove parâmetros redundantes sem violar propriedades estatísticas."
+            },
+            {
+                "text": "Redução ocorre pelo Teorema de Aproximação de Wold em amostras curtas.",
+                "is_correct": false,
+                "specific_explanation": "Isso é pura álgebra de operadores lineares."
+            },
+            {
+                "text": "A simplificação pode ser feita ignorando o operador $\\varepsilon_t$ sempre.",
+                "is_correct": false,
+                "specific_explanation": "Falso, depende do fator exato."
+            },
+            {
+                "text": "Simplificação porque séries decaem de forma logarítmica de Pareto.",
+                "is_correct": false,
+                "specific_explanation": "Sem sentido estocástico."
+            }
+        ]
+    },
+    {
+        "theme_id": 5,
+        "text": "Se a amplitude das flutuações sazonais aumenta linearmente com a média da série, qual transformação inicial deve ser operada?",
+        "image_url": null,
+        "general_explanation": "Sazonalidade multiplicativa pode ser homogeneizada pela transformação logarítmica, que achata expansões exponenciais.",
+        "concept_slug": "analise-grafica",
+        "options": [
+            {
+                "text": "Transformação logarítmica para estabilizar a variância incondicional no tempo perante a elevação do nível médio.",
+                "is_correct": true,
+                "specific_explanation": "O log estabiliza a variância quando o processo apresenta estrutura multiplicativa."
+            },
+            {
+                "text": "Aplicação de dupla diferenciação sazonal cruzada.",
+                "is_correct": false,
+                "specific_explanation": "Diferença não corrige heterocedasticidade proporcional."
+            },
+            {
+                "text": "Estimar com modelo VAR para suavizar amplitude.",
+                "is_correct": false,
+                "specific_explanation": "VAR precisa de séries estacionarizadas a priori."
+            },
+            {
+                "text": "Inclusão de Dummies sazonais sem logaritmo.",
+                "is_correct": false,
+                "specific_explanation": "Dummies sozinhas (aditivas) não ajustam perfeitamente a variação multiplicativa."
+            }
+        ]
+    },
+    {
+        "theme_id": 5,
+        "text": "Uma Função de Autocorrelação (FAC) com decaimento excessivamente longo e rampa alongada denota primariamente qual fenômeno?",
+        "image_url": null,
+        "general_explanation": "Decaimento muito lento é forte evidência visual de não estacionariedade, possivelmente presença de raiz unitária ou quase-unitária.",
+        "concept_slug": "analise-grafica",
+        "options": [
+            {
+                "text": "Forte sinal de Não-Estacionariedade, implicando alta persistência e indicativo provável de raiz unitária.",
+                "is_correct": true,
+                "specific_explanation": "Séries I(1) apresentam correlação perene que falha em convergir rapidamente."
+            },
+            {
+                "text": "Certeza de que o processo é puramente de Médias Móveis MA(1).",
+                "is_correct": false,
+                "specific_explanation": "MA(1) tem corte abrupto no lag 1."
+            },
+            {
+                "text": "Comprovação empírica direta de Estacionariedade Covariante ideal.",
+                "is_correct": false,
+                "specific_explanation": "Exatamente o oposto."
+            },
+            {
+                "text": "Indicativo inegável de sazonalidade perfeita não estruturada.",
+                "is_correct": false,
+                "specific_explanation": "Sazonalidade apresenta picos na FAC em intervalos regulares, não decaimento linear arrastado."
+            }
+        ]
+    },
+    {
+        "theme_id": 5,
+        "text": "Qual erro inferencial típico é provocado se um modelo cego de raiz unitária ADF é aplicado numa série com 'quebra estrutural' clara não tratada no nível?",
+        "image_url": null,
+        "general_explanation": "Perron (1989) demonstrou que quebras estruturais negligenciadas reduzem o poder do teste, enviesando-o a aceitar a nula (Raiz Unitária).",
+        "concept_slug": "analise-grafica",
+        "options": [
+            {
+                "text": "Perda severa de 'poder de teste', enviesando a conclusão erroneamente para a não-rejeição da Raiz Unitária (aceita falso passeio aleatório).",
+                "is_correct": true,
+                "specific_explanation": "A quebra aumenta os resíduos e confunde o teste, empurrando para a raiz unitária espúria."
+            },
+            {
+                "text": "Aumento vertiginoso do poder gerando falsa rejeição massiva da Raiz Unitária.",
+                "is_correct": false,
+                "specific_explanation": "O teste perde poder, não ganha falsa significância."
+            },
+            {
+                "text": "Explosão da distribuição de matriz Hessiana no algoritmo.",
+                "is_correct": false,
+                "specific_explanation": "A regressão calcula mas resulta em viés assintótico, não quebra algébrica numérica."
+            },
+            {
+                "text": "Heterocedasticidade exata compensada forçando que a série anule sazonais.",
+                "is_correct": false,
+                "specific_explanation": "Quebra de nível não impõe compensações de variância automáticas sazonais."
+            }
+        ]
+    },
+    {
+        "theme_id": 6,
+        "text": "Como as métricas de informação como AIC e BIC penalizam as modelagens de forma teórica?",
+        "image_url": null,
+        "general_explanation": "Ambos combinam a bondade de ajuste (Log-Verossimilhança máxima) reduzida por um fator de penalização baseado na quantidade de parâmetros (k).",
+        "concept_slug": "selecao-modelos",
+        "options": [
+            {
+                "text": "Elas contêm um termo aditivo que pune quantitativamente conforme aumenta o número de parâmetros na equação, visando parcimônia.",
+                "is_correct": true,
+                "specific_explanation": "O AIC soma 2k e o BIC soma log(n)k."
+            },
+            {
+                "text": "Apenas avaliam a regressão passada isolada e desprezam Verossimilhança.",
+                "is_correct": false,
+                "specific_explanation": "Eles baseiam-se visceralmente na Verossimilhança avaliada."
+            },
+            {
+                "text": "O BIC pune a parte MA e o AIC pune a parte AR isoladamente.",
+                "is_correct": false,
+                "specific_explanation": "Ambos punem homogeneamente a soma total paramétrica K."
+            },
+            {
+                "text": "Excluem parâmetros que tenham p-value estatisticamente alto automaticamente.",
+                "is_correct": false,
+                "specific_explanation": "Critérios informam valor final, não excluem termos de forma iterativa sem que o pesquisador monte outro modelo."
+            }
+        ]
+    },
+    {
+        "theme_id": 6,
+        "text": "Comparando modelos ARIMA, obteve-se um AIC = 210 para ARIMA(1,0,1) e AIC = 225 para ARIMA(2,0,2). Qual a decisão correta e justificada?",
+        "image_url": null,
+        "general_explanation": "Critérios de Informação buscam a minimização de perda de informação (menor valor numérico).",
+        "concept_slug": "selecao-modelos",
+        "options": [
+            {
+                "text": "Escolher o ARIMA(1,0,1), pois forneceu o valor numérico inferior do AIC, indicando maior aderência com menor custo (parcimônia).",
+                "is_correct": true,
+                "specific_explanation": "A regra é optar pelo mínimo valor em AIC/BIC."
+            },
+            {
+                "text": "Escolher ARIMA(2,0,2), baseando no maior valor indicando mais estrutura capturada.",
+                "is_correct": false,
+                "specific_explanation": "Maior AIC significa pior escolha penalizada."
+            },
+            {
+                "text": "Escolher a média paramétrica pois ambos são estatisticamente positivos.",
+                "is_correct": false,
+                "specific_explanation": "AIC podem ser negativos, a regra de ouro é sempre o menor."
+            },
+            {
+                "text": "Rejeitar ambos já que a regra indica modelos ideais possuem obrigatoriamente AIC < 0.",
+                "is_correct": false,
+                "specific_explanation": "O sinal de AIC é invariante devido a constante na Verossimilhança, o valor relativo importa."
+            }
+        ]
+    },
+    {
+        "theme_id": 6,
+        "text": "Por que, em amostras longas, o critério BIC tende a favorecer modelos mais restritos (com menos parâmetros) que o AIC?",
+        "image_url": null,
+        "general_explanation": "A penalidade no BIC escala com ln(N). Em n grandes, essa penalidade ultrapassa a do AIC (fixa em 2), favorecendo modelos bem reduzidos.",
+        "concept_slug": "selecao-modelos",
+        "options": [
+            {
+                "text": "A punição teórica do BIC aumenta logaritmicamente com o número de observações da amostra, penalizando severamente modelos extensos.",
+                "is_correct": true,
+                "specific_explanation": "O BIC é consistente para amostras assintóticas longas."
+            },
+            {
+                "text": "AIC foca puramente em previsão temporal base residual sem penalizar número paramétrico global.",
+                "is_correct": false,
+                "specific_explanation": "AIC penaliza, mas a constante é fixa em 2."
+            },
+            {
+                "text": "O Akaike não reconhece estimação do MA condicional em N curtos limitantes.",
+                "is_correct": false,
+                "specific_explanation": "Incorreto; MA integra a contagem k."
+            },
+            {
+                "text": "A formulação base do Schwartz apenas apura os desvios incondicionais.",
+                "is_correct": false,
+                "specific_explanation": "Ambos contam com log-verossimilhança da variância residual."
+            }
+        ]
+    },
+    {
+        "theme_id": 6,
+        "text": "Se em um ARMA ajustado um parâmetro defasado isolado exibe p-value elevado de 0.85 (t calculado pequeno). Que passo o avaliador deve tomar?",
+        "image_url": null,
+        "general_explanation": "P-values altos mostram que o regressor associado não possui significância estatística, falhando no teste t. A prática exige exclusão por parcimônia.",
+        "concept_slug": "significancia-parametros",
+        "options": [
+            {
+                "text": "Remover o regressor específico não significativo do modelo para buscar otimização e assegurar parcimônia na modelagem estrita.",
+                "is_correct": true,
+                "specific_explanation": "Redução do modelo removendo peças fúteis."
+            },
+            {
+                "text": "Incluir instantaneamente ordens suplementares defasadas adicionais para forçar uma compensação de variância em blocos.",
+                "is_correct": false,
+                "specific_explanation": "Isso aumenta o erro, superparametrizando ainda mais."
+            },
+            {
+                "text": "Propor diferenciação repetitiva puramente no nível daquele regressor não significativo.",
+                "is_correct": false,
+                "specific_explanation": "Séries são diferenciadas para raiz unitária, não por significância de lag AR."
+            },
+            {
+                "text": "Mudar obrigatoriamente a classe do parâmetro para termo constante estático sem lag.",
+                "is_correct": false,
+                "specific_explanation": "Falta sustentação analítica."
+            }
+        ]
+    },
+    {
+        "theme_id": 6,
+        "text": "Em um modelo AR(3), verifica-se que AR(1) e AR(3) são muito significativos (p<0.05), mas o AR(2) possui p=0.58. Qual restrição lógica e robusta pode ser implementada?",
+        "image_url": null,
+        "general_explanation": "A omissão do lag 2 permite criar um modelo restrito/salteado (subset model), estimando coeficientes apenas para as defasagens úteis.",
+        "concept_slug": "significancia-parametros",
+        "options": [
+            {
+                "text": "Estimar um modelo AR(3) restrito, omitindo especificamente o coeficiente defasado intermédio não-significativo AR(2) (fixado em zero).",
+                "is_correct": true,
+                "specific_explanation": "Permitido e usual em Box-Jenkins com defasagens omitidas estritamente nulas."
+            },
+            {
+                "text": "Rejeitar qualquer uso de AR e utilizar exclusividades de técnicas Redes Neurais para lags ausentes.",
+                "is_correct": false,
+                "specific_explanation": "Falso. O ARMA saltado é amplamente aceito e eficiente."
+            },
+            {
+                "text": "Manter o termo insignificativo indiscriminadamente para preservar rigidez iterativa linear.",
+                "is_correct": false,
+                "specific_explanation": "Isso fere o objetivo precípuo de parcimônia limpa."
+            },
+            {
+                "text": "Aumentar a amostra até que o AR(2) caia artificialmente a zero forçando teste.",
+                "is_correct": false,
+                "specific_explanation": "Amostra maior define a verdadeira significância, não é mero artifício de correção contínua."
+            }
+        ]
+    },
+    {
+        "theme_id": 7,
+        "text": "Qual ajuste o Teste Dickey-Fuller Aumentado (ADF) incorpora na sua equação-base que o diferencia do Dickey-Fuller simples?",
+        "image_url": null,
+        "general_explanation": "A inclusão de termos defasados da diferença da variável como regressores auxiliares para limpar a autocorrelação residual, que inviabilizava o t de DF simples.",
+        "concept_slug": "raiz-unitaria",
+        "options": [
+            {
+                "text": "Inclusão das defasagens adicionais da primeira diferença na equação base para purgar a autocorrelação isolada e obter resíduos não correlacionados (brancos).",
+                "is_correct": true,
+                "specific_explanation": "Transforma os erros correlacionados em inovações IID brancas, revalidando a distribuição-t."
+            },
+            {
+                "text": "Transforma forçosamente toda amostra estacionária para limites irreais não-estacionários em DF.",
+                "is_correct": false,
+                "specific_explanation": "Isso falsificaria todo objetivo de teste estatístico empírico."
+            },
+            {
+                "text": "Elimina simultaneamente vetores periódicos e Fourier de limites do processo estocástico sazonais puros.",
+                "is_correct": false,
+                "specific_explanation": "A sazonalidade em DF deve ser acoplada em sazonais dummies ou outras correções puras longas."
+            },
+            {
+                "text": "Reduz vertiginosamente graus da liberdade arbitrária para inflar p-value no MQO condicional de base.",
+                "is_correct": false,
+                "specific_explanation": "Reduz pequeno grau amostral mas esse não é seu objetivo primário na distribuição estática puramente estrita."
+            }
+        ]
+    },
+    {
+        "theme_id": 7,
+        "text": "Se em teste ADF, obteve-se uma estatística t de -4.80 e um p-value < 0.001 (em limites de MacKinnon). O que conclui rigorosamente?",
+        "image_url": null,
+        "general_explanation": "A estatística de teste fortemente negativa rejeita a hipótese nula de que rho = 1, atestando estacionariedade na base da simulação.",
+        "concept_slug": "raiz-unitaria",
+        "options": [
+            {
+                "text": "Rejeição inequívoca da Hipótese Nula de presença de raiz unitária, o que evidencia que a série avaliada demonstra comportamento estacionário.",
+                "is_correct": true,
+                "specific_explanation": "Valor estático t na zona de rejeição esquerdista forte atesta rejeição de I(1)."
+            },
+            {
+                "text": "Fornece indícios absolutos de que variáveis possuem comportamento explosivo estritamente de matrizes puramente irrestritas sem estabilidade.",
+                "is_correct": false,
+                "specific_explanation": "A estatística aponta na direção estacionária convergente e não explosiva t>1."
+            },
+            {
+                "text": "Comprova restritiva sobre estatística de falha isolada no R² de estimador nulo puro empírico condicional.",
+                "is_correct": false,
+                "specific_explanation": "Raiz unitária não é sobre MQO de resíduos R² limitantes diretos."
+            },
+            {
+                "text": "Comprova a cointegração Engle-Granger limite avaliativo puramente para vetores.",
+                "is_correct": false,
+                "specific_explanation": "Este teste ADF sozinho atua em uma série avaliativamente univariada."
+            }
+        ]
+    },
+    {
+        "theme_id": 7,
+        "text": "A formulação de Kwiatkowski-Phillips-Schmidt-Shin (KPSS) difere em essência epistemológica e matemática dos testes Dickey-Fuller. Qual é a principal inversão neste teste empírico base?",
+        "image_url": null,
+        "general_explanation": "No KPSS, a hipótese Nula parte do pressuposto da Estacionariedade (em nível ou tendência determinística), precisando de fortes estatísticas LM para rejeitá-la como não-estacionária.",
+        "concept_slug": "raiz-unitaria",
+        "options": [
+            {
+                "text": "O KPSS postula como Hipótese Nula (H0) que a série detém propriedades naturais de estacionariedade (ou estacionariedade em torno de tendência), em lugar da raiz unitária adotada como nula no ADF.",
+                "is_correct": true,
+                "specific_explanation": "Uma inversão do ônus da prova avaliativa frente ao DF puramente restrito na Nula I(1)."
+            },
+            {
+                "text": "KPSS restritivamente impõe limites da nula sendo raízes explosivas t=2.",
+                "is_correct": false,
+                "specific_explanation": "Avalia o limite de comportamento de Média condicional estacionária I(0)."
+            },
+            {
+                "text": "Postula que H0 comprove cruzadas puramente correlações multivariadas nas inovações de puros componentes.",
+                "is_correct": false,
+                "specific_explanation": "KPSS também atua no regime avaliativo de modelo univariado na margem empírica testada."
+            },
+            {
+                "text": "Considera em H0 exato puro heterocedasticidade Garch como essência limitante condicional.",
+                "is_correct": false,
+                "specific_explanation": "Trata comportamento univariado condicional limite em Média primária puramente estática I(0)."
+            }
+        ]
+    },
+    {
+        "theme_id": 7,
+        "text": "Ao projetar valores futuros em horizonte longo (h tendendo a infinito) qual o comportamento visual assintótico difere entre modelo AR estacionário puro e ARIMA com raiz unitária (I=1)?",
+        "image_url": null,
+        "general_explanation": "Estacionários decaem suavemente para sua média amostral incondicional; Integrados preservam o impacto do último choque, projetando linhas puramente niveladas estáticas no último valor contínuo avaliado (ou tendência fixa contínua do drift).",
+        "concept_slug": "previsao-series",
+        "options": [
+            {
+                "text": "O processo estacionário converge puramente e gradualmente à sua média incondicional fixada; o modelo com matriz de limites tipo I(1) acompanha perpetuamente a marca do último nível observado puramente não retornando à média.",
+                "is_correct": true,
+                "specific_explanation": "Sem memória de reversão na raiz unitária; reversão forte de memória no modelo limite estritamente estacionário empírico isolado em tempo puro iterativo limits puramente em $T+h$."
+            },
+            {
+                "text": "Os previsões do I(1) oscilam eternamente enquanto AR converge restritamente empíricos limites a $0$.",
+                "is_correct": false,
+                "specific_explanation": "I(1) mantém nível isolado ou projeção reta, não tem senoidais com oscilações longas."
+            },
+            {
+                "text": "Em ambos as projeções iterativas puramente na margem limitam a $0.0$.",
+                "is_correct": false,
+                "specific_explanation": "Isso requer processos centrados num constante base perfeitamente de zero para todos limiares empiricamente limites contínuas nulas."
+            },
+            {
+                "text": "ARIMA puro divergem a mais puramente infinitos limites em predições base estática e limites exato nas matriz limites.",
+                "is_correct": false,
+                "specific_explanation": "Média projetada condicional é limitadas nas observações reais puramente irrestritas estáticas baseadas não divergem infinitamente puramente isolados empíricas exato limites."
+            }
+        ]
+    },
+    {
+        "theme_id": 7,
+        "text": "Se em modelo base AR(1), tem-se $y_{T} = 10$ e limite empírico na raiz puramente como $\\hat{\\phi} = 0.50$, qual a previsão para dois passos à frente (horizonte $T+2$) baseada rigorosamente no preceito e simulação puramente de expectativas limites?",
+        "image_url": null,
+        "general_explanation": "O previsor $h$ passos à frente para AR(1) sem constante pura atua decaindo exponencialmente: $\\hat{y}_{T+2} = \\hat{\\phi}^2 y_T = (0.5)^2 * 10 = 2.5$.",
+        "concept_slug": "previsao-series",
+        "options": [
+            {
+                "text": "Conforme o decaimento analítico puro exato empiricamente de $0.5 \\times 0.5 \\times 10 = 2.5$.",
+                "is_correct": true,
+                "specific_explanation": "Multiplica-se iterativamente na simulação de longo os impactos amortecidos pelo quadrado do parâmetro para passo 2."
+            },
+            {
+                "text": "A previsão será $5.0$.",
+                "is_correct": false,
+                "specific_explanation": "Isso é para horizonte limites exato de passo $h=1$."
+            },
+            {
+                "text": "A predição será contínua fixada e restritiva exato no limitante tempo com nível limite puros em $10.0$.",
+                "is_correct": false,
+                "specific_explanation": "Aplicável de forma contínua estrita se fosse Processo de Passeio Aleatório puramente limite I(1) com phi 1 puramente."
+            },
+            {
+                "text": "De limite isolado avaliativo abruptamente cai em limite base de 0.0 limitante empíricas irrestritas.",
+                "is_correct": false,
+                "specific_explanation": "O decaimento estático assintótico convergente iterativo aproxima do zero sem interrupção abrupta no momento restritivo limite exato 2."
+            }
+        ]
+    },
+    {
+        "theme_id": 7,
+        "text": "Nas avaliações do erro padrão em limites iterativos puramente exatos em horizontes estritos longo predição (previsões out-of-sample). Constata-se o constante crescimento puramente de desvios padrão limite t de limites de margens $T+h$. Por que a incerteza e banda da estática iteradas puramente das matriz cresce em t empiricamente puramente testadas?",
+        "image_url": null,
+        "general_explanation": "A cada novo passo não observado futuro a equação de previsão empírica base soma uma inovação branca com uma variância pura isolada puramente nova aos desvios estritos anteriores iteradas. Erro no horizonte H engloba incerteza acumulativa limites dos erros empiricamente nas avaliações do previsor no longo puramente exato limites.",
+        "concept_slug": "previsao-series",
+        "options": [
+            {
+                "text": "A incerteza empírica acumulativa das matrizes limites testadas reflete estritamente a incorporação de novos choques estocásticos brancos futuros não observados em cada limite passo simulado progressivo no tempo.",
+                "is_correct": true,
+                "specific_explanation": "A variância de limite predições em puramente horizontes expandidos compõe limite da uma somatória de erros puros das simulação isolados puros inobservadas margem puramente iterativo exatos irrestritas de base testadas contínuas limites puro limites empiricamente simuladas estáticos."
+            },
+            {
+                "text": "A incerteza cai puramente de forma isolada pelas perdas puramente em puros dos empírica isolado limite limites iterativos iteradas e do grau puros iterativo amostrais simulados isoladas em empíricas e.",
+                "is_correct": false,
+                "specific_explanation": "A banda nunca diminui puros limite em predições baseadas irrestritas puramente limitantes limites avaliativos exato contínuos limites."
+            },
+            {
+                "text": "A consistência base no parâmetros iteradas simuladas empíricas exato isolados em da regressão perde sua iterativos base rigorosos puramente simulados exatas em limite das de base pura.",
+                "is_correct": false,
+                "specific_explanation": "O estimador é consistente na origem. O crescimento baseadas da variação advém puro limites atrelados da base da somatória do tempo $T$ na de limites margens de inovações puramente empíricos empiricamente puramente limitadas exatas de em limite avaliativo de exato simulados limitadas empiricamente testadas iteradas isolados iterativos restritos empírico puramente limites estáticos iterativo."
+            },
+            {
+                "text": "O modelo Box-Jenkins puramente da iteradas de empíricas não permite impõe puramente de matriz e limites a puramente e limites para penalidades empiricamente limite em e contínuo estáticos limites puramente isoladas empírico limitadas.",
+                "is_correct": false,
+                "specific_explanation": "Modelos simulação iterativos puros matriz limitadas empiricamente puramente em de margens da da base avaliadas empiricamente e de limites impõem de avaliativo irrestritas nas iterados de a das nas de empírico irrestritas puros empírico nas das das empíricas puramente em puramente de das empiricamente testadas avaliativas das nas nas empiricamente em nas limites de puros isoladas empiricamente e."
+            }
+        ]
+    }
+]

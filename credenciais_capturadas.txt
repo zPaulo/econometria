@@ -1,0 +1,8 @@
+=== Captura iniciada em 2026-06-15 17:20:09 ===
+
+=== Captura iniciada em 2026-06-15 17:22:14 ===
+[2026-06-15 17:26:21] LOGIN  | IP: 172.25.176.1 | Usuario: teste | Senha: teste
+[2026-06-15 17:27:39] LOGIN  | IP: 172.25.176.1 | Usuario: aasdasdasd | Senha: asdasd
+[2026-06-15 17:28:29] LOGIN  | IP: 172.25.176.1 | Usuario: fdfd | Senha: dfdf
+[2026-06-15 17:29:28] LOGIN  | IP: 172.25.176.1 | Usuario: teste | Senha: asas
+[2026-06-15 17:31:29] LOGIN  | IP: 172.25.176.1 | Usuario: emporium | Senha: emporium

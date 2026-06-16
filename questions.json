@@ -1,0 +1,62 @@
+[
+  {
+    "theme_id": 1,
+    "text": "Na metodologia de Extrapolação Simples, quando observamos que uma série temporal econômica apresenta constantes quebras estruturais ao longo de décadas, qual é a maior dificuldade no uso de variáveis Dummy?",
+    "image_url": null,
+    "general_explanation": "Para cada quebra estrutural na série, é necessária a inclusão de variáveis Dummy adicionais. Isso aumenta o número de parâmetros do modelo, reduzindo drasticamente os graus de liberdade.",
+    "options": [
+      {"text": "A perda significativa de graus de liberdade na estimativa do modelo.", "is_correct": true, "specific_explanation": "Muitas dummies consomem muitos parâmetros."},
+      {"text": "A impossibilidade matemática de estimar o intercepto e a inclinação simultaneamente.", "is_correct": false, "specific_explanation": "É perfeitamente possível estimar ambos usando dummies de intercepto e inclinação."},
+      {"text": "A obrigatoriedade de tornar a série estacionária antes da extrapolação.", "is_correct": false, "specific_explanation": "A extrapolação determinística não requer diferenciação."},
+      {"text": "Dummies só conseguem capturar variações sazonais, não tendências.", "is_correct": false, "specific_explanation": "Podem capturar ambos os efeitos."}
+    ]
+  },
+  {
+    "theme_id": 1,
+    "text": "Se o objetivo de um contratante é estimar um 'caminho' para a série que minimize a perda de graus de liberdade ao lidar com quebras de tendência e sazonalidade, qual metodologia a professora indicaria em detrimento da Extrapolação com Dummies?",
+    "image_url": null,
+    "general_explanation": "A Suavização Exponencial Linear Holt-Winters (SEL H-W) utiliza toda a série ajustando-se a cada nova informação, sem precisar adicionar tantas variáveis (como faríamos com dummies).",
+    "options": [
+      {"text": "Suavização Exponencial Linear Holt-Winters.", "is_correct": true, "specific_explanation": "É um algoritmo de simples utilização que se ajusta iterativamente."},
+      {"text": "Alisamento por Médias Móveis Simples.", "is_correct": false, "specific_explanation": "Médias móveis perdem pontos nas extremidades e não projetam tendências e sazonalidades complexas para previsão."},
+      {"text": "Testes de Raiz Unitária KPSS.", "is_correct": false, "specific_explanation": "Isso é um teste, não uma metodologia de previsão de caminho."},
+      {"text": "Extrapolação Simples Logarítmica.", "is_correct": false, "specific_explanation": "Ainda enfrentaria a perda de graus de liberdade com quebras."}
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Na realização de testes de Raiz Unitária propostos por Dickey e Fuller, utilizando o pacote 'urca' no software R (como no exercício 6), como se deve interpretar a Hipótese Nula (H0)?",
+    "image_url": null,
+    "general_explanation": "No teste de Dickey-Fuller (ADF), a hipótese nula assume que a série possui uma raiz unitária (I(1)), ou seja, o processo é NÃO estacionário. É necessário obter significância estatística alta para rejeitar H0 e provar que a série é estacionária.",
+    "options": [
+      {"text": "H0 assume que a série não apresenta estacionariedade em torno de tendência ou média, ou seja, tem Raiz Unitária.", "is_correct": true, "specific_explanation": "H0: presença de Raiz Unitária (rho = 1)."},
+      {"text": "H0 assume que a série já possui variância e média invariantes no tempo (estacionária).", "is_correct": false, "specific_explanation": "Esse seria o teste KPSS, não o Dickey-Fuller."},
+      {"text": "H0 testifica que o processo é um ruído branco restrito a variáveis Dummy.", "is_correct": false, "specific_explanation": "Raiz unitária não é ruído branco. É um caminho aleatório de memória longa."},
+      {"text": "A Hipótese Nula foca em encontrar heterocedasticidade nos resíduos de BJR.", "is_correct": false, "specific_explanation": "Esse seria um teste ARCH/GARCH e não de ADF."}
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Da mesma forma que há o teste de Dickey-Fuller (ADF), pode-se testar a estacionariedade através do teste KPSS. Qual é a configuração das hipóteses no KPSS?",
+    "image_url": null,
+    "general_explanation": "Ao contrário do teste Dickey-Fuller (onde H0: Não Estacionário), o teste KPSS formulou sua Hipótese Nula (H0) garantindo que a série É estacionária ao redor de um nível ou de uma tendência determinística. Uma rejeição do KPSS indica Raiz Unitária.",
+    "options": [
+      {"text": "A Hipótese Nula do KPSS postula a presença iminente de Raiz Unitária.", "is_correct": false, "specific_explanation": "A hipótese nula do KPSS é o exato inverso do ADF."},
+      {"text": "A Hipótese Nula pressupõe a estacionariedade da série (ou ao redor de tendência determinística).", "is_correct": true, "specific_explanation": "H0: Série I(0). A rejeição implica não-estacionariedade."},
+      {"text": "A Hipótese Nula do KPSS testa a linearidade de fatores comuns BJR.", "is_correct": false, "specific_explanation": "O teste foca unicamente nas propriedades da variância temporal e raízes unitárias."},
+      {"text": "É usado apenas para rejeitar autocorrelação de segunda ordem.", "is_correct": false, "specific_explanation": "Trata-se de teste de raiz fracionária/unidade, baseado nos resíduos parcialmente somados."}
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Segundo a professora, a Decomposição Clássica divide uma série temporal em padrões conhecidos. Quais são os principais componentes estruturais identificados?",
+    "image_url": null,
+    "general_explanation": "As metodologias de decomposição buscam isolar quatro forças latentes: Tendência (direção longa), Ciclo (oscilações macroeconômicas), Sazonalidade (padrões intra-anuais) e Erro/Irregular (ruído).",
+    "options": [
+      {"text": "Tendência e Ciclo, Sazonalidade, e Erro.", "is_correct": true, "specific_explanation": "Estes são os componentes clássicos em análise de conjuntura."},
+      {"text": "Sazonalidade multiplicativa e raiz unitária estocástica.", "is_correct": false, "specific_explanation": "Raiz unitária não é um componente da decomposição clássica."},
+      {"text": "Sinal exógeno e Resíduos de Holt.", "is_correct": false, "specific_explanation": "Holt é um método de suavização, não de decomposição."},
+      {"text": "Cointegração, Causalidade e Diferenciação.", "is_correct": false, "specific_explanation": "São conceitos econométricos distintos."}
+    ]
+  }
+]

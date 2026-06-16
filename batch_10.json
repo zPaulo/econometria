@@ -1,0 +1,872 @@
+[
+  {
+    "theme_id": 3,
+    "text": "Na metodologia de Box-Jenkins, a estimação dos parâmetros de um modelo ARMA pode ser realizada por Máxima Verossimilhança Exata (EML) ou por Mínimos Quadrados Condicionais (CLS). Qual é a principal diferença entre essas duas abordagens no que tange ao tratamento dos valores iniciais da série?",
+    "image_url": null,
+    "general_explanation": "A estimação CLS assume que as observações passadas inobserváveis são nulas ou condiciona o modelo às primeiras p observações, descartando-as. A EML calcula as funções de verossimilhança incondicionais, tratando os valores iniciais por retroprojeção (backcasting) ou integrando a distribuição exata.",
+    "concept_slug": "estimacao-box-jenkins",
+    "options": [
+      {
+        "text": "CLS ignora as primeiras p observações e condiciona a função de verossimilhança a esses valores, enquanto EML incorpora a distribuição marginal das observações iniciais, retroprojetando-as ou de forma exata.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O CLS atua condicionando os primeiros valores, enquanto EML usa retroprojeção ou filtros para obter a verossimilhança exata."
+      },
+      {
+        "text": "EML requer que os resíduos iniciais sejam assumidos como determinísticos e constantes, enquanto CLS estima os valores iniciais iterativamente.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. É o CLS que lida com aproximações e condições nos resíduos (muitas vezes zerando-os)."
+      },
+      {
+        "text": "Ambas assumem exatamente os mesmos valores iniciais, divergindo apenas na escolha da distribuição estatística (Normal versus t de Student).",
+        "is_correct": false,
+        "specific_explanation": "Falso. A diferença principal é justamente como os valores e resíduos anteriores ao tempo inicial são lidados."
+      },
+      {
+        "text": "CLS inclui as condições iniciais na matriz de covariância do erro, enquanto EML resolve o sistema através do filtro de Hodrick-Prescott.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Filtro HP não está relacionado à estimação de verossimilhança de modelos ARMA."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Sob a hipótese de que as inovações são independentes e identicamente distribuídas com distribuição normal, a estimação por Mínimos Quadrados Condicionais (CLS) e a estimação por Máxima Verossimilhança Exata (EML) para modelos ARMA estacionários e invertíveis apresentam qual propriedade assintótica?",
+    "image_url": null,
+    "general_explanation": "Em grandes amostras, as condições iniciais perdem sua influência relativa. Assim, a função de verossimilhança condicional e a exata convergem para a mesma forma limite, tornando os estimadores assintoticamente equivalentes.",
+    "concept_slug": "estimacao-box-jenkins",
+    "options": [
+      {
+        "text": "Ambas as metodologias produzem estimadores assintoticamente equivalentes, convergindo para os mesmos valores populacionais à medida que o tamanho da amostra tende ao infinito.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Devido ao decaimento exponencial da influência dos valores iniciais, ambas abordagens se igualam assintoticamente."
+      },
+      {
+        "text": "EML sempre apresenta uma variância assintótica estritamente menor que CLS, caracterizando-se como o único estimador eficiente em grandes amostras.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Em amostras infinitas, a eficiência é igual para processos estacionários e invertíveis."
+      },
+      {
+        "text": "CLS resulta em estimadores inconsistentes sempre que o termo MA(q) tem raízes negativas, diferentemente de EML que mantém a consistência.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Desde que os pressupostos de estacionariedade e invertibilidade sejam mantidos, CLS é consistente."
+      },
+      {
+        "text": "As duas abordagens divergem assintoticamente para processos que não são um Ruído Branco estrito, favorecendo EML.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Elas convergem em processos ARMA regulares em grandes amostras."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Em amostras pequenas ou quando as raízes do polinômio autorregressivo ou de médias móveis estão muito próximas do círculo unitário, o uso de Mínimos Quadrados Condicionais (MQC) em vez de Máxima Verossimilhança Exata (MVE) pode causar qual problema?",
+    "image_url": null,
+    "general_explanation": "Em amostras pequenas, as perdas de informação ao condicionar os primeiros valores distorcem os resultados, especialmente quando a série quase não é estacionária ou não invertível.",
+    "concept_slug": "estimacao-box-jenkins",
+    "options": [
+      {
+        "text": "O estimador MQC pode apresentar viés substancial nas estimativas dos parâmetros, pois a perda de informações nas condições iniciais afeta severamente a modelagem de raízes próximas à não estacionariedade.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Sem o backcasting, raízes próximas da unidade levam a um viés elevado no MQC."
+      },
+      {
+        "text": "A utilização de MVE em amostras pequenas causa não-identificabilidade dos parâmetros devido à matriz hessiana se tornar estritamente singular.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. MVE é preferível justamente em amostras pequenas para evitar esse viés."
+      },
+      {
+        "text": "MQC superestimará a variância dos resíduos de tal forma que o modelo rejeitará sempre os pressupostos de ruído branco de Jarque-Bera.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A principal questão não é a variância rejeitada por Jarque-Bera, mas o viés nos coeficientes."
+      },
+      {
+        "text": "A convergência do algoritmo de MQC torna-se impossível, resultando em coeficientes infinitos por conta das raízes imaginárias.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. MQC pode convergir, mas para valores altamente viesados."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Em um modelo ARIMA(1,1,0), a estatística de teste para avaliar a significância individual do coeficiente autorregressivo (ϕ_1) é calculada como a razão entre a estimativa do parâmetro e o seu erro padrão (Teste Z). Qual é a distribuição assintótica dessa estatística sob a hipótese nula?",
+    "image_url": null,
+    "general_explanation": "Se o processo já foi diferenciado para obter a estacionariedade, os parâmetros AR e MA seguem a distribuição assintótica Normal Padrão, justificando o uso do Teste Z.",
+    "concept_slug": "significancia-parametros-arima",
+    "options": [
+      {
+        "text": "Distribuição Normal Padrão N(0,1), sob a premissa de que a série já foi diferenciada, tornando-se estacionária.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Em séries temporais estacionárias, os estimadores convergem em distribuição para uma Normal."
+      },
+      {
+        "text": "Distribuição t de Student com T-1 graus de liberdade, independentemente do tamanho da amostra.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Como já se tratou a raiz unitária (d=1), as raízes residuais são estacionárias, recaindo na normalidade assintótica."
+      },
+      {
+        "text": "Distribuição de Dickey-Fuller assimétrica, pois o termo AR(1) absorve propriedades de passeio aleatório.",
+        "is_correct": false,
+        "specific_explanation": "Falso. O modelo ARIMA(1,1,0) estipula estacionariedade pós-diferença; Dickey-Fuller é para testar raízes unitárias."
+      },
+      {
+        "text": "Distribuição Qui-quadrado com 1 grau de liberdade devido à transformação não-linear da variância.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A estatística Z não segue qui-quadrado, mas sim o seu quadrado."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Um pesquisador estimou um modelo ARIMA(1,1,0) e obteve um coeficiente para o termo AR(1) de -0,4517, com um erro padrão associado de 0,0471. Considerando um nível de significância de 5% (Z crítico ≈ ±1,96), qual a conclusão?",
+    "image_url": null,
+    "general_explanation": "A estatística é obtida dividindo-se a estimativa pelo seu desvio padrão: Z = -0.4517 / 0.0471 ≈ -9.59. Em módulo, é superior a 1.96.",
+    "concept_slug": "significancia-parametros-arima",
+    "options": [
+      {
+        "text": "A estatística calculada é aproximadamente -9,59. Rejeita-se a hipótese nula de que o coeficiente é zero.",
+        "is_correct": true,
+        "specific_explanation": "Correto. |-9.59| > 1.96, indicando forte significância estatística."
+      },
+      {
+        "text": "A estatística calculada é de aproximadamente 0,10. Falha-se em rejeitar a hipótese nula.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A fórmula é estimativa / erro padrão, não erro padrão / estimativa."
+      },
+      {
+        "text": "Como o coeficiente tem valor negativo, deve-se elevar ao quadrado e usar a distribuição F.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Pode-se calcular Z negativo para testes bicaudais com a distribuição Normal."
+      },
+      {
+        "text": "A estatística é -9,59, mas não pode ser usada devido à violação da positividade condicional do ARIMA.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Coeficientes autorregressivos podem perfeitamente ser negativos."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Ao optar por manter parâmetros não significativos em um modelo ARIMA (sobreparametrização), o pesquisador enfrenta qual complicação teórica?",
+    "image_url": null,
+    "general_explanation": "Incluir parâmetros irrelevantes diminui os graus de liberdade e aumenta a incerteza (variância) das estimativas.",
+    "concept_slug": "significancia-parametros-arima",
+    "options": [
+      {
+        "text": "Aumento desnecessário da variância dos erros de previsão e diminuição dos graus de liberdade, violando a parcimônia.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O overfitting piora a predição por superestimar a variância dos estimadores."
+      },
+      {
+        "text": "Geração inevitável de raízes unitárias, transformando o modelo forçosamente em não estacionário.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A superparametrização gera redundância, mas não obriga a ter uma raiz unitária."
+      },
+      {
+        "text": "A correlação serial será zerada artificialmente, invalidando os testes de Ljung-Box.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A sobreparametrização não invalida estruturalmente o teste, mas penaliza o modelo na seleção."
+      },
+      {
+        "text": "Distorção na probabilidade do teste Z, forçando o uso de critérios de Akaike.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste Z mantém suas propriedades assintóticas."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Por que se recomenda frequentemente o uso da distribuição t de Student no lugar da Normal Padrão (Z) para avaliar a significância em amostras menores?",
+    "image_url": null,
+    "general_explanation": "A distribuição t de Student acomoda a incerteza extra da estimação da variância populacional em pequenas amostras.",
+    "concept_slug": "significancia-parametros-arima",
+    "options": [
+      {
+        "text": "A t de Student apresenta caudas mais pesadas e reflete melhor a incerteza na estimação da variância populacional em amostras menores.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Ela converge para a Normal, mas é mais segura quando T é pequeno."
+      },
+      {
+        "text": "A t de Student ajusta as estimações que impedem variáveis de ultrapassar o valor zero.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Ela não impede negatividade, é simétrica como a Normal."
+      },
+      {
+        "text": "A distribuição t foi criada para resolver o problema de raízes unitárias espúrias.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Raízes unitárias requerem distribuições tipo Dickey-Fuller."
+      },
+      {
+        "text": "Usa-se a distribuição t sempre que o parâmetro MA for superior a 1 em valor absoluto.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Não se relaciona à não invertibilidade."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "O intervalo de confiança de 95% para o parâmetro MA(1) resultou em [-0,05 ; 0,42]. Como interpretar metodologicamente?",
+    "image_url": null,
+    "general_explanation": "Se o intervalo inclui zero, não é possível rejeitar H0 de que o valor seja nulo a 5% de significância.",
+    "concept_slug": "significancia-parametros-arima",
+    "options": [
+      {
+        "text": "O zero está contido no intervalo, logo falha-se em rejeitar a hipótese nula de que o parâmetro é zero.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Intervalo cruzando zero implica não significância a 5%."
+      },
+      {
+        "text": "O limite superior (0,42) mostra que as raízes ultrapassam o círculo unitário, causando instabilidade.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O modelo é invertível se o parâmetro MA estiver entre -1 e 1."
+      },
+      {
+        "text": "O valor negativo inferior comprova sobrediferenciação nos dados.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Um parâmetro tão próximo de zero não prova sobrediferenciação de forma conclusiva."
+      },
+      {
+        "text": "Tona o parâmetro estatisticamente significativo apenas sob testes unilaterais rigorosos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Cruza o zero; não é significativo mesmo unilateralmente para a maioria das direções."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Qual a principal hipótese nula testada pelo Teste de Chow na verificação de quebras estruturais?",
+    "image_url": null,
+    "general_explanation": "O teste avalia se os coeficientes dos subperíodos são estatisticamente iguais aos do período amostral completo.",
+    "concept_slug": "estabilidade-parametros",
+    "options": [
+      {
+        "text": "A hipótese nula testa se todos os parâmetros do modelo estimado permanecem constantes ao longo de todas as subamostras analisadas.",
+        "is_correct": true,
+        "specific_explanation": "Correto. A H0 postula a ausência de quebra (parâmetros constantes)."
+      },
+      {
+        "text": "A hipótese nula estabelece que houve uma alteração permanente no intercepto.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Isso seria a hipótese alternativa de quebra de intercepto."
+      },
+      {
+        "text": "A hipótese nula propõe que os coeficientes AR e MA se anulam no ponto da quebra.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A H0 afirma estabilidade total ao longo do tempo."
+      },
+      {
+        "text": "Testa se a função de autocorrelação empírica muda de sinal nos pontos de ruptura.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste avalia coeficientes via F ou LR, não sinais de ACF."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Como é estruturada a estatística do Teste de Razão de Verossimilhança (LR) para identificar quebras estruturais?",
+    "image_url": null,
+    "general_explanation": "O teste estatístico compara a verossimilhança sem restrições (dados particionados otimizados separadamente) com a restrita (amostra junta).",
+    "concept_slug": "estabilidade-parametros",
+    "options": [
+      {
+        "text": "LR = 2(LL_irrestrito - LL_restrito), onde LL_irrestrito é a soma das log-verossimilhanças das subamostras.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Essa é a formulação clássica do teste LR (Likelihood Ratio)."
+      },
+      {
+        "text": "LR = (LL_restrito² - LL_irrestrito²) dividido pelos graus de liberdade.",
+        "is_correct": false,
+        "specific_explanation": "Falso. A estatística LR não tem elevação ao quadrado nas verossimilhanças."
+      },
+      {
+        "text": "LR baseia-se no produtório da verossimilhança comparado pela distribuição t-Student.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. LR usa soma de log-verossimilhanças e distribuição qui-quadrado."
+      },
+      {
+        "text": "LR = (LL_restrito - LL_irrestrito) / 2, sob a hipótese estrita ergódica.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A fórmula inverte os termos e a escala corretos."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "O Teste de Chow modificado resultou em estatística estritamente inferior ao valor crítico a 5%. A interpretação metodológica indica que:",
+    "image_url": null,
+    "general_explanation": "Se a estatística for menor que o valor crítico, ela não atinge a região de rejeição da hipótese nula de estabilidade.",
+    "concept_slug": "estabilidade-parametros",
+    "options": [
+      {
+        "text": "Não se pode rejeitar a hipótese nula, concluindo-se em favor da estabilidade paramétrica da série.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Valor de teste menor que o crítico implica falha em rejeitar H0."
+      },
+      {
+        "text": "Ocorre a rejeição sumária da hipótese nula, provando a existência de quebra estrutural.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Apenas valores maiores que o crítico levam à rejeição."
+      },
+      {
+        "text": "O teste padece de falta de poder assintótico e deve ser descartado imediatamente.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O resultado é perfeitamente válido estatisticamente."
+      },
+      {
+        "text": "Prova que a quebra ocorreu temporariamente e o sistema retornou à média.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Conclui-se que não houve evidência suficiente de qualquer quebra global."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "O que ocorre empiricamente na FAC quando se ajusta um modelo ARMA ignorando uma mudança abrupta de nível (quebra estrutural) na série temporal?",
+    "image_url": null,
+    "general_explanation": "Quebras de nível induzem uma forte autocorrelação aparente nos dados. As FACs decaem vagarosamente, parecendo ser I(1).",
+    "concept_slug": "estabilidade-parametros",
+    "options": [
+      {
+        "text": "Ocorre um decaimento artificialmente lento da FAC, criando o efeito espúrio de que o processo é não estacionário (longa memória ou raiz unitária).",
+        "is_correct": true,
+        "specific_explanation": "Correto. Trata-se da quebra estrutural disfarçada de raiz unitária (Perron)."
+      },
+      {
+        "text": "O modelo estimará coeficientes de médias móveis iguais a +1.0 forçadamente.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Não há restrição mecânica que gere MA=1 isoladamente nestes casos."
+      },
+      {
+        "text": "Os resíduos assumirão distribuição de Laplace, inviabilizando qualquer teste.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A normalidade pode falhar, mas não migra forçosamente para Laplace."
+      },
+      {
+        "text": "O efeito da quebra anula-se se usar o estimador de Mínimos Quadrados Condicionais.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. MQC não resolve passivamente uma mudança discreta de nível nos dados."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "No diagnóstico de adequação Box-Jenkins, quais devem ser estritamente as propriedades estatísticas da série de resíduos ajustados?",
+    "image_url": null,
+    "general_explanation": "Devem não ter padrão previsível: ruído branco (iid) com média zero e variância constante.",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "Devem possuir média condicional nula, variância homoscedástica estrita e total ausência de autocovariância para quaisquer defasagens, sendo Ruído Branco.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O resíduo ideal é um ruído branco sem previsibilidade restante."
+      },
+      {
+        "text": "As inovações precisam demonstrar correlação serial de primeira ordem (AR1) para validar o MQC.",
+        "is_correct": false,
+        "specific_explanation": "Falso. A autocorrelação no resíduo sinaliza modelo sub-especificado."
+      },
+      {
+        "text": "Exige-se que os erros manifestem assimetria condicional fortemente variante e bicaudal.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Espera-se estabilidade e, se possível, normalidade e homoscedasticidade."
+      },
+      {
+        "text": "A variância implícita do resíduo deve possuir decaimento hiperbólico congruente com o espectro.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O resíduo não deve possuir decaimento ou dependência; sua covariância é zero."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Na análise visual de autocorrelogramas (FAC/FACP) residuais, o que se atesta utilizando os limites da Banda de Bartlett?",
+    "image_url": null,
+    "general_explanation": "Verifica-se se as defasagens estão dentro de limites (aproximadamente ± 1,96/√T) que indicam não significância estatística.",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "Atesta-se se os coeficientes estão predominantemente dentro do intervalo ± 1,96/√T, indicando ausência de memória estocástica.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Limites de Bartlett servem para julgar a hipótese univariada de correlação nula."
+      },
+      {
+        "text": "Comprova-se a adequação se houver alternância de sinal periódica extrapolando os limites.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O ideal é que as barras permaneçam dentro da banda de confiança."
+      },
+      {
+        "text": "Deve-se assegurar visualmente que a FAC tenha declínio linear contínuo rompendo as bandas.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Declínios lentos indicam correlações remanescentes severas e raízes unitárias."
+      },
+      {
+        "text": "Os resíduos devem propositalmente exceder as bandas nas primeiras 3 defasagens devido ao viés da estimação condicional.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Nenhum padrão sistemático deve estourar os limites intencionalmente."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Ao diagnosticar um modelo ARIMA(1,1,0), a FAC dos resíduos apresenta um pico significativo isolado apenas na defasagem 1 (k=1). Qual a indicação iterativa apropriada?",
+    "image_url": null,
+    "general_explanation": "Um pico no lag 1 da FAC indica um padrão de médias móveis (MA) de ordem 1 que não foi incorporado ao modelo inicial.",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "Um pico singular na primeira defasagem sinaliza um processo MA(1) negligenciado, recomendando-se a reestimação para um ARIMA(1,1,1).",
+        "is_correct": true,
+        "specific_explanation": "Correto. A marca de um modelo MA(1) puro nos resíduos é justamente um único 'spike' na FAC."
+      },
+      {
+        "text": "Aponta inequivocamente para sub-diferenciação intrínseca, obrigando a adotar o ARIMA(1,2,0).",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Sub-diferenciação geraria correlação prolongada e declínio lento na FAC, não um corte abrupto no lag 1."
+      },
+      {
+        "text": "Trata-se de ruído espúrio pontual em defasagens curtas que não compromete o processo gerador, devendo ser irrelevado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Um choque no lag 1 reflete omissão importante de componente estrutural curto."
+      },
+      {
+        "text": "Evidencia falha do alisamento exponencial, devendo-se utilizar testes de quebra de Chow.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Não se relaciona diretamente a alisamento exponencial nem a quebras estruturais."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Qual a principal limitação da inspeção puramente visual dos coeficientes individuais das FAC/FACP dos resíduos na análise de ruído branco?",
+    "image_url": null,
+    "general_explanation": "Conferir picos individualmente negligencia a análise do conjunto multivariado e amplia o erro do Tipo I (falsos positivos).",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      {
+        "text": "Testes individuais sequenciados não controlam adequadamente a taxa cumulativa de Erro Tipo I para testar a independência conjunta das defasagens.",
+        "is_correct": true,
+        "specific_explanation": "Correto. A análise de lags separados falha em atestar a validade global simultânea, ensejando o uso de Ljung-Box."
+      },
+      {
+        "text": "A extração de estatísticas individuais é matematicamente impossível via verossimilhança de resíduos de grandes amostras.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Calcular ACF amostral não é impossível nem proibido; a limitação reside no controle probabilístico simultâneo."
+      },
+      {
+        "text": "A aproximação de Bartlett subestima resíduos com distribuição bimodal ou multivariada estrita.",
+        "is_correct": false,
+        "specific_explanation": "Falso. A banda baseia-se na variância assintótica da correlação, independente de ser bimodal."
+      },
+      {
+        "text": "Produz viés determinístico no teste Z das matrizes de autocovariância temporal iterada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O problema não é o teste Z individual (que tem certo valor), e sim o nível de significância conjunto."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Como Ljung e Box alteraram o Teste Portmanteau original de Box-Pierce para derivar a estatística Q*?",
+    "image_url": null,
+    "general_explanation": "A modificação consiste em atribuir um peso crescente com o aumento da defasagem para compensar o viés de amostras finitas.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "Introduziram um fator escalar (T+2)/(T-k) aos quadrados das autocorrelações para corrigir a subestimação da variância em amostras finitas.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Essa ponderação ajusta os graus de liberdade da distribuição Qui-quadrado, elevando o poder do teste em pequenas amostras."
+      },
+      {
+        "text": "Aplicaram penalizações tipo Lasso diretamente sobre o primeiro momento do erro condicional inobservável.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Ljung-Box não utiliza otimização Lasso."
+      },
+      {
+        "text": "Isolaram a matriz Hessiana da predição recursiva para mitigar erros oriundos da heterocedasticidade GARCH.",
+        "is_correct": false,
+        "specific_explanation": "Falso. A modificação incide puramente no escalonamento dos quadrados da ACF."
+      },
+      {
+        "text": "Substituíram p-valores nulos pelo logaritmo de máxima verossimilhança de Akaike multivariado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. AIC não faz parte da derivação da estatística Q*."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Ao aplicar o teste de Ljung-Box aos resíduos de um modelo ARIMA(p,d,q), como são calculados os Graus de Liberdade (DF) sob a hipótese nula de independência conjunta até defasagem m?",
+    "image_url": null,
+    "general_explanation": "Para compensar os coeficientes ARMA que 'enxugaram' a correlação durante a estimação, descontam-se os p e q parâmetros do limite m testado.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "A calibração dos graus de liberdade obedece à equação DF = m - p - q, descontando-se os parâmetros endógenos AR e MA previamente ajustados.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Estimar parâmetros diminui os graus de liberdade remanescentes na análise dos resíduos ajustados."
+      },
+      {
+        "text": "A regra universal inalterável é DF = m - 1 para qualquer estrutura ARIMA univariada analisada iterativamente.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A restrição de grau está ancorada na complexidade paramétrica (p+q) do modelo."
+      },
+      {
+        "text": "São definidos pela soma irrestrita e exata DF = p + d + q + 1.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A variável analisada é m, da qual as ordens p e q devem ser debitadas. A ordem d não influencia DF residual."
+      },
+      {
+        "text": "Atrelam-se à raiz quadrada de T, definindo o tamanho da janela assintótica global.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Raiz de T é às vezes usada como sugestão para m, não é a definição de graus de liberdade."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "O teste de Ljung-Box (até defasagem m=24) gerou Q* = 186.57 e p-valor < 2.2e-16 (DF=23). Qual o veredito metodológico adequado?",
+    "image_url": null,
+    "general_explanation": "A estatística enorme com p-valor quase zero rejeita a hipótese nula de inovações descorrelacionadas. O resíduo ainda contém dinâmica oculta.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "A hipótese nula é firmemente rejeitada. Os resíduos não operam como ruído branco estrito e o modelo possui adequação falha.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Isso atesta que o modelo foi subespecificado e deixou escapar autocorrelações remanescentes robustas."
+      },
+      {
+        "text": "A hipótese nula de adequação total do ruído é categoricamente confirmada pela proximidade do p-valor com a origem probabilística zero.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. P-valor baixo no Ljung-Box significa rejeição do Ruído Branco (H0)."
+      },
+      {
+        "text": "Sinaliza a eliminação imediata de componentes ARMA, regressando-se inteiramente ao passeio aleatório puro.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Exige reajustar (aumentar ou mudar as ordens) e não apagar a estrutura por completo indiscriminadamente."
+      },
+      {
+        "text": "O desfecho afirma irrefutavelmente que os resíduos não possuem distribuição Normal, apesar de serem estatisticamente i.i.d.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Ljung-Box não afere aderência à normalidade, mas sim dependência temporal (autocorrelação)."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "A necessidade metodológica da correção feita por Ljung e Box derivou de qual anomalia estatística clássica observada no Box-Pierce original Q em amostras restritas?",
+    "image_url": null,
+    "general_explanation": "A estatística original assumia propriedades assintóticas restritas, subestimando o quantil qui-quadrado, o que causava o não-rejeitar de modelos ruins.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "A estatística Q tendia a ser numericamente menor do que os níveis esperados da distribuição qui-quadrado, falhando com frequência inaceitável em rejeitar modelos insuficientes.",
+        "is_correct": true,
+        "specific_explanation": "Correto. É o famoso 'viés de sub-rejeição' em amostras limitadas da formulação clássica Q original."
+      },
+      {
+        "text": "A Q original assumia inovações heteroscedásticas explosivas sistemáticas que causavam a rejeição universal e cega de qualquer especificação correta.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Pelo contrário, Box-Pierce era leniente e complacente, não excessivamente rigoroso."
+      },
+      {
+        "text": "Box-Pierce fixava o parâmetro temporal (m) sempre no limite de Nyquist, saturando iterativamente as partições do filtro espectral subjacente.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A anomalia advinha do cálculo bruto não ponderado da autocorrelação elevada ao quadrado, não de Nyquist."
+      },
+      {
+        "text": "O teste hipertrofiava artificialmente o componente estático temporal, rejeitando exclusivamente a existência de passeios estocásticos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Não rejeitava passeios aleatórios especificamente, seu defeito era sua aderência subestimada à qui-quadrado."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Qual é o foco exato da premissa probabilística avaliada e sancionada pelo crivo analítico do teste Jarque-Bera sobre resíduos de um modelo?",
+    "image_url": null,
+    "general_explanation": "Jarque-Bera analisa exclusivamente se os resíduos acompanham o formato teórico da distribuição Gaussiana (Normal), baseado nos índices de Assimetria (Skewness) e Curtose (Kurtosis).",
+    "concept_slug": "teste-jarque-bera",
+    "options": [
+      {
+        "text": "Inspeciona sumariamente se as dispersões e desvios atendem às propriedades de assimetria nula e curtose igual a 3 da distribuição normal teórica.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Essa é a essência do JB, calcular a distância dos momentos amostrais em relação a Normal Padrão."
+      },
+      {
+        "text": "Atesta categoricamente se as variáveis de erro transacionam homocedasticidade condicional generalizada no transcurso do horizonte temporal.",
+        "is_correct": false,
+        "specific_explanation": "Falso. O teste de homocedasticidade é outro (e.g. ARCH-LM ou White), JB avalia puramente as caudas e simetria do histograma residual."
+      },
+      {
+        "text": "Identifica rigorosamente a validade formal de componentes sazonais exógenos ocultos em séries estacionárias parciais.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Teste inútil e inapto para identificação de harmônicos sazonais iterativos."
+      },
+      {
+        "text": "Mensura se as inovações defasadas refutam inequivocamente qualquer hipótese de correlação temporal empírica estrita entre lags.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. JB afere forma da distribuição, independendo completamente das conexões seriais (lags)."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Caso o Teste Jarque-Bera acuse um índice de X-squared elevado com p-valor < 0.01 nos resíduos estáticos gerados, o que o analista deve inferir?",
+    "image_url": null,
+    "general_explanation": "A H0 do JB é Normalidade. A probabilidade baixa leva a rejeição dessa normalidade devido às caudas ou assimetria divergentes.",
+    "concept_slug": "teste-jarque-bera",
+    "options": [
+      {
+        "text": "A normalidade dos erros é firmemente rejeitada. Isso indica formato estrutural não gaussiano (caudas longas ou assimetria), mas não prova dependência serial por si só.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Pode ser i.i.d e ainda assim ter distribuição t-student ou hiperbólica, reprovando no JB sem reprovar nos correlogramas."
+      },
+      {
+        "text": "Ratifica de modo sumário e integral que as inovações comportam-se ex-post como o mais autêntico ruído branco empírico condicional.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Erros não-normais quebram parte da definição forte e clássica do ruído gaussiano (embora mantenham ruído estrito se i.i.d)."
+      },
+      {
+        "text": "Assinala gravíssima falha em covariâncias não anuladas temporalmente iteradas, provando a falta crônica de independência ex-ante das perturbações sazonais.",
+        "is_correct": false,
+        "specific_explanation": "Falso. O teste JB é transversal/pontual no histograma, desconectado de covariâncias inter-lags sazonais iteradas."
+      },
+      {
+        "text": "Acarreta a invalidez terminante de qualquer inferência, forçando a adoção obrigatória restrita e exata dos modelos não-lineares GARCH assimétricos incondicionais.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Ausência de normalidade apenas fere a verossimilhança ótima forte, sem colapsar a robustez dos mínimos quadrados e necessitar invariavelmente de GARCH."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Qual a principal implicação metodológica decorrente da reprovação categórica dos resíduos no teste Jarque-Bera, admitindo que o modelo ARMA esteja livre de autocorrelações?",
+    "image_url": null,
+    "general_explanation": "A consistência do estimador de mínimos quadrados permanece, mas a Máxima Verossimilhança perde eficiência assintótica total, e as inferências paramétricas tornam-se menos calibradas.",
+    "concept_slug": "teste-jarque-bera",
+    "options": [
+      {
+        "text": "A rejeição da normalidade não invalida a consistência de estimação dos parâmetros ARMA, mas compromete a eficiência forte da Máxima Verossimilhança e pode descalibrar os testes de hipótese usuais.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O estimador quase-verossimilhança ainda é sólido (consistente), mas a inferência via teste t e limites empíricos pode estar enviesada se a amostra for moderada."
+      },
+      {
+        "text": "Impede de imediato o transcurso analítico contínuo para geração de previsão temporal ex-ante estrita, bloqueando formalmente sua utilização em Box-Jenkins.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O modelo é perfeitamente apto para projeção preditiva pontual sob hipótese fraca, contanto que independa no tempo."
+      },
+      {
+        "text": "Assegura, em caráter reverso, que todas as flutuações e viéses da variância marginal heteroscedástica foram perfeitamente eliminados de modo estacionário exógeno incondicional iterativo.",
+        "is_correct": false,
+        "specific_explanation": "Falso. JB desaprovado indica que existem problemas na distribuição (frequentemente causados por heteroscedasticidade, quebrando essa premissa irrealista afirmativa)."
+      },
+      {
+        "text": "Inverte a direção dos interceptos temporais condicionais, anulando a validade estática incondicional das equações diferencias estacionais subjacentes iteradas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Argumentação estatística puramente falaciosa; formato leptocúrtico não altera interceptos ou sinais de direções de equações iteradas diferenciais."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Como se identifica visualmente a incidência de sazonalidade estocástica (não-estacionariedade sazonal) latente na Função de Autocorrelação analítica (FAC) prévia?",
+    "image_url": null,
+    "general_explanation": "Sazonalidade estocástica se reflete na persistência empírica de alta correlação nos múltiplos s.",
+    "concept_slug": "sazonalidade-sarima",
+    "options": [
+      {
+        "text": "A FAC exibe picos preeminentes duradouros que decaem muito lentamente sobre as defasagens exatas correspondentes aos múltiplos do ciclo anual da série s.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Esses picos persistentes nos lags sazonais são a impressão digital analítica típica do comportamento integrado e instável intermitente sazonal."
+      },
+      {
+        "text": "A FAC exibe abruptamente vales assimétricos e invertidos exclusivamente em defasagens ímpares que dissipam velozmente sua influência no limite do espectro iterado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A sazonalidade gera repetições cíclicas marcadas periodicamente, e não um colapso ímpar acelerado assintótico cego."
+      },
+      {
+        "text": "Ocorre um decréscimo hiperbólico e contínuo focado unicamente na Função Parcial (FACP), mantendo-se a FAC global invariável e perfeitamente plana nas raízes iteradas.",
+        "is_correct": false,
+        "specific_explanation": "Falso. O diagnóstico primário foca fortemente nas ondas não estagnantes explícitas latentes da matriz FAC global primária iterada sazonalmente."
+      },
+      {
+        "text": "Oscilações de curto prazo convergindo no limite para zero atestam dependência irrestrita sazonal e não-linear no horizonte intermitente das caldas de pareto iteradas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A queda imediata e convergente para zero é exatamente o OPOSTO do sintoma gerado pela não-estacionariedade irrestrita persistente sazonal empírica."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Diante da confirmação peremptória de não-estacionariedade sazonal persistente, qual premissa é obrigatória no método empírico SARIMA para estabilizar os dados analíticos?",
+    "image_url": null,
+    "general_explanation": "Aplica-se a diferença sazonal aos dados brutos para eliminar a dependência persistente nos períodos fixos.",
+    "concept_slug": "sazonalidade-sarima",
+    "options": [
+      {
+        "text": "A aplicação metodológica condicional do operador iterativo diferencial sazonal (Y_t - Y_t-s), anulando a variância persistente no hiato longo exógeno intermitente temporal.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O Delta anual/sazonal retira a tendência estocástica e as intermitências fixadas à distância do ciclo principal, sendo o primeiro tratamento univariado."
+      },
+      {
+        "text": "A adição obrigatória irrestrita de transformações estáticas não-lineares puras sobre o ruído, alterando e estabilizando a covariância irrestrita analítica para log-log temporal transversal.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A transformação Log (Box-Cox) mira variabilidade de escala (homoscedasticidade) não-condicional, diferindo totalmente do ajuste diferencial univariado fixo temporal sazonal s."
+      },
+      {
+        "text": "Implementação universal dos critérios estáticos incondicionais e de testes pontuais Chow transversais nas partições irrestritas marginais estritas iterativas.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Chow apura rupturas estruturais de estabilidade ao longo do espectro linear contínuo, inútil para extirpar oscilações puramente periódicas intrínsecas fixadas temporalmente (sazonalidade)."
+      },
+      {
+        "text": "A fixação irrestrita iterativa empírica e contínua e exógena do componente MA na ordem univariada q=12 com a abstenção compulsória temporal irrestrita condicional das demais intervenções iteradas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Engessar ingenuamente um polinômio temporal exato MA(12) sem antes estabilizar os dados temporalmente iterados com d sazonal costuma culminar em raízes irrestritas unitárias e inconsistências incondicionais."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Como a teoria SARIMA iterativa responde metodologicamente à falaciosa alegação de que 'A sazonalidade na FAC não possui correção paramétrica possível a ser refeita ex-post e impõe a manutenção passiva de modelos iterados'?",
+    "image_url": null,
+    "general_explanation": "A sazonalidade pode ser tratada através de parâmetros autoregressivos e médias móveis sazonais, ou diferenciação sazonal.",
+    "concept_slug": "sazonalidade-sarima",
+    "options": [
+      {
+        "text": "A alegação é tecnicamente infundada, pois padrões cíclicos estocásticos persistentes podem ser estabilizados por diferenciações sazonais empíricas iterativas e modelados com adição contínua de parâmetros AR/MA sazonais puros.",
+        "is_correct": true,
+        "specific_explanation": "Correto. É exatamente o princípio incondicional empírico estrito gerador do arcabouço iterativo expandido temporal passivo SARIMA; ele conserta ex-post a sazonalidade iterada e exógena."
+      },
+      {
+        "text": "Mostra-se estritamente correta; anomalias e raízes sazonais intrínsecas da amostra não paramétrica empírica ex-post não podem ser extirpadas sem o controle iterativo incondicional estático paramétrico univariado estrito do algoritmo de filtro Kalman exógeno e contínuo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A sentença é sabidamente falsa no cerne do modelo. Box-Jenkins com suas variações e complementos acomoda perfeitamente e remedia a irregularidade irrestritamente transversal iterada sem filtro condicional Kalman puro."
+      },
+      {
+        "text": "A veracidade recai unicamente no postulado puramente paramétrico iterativo pontual exógeno de que polinômios sazonais só eliminam sazonalidade se o termo empírico condicional contínuo e intermitente irrestrito do filtro analítico estiver em concordância estática estrita univariada transversal ao ruído branco não iterado empírico estrito incondicional.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Declaração tecnicamente vazia transversal iterada pontual estática empírica. A falsidade da afirmativa inicial não reside em detalhes restritivos confusos exógenos iterativos incondicionais sobre concordância ao ruído univariado exato pontual."
+      },
+      {
+        "text": "Demonstra que a incondicionalidade sazonal passiva iterada empírica anula o logaritmo empírico condicional temporal univariado puro ex-ante, proibindo intervenção transversal intermitente estrita e contínua paramétrica univariada pontual irrestritamente incondicional.",
+        "is_correct": false,
+        "specific_explanation": "Falso. O texto subjacente errôneo incondicional irrestritamente transversal empírico e estático iterativo exógeno contínuo propaga uma tese falida passiva temporal; a matemática do SARIMA condicional pontual estrito univariado puro desmente isso cabalmente temporariamente."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Ao estruturar iterativamente os polinômios defasados Phi(B^s) e Theta(B^s) nas especificações SARIMA, eles atuam empiricamente com qual objetivo analítico direto e principal no controle das intermitências sazonais?",
+    "image_url": null,
+    "general_explanation": "Esses polinômios capturam e retiram os choques periódicos nas defasagens exatamente distanciadas de s períodos (mês a mês, por exemplo).",
+    "concept_slug": "sazonalidade-sarima",
+    "options": [
+      {
+        "text": "Exercem modelamento univariado paramétrico preciso para capturar a dependência residual alojada especificamente nas defasagens temporais separadas por hiatos múltiplos inteiros da frequência sazonal analítica s.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O objetivo do filtro e do parâmetro intermitente sazonal exógeno empírico s é engajar a correlação que salta as defasagens intermediárias estritas univariadas iteradas e interliga apenas pontualmente as pontas sazonais s isoladas no tempo."
+      },
+      {
+        "text": "Abater as instabilidades da variância homoscedástica transversal estritamente pontual empírica através de defasagens iteradas analíticas condicionais e univariadas estáticas puramente exógenas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Corrigir heterocedasticidade exógena iterativa incondicional univariada estrita e contínua não tem nexo algum metodológico empírico iterado sazonal analítico com a inclusão isolada condicional de parâmetros SAR exatos e SMA transversais univariados pontuais temporais puramente paramétricos."
+      },
+      {
+        "text": "Ajustar incondicional e empiricamente as assimetrias transversais estáticas da matriz leptocúrtica aferida na normalidade univariada intermitente exógena temporal do teste de resíduos de Jarque-Bera iterado e condicional.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Polinômios irrestritamente transversais paramétricos intermitentes exógenos sazonais de médias estáticas univariadas temporais estritas não servem para arredondar ou esmagar caudas iterativas empíricas condicionais incondicionais de histogramas irregulares pontuais analíticos estáticos temporais puramente ex-post."
+      },
+      {
+        "text": "Garantir a totalidade das raízes univariadas dentro da banda irrestritamente empírica de reversão de Nyquist transversal incondicional puramente iterada e contínua temporal analítica estrita paramétrica e univariada pontual passiva temporal exógena e estática condicional irrestrita.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A estabilidade das raízes empíricas temporais iterativas puramente transversais estritas analíticas univariadas e pontuais transversais sazonais condicionais e exógenas puras é um mero efeito colateral ou requisito irrestritamente passivo e pontual, não o propósito causal primário iterativo univariado condicional passivo temporal puro da formulação exógena empírica e analítica."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Se o diagnóstico paramétrico final condicional univariado de um modelo Box-Jenkins atestar que os resíduos reprovaram o teste de ruído branco, qual curso de ação iterativo deve seguir o pesquisador irrestritamente?",
+    "image_url": null,
+    "general_explanation": "A metodologia demanda que um diagnóstico falho obrigue o retorno à etapa de identificação e reespecificação do modelo univariado.",
+    "concept_slug": "metodologia-box-jenkins",
+    "options": [
+      {
+        "text": "Deve-se retroceder ao estágio primário de averiguação para especificar e readequar uma nova arquitetura paramétrica capaz de absorver a dinâmica remanescente negligenciada no ajustamento prévio.",
+        "is_correct": true,
+        "specific_explanation": "Correto. É exatamente este fluxo transversal irrestritamente empírico cíclico iterativo univariado e condicional de retorno analítico incondicional temporal a essência de Box-Jenkins em caso de falha estática paramétrica estrita iterada pontual exógena puramente passiva."
+      },
+      {
+        "text": "O pesquisador deve manter o modelo univariado estático iterativo falho e compensar o erro inflando irrestritamente as variáveis pela matriz intermitente incondicional condicional exógena pontual estrita sazonal passiva iterada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O erro de especificação iterativa univariada puramente estática temporal empírica e pontual transversal irrestrita incondicional condicional estritamente analítica paramétrica transversal e exógena jamais deve ser tolerado estaticamente com gambiarras infundadas passivas analíticas temporais iteradas."
+      },
+      {
+        "text": "Ignorar o teste empírico e abandonar a regressão paramétrica ARMA irrestrita, priorizando o alisamento passivo incondicional temporal condicional univariado transversal analítico exógeno empírico de erro mínimo temporal estrito.",
+        "is_correct": false,
+        "specific_explanation": "Falso. Box-Jenkins univariado iterativo pontual empírico e estático analítico irrestritamente paramétrico condicional e passivo exógeno temporal não prega rendição ao fracasso do modelo incondicional inicial univariado estritamente temporal transversal empírico e analítico, e sim tentativa irrestrita de re-modelagem iterativa pontual."
+      },
+      {
+        "text": "Acatar irrestritamente a rejeição transversal do diagnóstico condicional temporal univariado pontual como inevitável e utilizá-lo estaticamente mesmo falho, aplicando correção manual incondicional empírica iterada paramétrica analítica passiva e exógena estrita nos p-valores intermitentes e transversais pontuais condicionais estáticos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Usar modelo sub-especificado e distorcido iterativamente condicional puramente paramétrico estrito transversal analítico e univariado incondicional passivo temporal e exógeno iterado temporal com resíduos dependentes empíricos pontuais transversais arruína a projeção ex-ante estritamente paramétrica analítica condicional irrestrita empírica passiva temporariamente incondicional."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Antes de processar exaustivamente o arcabouço univariado condicional Box-Jenkins, o que, via de regra, não se consegue extrair confiavelmente através da simples inspeção ocular transversal do gráfico cru univariado temporal de série histórica?",
+    "image_url": null,
+    "general_explanation": "Gráficos puros apontam para ciclos, tendências (não-estacionariedade de média) e variância crescente (não-estacionariedade de variância). No entanto, não conseguem apontar os detalhes micro da estrutura paramétrica univariada de ordens p e q.",
+    "concept_slug": "metodologia-box-jenkins",
+    "options": [
+      {
+        "text": "A quantificação exata paramétrica das ordens (p e q) intrínsecas necessárias para a modelagem empírica iterativa do sinal auto-regressivo univariado subjacente.",
+        "is_correct": true,
+        "specific_explanation": "Correto. As defasagens puras precisas AR e MA requerem a visualização da FAC e FACP, e não apenas o gráfico contínuo dos dados."
+      },
+      {
+        "text": "A presença de viés tendencial condicional empírico e iterativo (crescimento ou decrescimento de longo prazo) na série histórica univariada estática.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. É extremamente simples univariadamente atestar tendências por pura inspeção visual gráfica univariada."
+      },
+      {
+        "text": "O comportamento condicional heteroscedástico (aumento contínuo exógeno univariado da volatilidade e variância empírica ao longo do tempo).",
+        "is_correct": false,
+        "specific_explanation": "Falso. A dispersão irregular progressiva e explosão na linha estritamente incondicional empírica gráfica salta puramente aos olhos sem grandes investigações."
+      },
+      {
+        "text": "A incidência de anomalias pontuais puramente empíricas e isoladas (outliers de enorme e destacada amplitude na linha de tempo iterativa condicional).",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Choques aberrantes são imediatamente visíveis irrestritamente univariados na linha temporal empírica estrita condicional paramétrica gráfica incondicional."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "A adoção univariada paramétrica rigorosa empírica condicional iterativa e analítica do 'princípio da parcimônia' na escolha do modelo Box-Jenkins tem como objetivo precípuo mitigar e inibir a ocorrência de qual problema analítico estrito condicional empírico univariado irrestrito exógeno temporal?",
+    "image_url": null,
+    "general_explanation": "A parcimônia alerta o modelador a preferir o modelo ARMA mais magro possível, prevenindo o overfitting (super-ajuste).",
+    "concept_slug": "metodologia-box-jenkins",
+    "options": [
+      {
+        "text": "Evita a acomodação irrestrita de parâmetros excessivos à dinâmica do ruído local incondicional (overfitting), o que drenaria de forma iterativa condicional os graus de liberdade univariados puros e prejudicaria a predição.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Modelos gigantes com infinitas defasagens e incondicionais ajustam-se demais às idiossincrasias irrepetíveis temporais (ruído), custando acurácia."
+      },
+      {
+        "text": "Assegura analiticamente de modo empírico exógeno iterativo a identificação absoluta irrestritamente transversal temporal pontual empírica univariada incondicional e a eliminação da raiz unitária da matriz temporal sazonal e contínua condicional estática paramétrica.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Controle de raízes passivas e integradas incondicionais puras iterativas não reside em mera supressão paramétrica univariada empírica transversal condicional iterada por economia e parcimônia; demanda uso de filtro diferencial irrestrito condicional temporal estrito pontual univariado."
+      },
+      {
+        "text": "Inibe univariadamente de forma temporal incondicional condicional estritamente analítica empírica a formação contínua passiva de componentes estáticos transversais sazonais iterativos puros com ciclo idêntico e condicional ao hiato estático paramétrico irrestrito exógeno iterativo estrito empírico e analítico transversal temporal passivo sazonal exato.",
+        "is_correct": false,
+        "specific_explanation": "Falso. A parcimônia incondicional iterativa condicional temporal empírica estática transversal puramente univariada não isola nem inibe sazonalidades estritamente paramétricas transversais iterativas empíricas condicionais analíticas puras temporais; apenas inibe exógenos excessos de lags iterativos pontuais univariados incondicionais transversais empíricos e condicionais estritos paramétricos iterados sazonais."
+      },
+      {
+        "text": "Garante irrestritamente temporal univariada analítica estática e iterativa condicional e empírica que os coeficientes incondicionais não superem o limite fixo unitário imposto pela aproximação irrestrita de Bartlett transversal condicional analítica estrita univariada paramétrica temporal empírica iterativa incondicional exógena e passiva pontual estática e transversal temporal pura.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A convergência ou os limitadores assintóticos condicional iterativo univariado e analítico transversal paramétrico pontual estrito e incondicional temporal exógeno não dependem essencialmente puramente da restrição de parcimônia incondicional estritamente empírica temporal e iterada condicional puramente irrestrita transversal univariada analítica paramétrica."
+      }
+    ]
+  }
+]

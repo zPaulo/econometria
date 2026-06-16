@@ -1,0 +1,392 @@
+[
+  {
+    "theme_id": 4,
+    "text": "Ao examinar as Funções de Autocorrelação (ACF) e Autocorrelação Parcial (PACF) de uma série temporal econômica não transformada, nota-se que a ACF decai linearmente e muito lentamente. Com base apenas nesta inspeção visual, qual é o diagnóstico preliminar mais adequado?",
+    "image_url": null,
+    "general_explanation": "O decaimento muito lento na ACF é a assinatura visual clássica de uma série com não estacionariedade, frequentemente devido a uma raiz unitária (tendência estocástica) ou tendência determinística severa.",
+    "concept_slug": "identificacao-nao-estacionariedade",
+    "options": [
+      { "text": "A série é um processo de Ruído Branco.", "is_correct": false, "specific_explanation": "Um ruído branco teria ACF insignificante desde a primeira defasagem." },
+      { "text": "A série segue um modelo estacionário de Médias Móveis, MA(q).", "is_correct": false, "specific_explanation": "Um MA(q) tem a ACF cortando abruptamente para zero após a defasagem q." },
+      { "text": "A série é altamente indicativa de não estacionariedade, sugerindo a necessidade de diferenciação.", "is_correct": true, "specific_explanation": "O decaimento lento na ACF demonstra que choques passados não perdem influência rapidamente, indicando que a série não reverte à média." },
+      { "text": "A série apresenta forte sazonalidade que ofusca sua estacionariedade subjacente.", "is_correct": false, "specific_explanation": "Sazonalidade manifesta-se através de picos repetitivos (ex: a cada 12 meses), não apenas como um decaimento lento e contínuo." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "No contexto da metodologia de Box-Jenkins, suponha que a Função de Autocorrelação (ACF) de uma série temporal apresente um corte abrupto (torna-se zero) após a defasagem 2, enquanto a Função de Autocorrelação Parcial (PACF) decai exponencialmente ou de forma oscilatória. Qual o modelo subjacente sugerido?",
+    "image_url": null,
+    "general_explanation": "Para processos MA(q), a ACF corta após 'q' defasagens, e a PACF apresenta decaimento assintótico. Sendo o corte na defasagem 2, o modelo sugerido é um MA(2).",
+    "concept_slug": "identificacao-ma",
+    "options": [
+      { "text": "Modelo Autorregressivo de ordem 2, AR(2).", "is_correct": false, "specific_explanation": "No AR(2), é a PACF que sofre o corte após a defasagem 2, enquanto a ACF decai." },
+      { "text": "Modelo de Médias Móveis de ordem 2, MA(2).", "is_correct": true, "specific_explanation": "O corte abrupto na ACF determina a ordem 'q' do processo de médias móveis." },
+      { "text": "Modelo Autorregressivo e de Médias Móveis, ARMA(2,2).", "is_correct": false, "specific_explanation": "Em um ARMA(2,2), tanto a ACF quanto a PACF exibiriam decaimento, sem cortes imediatos abruptos nos primeiros lags." },
+      { "text": "Passeio Aleatório (Random Walk).", "is_correct": false, "specific_explanation": "Passeios aleatórios apresentam decaimento muito lento e linear da ACF, sem cortes abruptos iniciais." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Para uma série temporal estacionária, observa-se que a sua Função de Autocorrelação Parcial (PACF) corta para valores não significativos logo após a defasagem 3, ao passo que a ACF oscila decaindo de forma gradual. Esse padrão é característico de qual processo estocástico?",
+    "image_url": null,
+    "general_explanation": "O ponto em que a PACF corta para zero determina a ordem 'p' de um processo Autorregressivo puro AR(p).",
+    "concept_slug": "identificacao-ar",
+    "options": [
+      { "text": "ARIMA(0,1,3).", "is_correct": false, "specific_explanation": "Um processo com raiz unitária (d=1) não apresentaria o decaimento gradual esperado na ACF para estacionariedade." },
+      { "text": "MA(3).", "is_correct": false, "specific_explanation": "No MA(3), a ACF (e não a PACF) cortaria após a defasagem 3." },
+      { "text": "AR(3).", "is_correct": true, "specific_explanation": "Um processo AR(p) puro é tipicamente identificado pelo corte da PACF após a p-ésima defasagem." },
+      { "text": "ARMA(3,3).", "is_correct": false, "specific_explanation": "Num modelo ARMA misto, nenhuma das duas funções cortaria abruptamente nos primeiros lags." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Ao avaliar os gráficos da ACF e PACF de uma série mensal, um analista observa picos muito fortes e que extrapolam as bandas de confiança nos lags 12, 24 e 36. O que este padrão sinaliza primariamente sobre a dinâmica da série?",
+    "image_url": null,
+    "general_explanation": "Picos periódicos nas defasagens sazonais (como 12, 24, 36 para dados mensais) indicam forte dependência da observação do mesmo período no ano anterior, definindo a presença de sazonalidade.",
+    "concept_slug": "identificacao-sazonalidade",
+    "options": [
+      { "text": "A presença de sazonalidade e de uma forte dependência intra-anual cíclica.", "is_correct": true, "specific_explanation": "O reaparecimento de correlações a cada 12 meses reflete comportamentos sazonais típicos, comuns em dados de inflação, vendas, produção, etc." },
+      { "text": "Uma quebra estrutural contínua a cada ano.", "is_correct": false, "specific_explanation": "Quebras estruturais afetam o nível da série permanentemente e não geram ciclos estáveis na ACF nesses intervalos." },
+      { "text": "Que a série é estritamente não estacionária no componente regular (raiz unitária no lag 1).", "is_correct": false, "specific_explanation": "O padrão observado fala apenas sobre a parte sazonal; a parte regular precisa ser avaliada observando os primeiros lags não sazonais." },
+      { "text": "Um modelo puramente de ruído branco, já que picos a longo prazo podem ocorrer ao acaso.", "is_correct": false, "specific_explanation": "Picos regulares nesses lags não são obra do acaso e sim uma evidência sistemática do padrão gerador de dados (Sazonalidade)." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Após identificar a presença de sazonalidade a partir das análises da ACF e PACF, e questionando-se 'será que você considera retirar a sazonalidade?', qual é o principal argumento econométrico a favor da remoção do componente sazonal?",
+    "image_url": null,
+    "general_explanation": "Retirar a sazonalidade ajuda a revelar o comportamento subjacente da série (tendência e ciclo) e evita que flutuações regulares mas intensas mascarem relações reais ao realizar regressões e prever componentes estruturais.",
+    "concept_slug": "dessazonalizacao-justificativa",
+    "options": [
+      { "text": "Remover a sazonalidade reduz a variação espúria e facilita a modelagem do componente de longo prazo e a inferência estrutural.", "is_correct": true, "specific_explanation": "Modelar o ciclo subjacente sem o ruído das variações repetitivas sazonais torna as previsões de tendência mais claras e evita problemas de autocorrelação nos resíduos de regressões." },
+      { "text": "É um requisito obrigatório para a realização do Teste de Ljung-Box em modelos MA puros.", "is_correct": false, "specific_explanation": "O teste de Ljung-Box pode ser aplicado em resíduos de modelos sazonais (SARIMA) adequadamente especificados." },
+      { "text": "A sazonalidade torna qualquer série impossível de ser modelada por técnicas univariadas.", "is_correct": false, "specific_explanation": "Séries sazonais podem ser modeladas através de métodos univariados como o SARIMA e a modelagem de Holt-Winters." },
+      { "text": "O componente sazonal invalida a aplicação de testes de raiz unitária na série original.", "is_correct": false, "specific_explanation": "Testes como HEGY permitem testar raízes unitárias estritamente sazonais, ou pode-se usar regressões auxiliares." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Supondo que um analista opte por remover a sazonalidade sem a utilização de comandos de R, como um procedimento algébrico e manual. Qual dos métodos abaixo é uma abordagem clássica para lidar matematicamente com um componente sazonal determinístico de período s?",
+    "image_url": null,
+    "general_explanation": "Modelos de regressão com variáveis 'dummy' sazonais e o cálculo da diferença sazonal (1 - L^s) são métodos clássicos. Para sazonalidade determinística (fixa), a adição de dummys é a abordagem estrutural correta.",
+    "concept_slug": "dessazonalizacao-metodos",
+    "options": [
+      { "text": "Multiplicar a série temporal pelo logaritmo neperiano das defasagens anteriores.", "is_correct": false, "specific_explanation": "Logaritmo serve para suavizar e estabilizar a variância (efeito heterocedástico), não para ajustar a sazonalidade." },
+      { "text": "Incluir na equação de modelagem s-1 variáveis indicadoras (dummies) associadas aos períodos sazonais.", "is_correct": true, "specific_explanation": "A regressão sobre dummys sazonais extrai os padrões fixos sazonais da série, deixando o resto (resíduo) como a série livre de sazonalidade determinística." },
+      { "text": "Diferenciar a série repetidamente, iterando até a variância da série se aproximar de zero.", "is_correct": false, "specific_explanation": "Super-diferenciação gera ruído artificial nos resíduos e introduz distorções de raiz de médias móveis, sendo um erro metodológico." },
+      { "text": "Aplicar o teste de Dickey-Fuller Aumentado sem componente de tendência.", "is_correct": false, "specific_explanation": "O ADF é um teste de não-estacionariedade (raiz unitária comum), e aplicá-lo não transforma/remove a sazonalidade da base de dados." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Caso a sazonalidade identificada em uma série temporal mensal seja de origem estocástica (uma raiz unitária sazonal), qual o procedimento algébrico (sem software) adequado para atingir a estacionariedade sazonal?",
+    "image_url": null,
+    "general_explanation": "A raiz unitária sazonal é tratada através da Diferenciação Sazonal, ou seja, subtraindo do valor atual o valor ocorrido no mesmo período do ano anterior: Y_t - Y_{t-12}.",
+    "concept_slug": "diferenciacao-sazonal",
+    "options": [
+      { "text": "Aplicação do operador de diferença sazonal, calculando Δ_{12} Y_t = Y_t - Y_{t-12}.", "is_correct": true, "specific_explanation": "O operador (1 - L^{12}) aniquila efetivamente uma raiz sazonal e remove flutuações sazonais erráticas que variam ano a ano." },
+      { "text": "Aplicação da primeira diferença sequencial repetida doze vezes, Y_t - 12 Y_{t-1}.", "is_correct": false, "specific_explanation": "A primeira diferença seqüencial aplicada várias vezes lida com integração de alta ordem regular, não extrai a correlação de atraso 12 apropriadamente e induzirá complexidade severa." },
+      { "text": "Estimar e subtrair a média global da série de cada observação individual.", "is_correct": false, "specific_explanation": "Isso apenas centraliza a série em torno de zero e não remove nem a não estacionariedade sazonal nem a regular." },
+      { "text": "Dividir a série em doze partições aleatórias e utilizar a mediana anual.", "is_correct": false, "specific_explanation": "Um procedimento que perderia toda a estrutura temporal sequencial inerente a séries de tempo econômicas." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Ao analisar graficamente uma série econômica de um determinado Estado (ex: PIB do Maranhão), a série original demonstra crescimento constante ao longo dos anos, com oscilações oscilantes proporcionais ao nível da série. Se essa proporção variância-nível for real, o que se deve fazer antes de retirar a sazonalidade e realizar diferenciações?",
+    "image_url": null,
+    "general_explanation": "Quando a variância (amplitude das flutuações) cresce acompanhando o nível absoluto da série, temos não estacionariedade na variância. O tratamento clássico é a transformação Box-Cox ou Logarítmica.",
+    "concept_slug": "estabilizacao-variancia",
+    "options": [
+      { "text": "Realizar uma regressão por Mínimos Quadrados Ponderados, atribuindo maior peso aos anos recentes.", "is_correct": false, "specific_explanation": "Isso não aborda a construção do modelo ARIMA nem estabiliza a série para diagnóstico na metodologia Box-Jenkins." },
+      { "text": "Aplicar o teste de Causalidade de Granger para remover a heterocedasticidade.", "is_correct": false, "specific_explanation": "Causalidade de Granger testa capacidade preditiva cruzada entre variáveis, não trata variância temporal." },
+      { "text": "Aplicar o operador de diferença sazonal primeiramente, sem transformações prévias.", "is_correct": false, "specific_explanation": "Diferenciar sem tratar o aumento da variância resultará em resíduos com heterocedasticidade severa (ARCH)." },
+      { "text": "Aplicar o logaritmo natural em toda a série com o objetivo de estabilizar a variância antes de qualquer procedimento.", "is_correct": true, "specific_explanation": "A transformação logarítmica achata variações de escala e percentuais, sendo o passo inicial ideal em séries macroeconômicas com crescimento exponencial." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Após avaliar visualmente os correlogramas e suspeitar da presença de raiz unitária na série em nível, questiona-se: 'qual o próximo passo?'. Dentro do rigor econométrico, qual deve ser a etapa seguinte imediata antes de modelar componentes AR e MA?",
+    "image_url": null,
+    "general_explanation": "A inspeção gráfica das ACFs/PACFs serve apenas como diagnóstico heurístico. O rigor exige confirmação estatística formal via testes de raiz unitária (como ADF, Phillips-Perron ou KPSS).",
+    "concept_slug": "teste-raiz-unitaria",
+    "options": [
+      { "text": "Rodar um Teste de Dickey-Fuller Aumentado (ADF) ou Phillips-Perron para confirmar formalmente a não-estacionariedade.", "is_correct": true, "specific_explanation": "Os testes formais garantem um amparo estatístico de que há realmente uma raiz unitária, suportando a escolha do parâmetro 'd' do modelo ARIMA." },
+      { "text": "Calcular os critérios de informação de Akaike (AIC) para todas as combinações de modelos AR(p) em nível.", "is_correct": false, "specific_explanation": "Não se pode modelar ARMA em séries não estacionárias sem risco de gerar inconsistência estatística. A estacionariedade deve ser resolvida antes." },
+      { "text": "Substituir imediatamente todos os valores atípicos (outliers) pela média condicional.", "is_correct": false, "specific_explanation": "Outliers podem impactar testes, mas a decisão formal sobre a ordem de integração antecede ao tratamento fino." },
+      { "text": "Aplicar um modelo de Vetores Autorregressivos (VAR) para compensar a não estacionariedade internamente.", "is_correct": false, "specific_explanation": "Modelos VAR tradicionais requerem séries estacionárias. Caso hajam raízes, a técnica envolveria Cointegração e VECM." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Ao executar o Teste de Dickey-Fuller Aumentado (ADF), qual é a estrutura básica da hipótese nula em relação à série e o que sua não-rejeição implica?",
+    "image_url": null,
+    "general_explanation": "A Hipótese Nula (H0) do teste ADF é que a série possui uma raiz unitária (γ = 0 na equação de diferença). A não-rejeição implica que devemos aceitar a não-estacionariedade e aplicar uma diferenciação.",
+    "concept_slug": "hipotese-adf",
+    "options": [
+      { "text": "A hipótese nula afirma que a série é estacionária. A não-rejeição não exige diferenciação.", "is_correct": false, "specific_explanation": "Esta é a hipótese nula do teste KPSS, e não do ADF." },
+      { "text": "A hipótese nula atesta a ausência de autocorrelação nos resíduos. A não-rejeição atesta boa qualidade do modelo.", "is_correct": false, "specific_explanation": "Trata-se de hipóteses de testes de ruído branco, como o Ljung-Box ou Breusch-Godfrey." },
+      { "text": "A hipótese nula afirma a existência de raiz unitária. A não-rejeição dita que a série deve ser diferenciada (d=1).", "is_correct": true, "specific_explanation": "No framework do ADF, testar a raiz unitária falhando em rejeitá-la atesta que o processo carece do operador de diferença para ser modelável." },
+      { "text": "A hipótese nula avalia apenas a significância conjunta dos termos de Médias Móveis (MA).", "is_correct": false, "specific_explanation": "O teste ADF avalia apenas o coeficiente que multiplica a primeira defasagem do termo em nível da série, ignorando termos MA (ele os trata aproximando com mais termos AR)." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Considerando uma série com forte persistência na ACF, o analista decide aplicar a primeira diferença Δy_t. Ao plotar a nova ACF, ele observa um significativo e forte pico negativo unicamente na defasagem 1, com demais próximas a zero. Qual é o provável erro metodológico cometido?",
+    "image_url": null,
+    "general_explanation": "Uma ACF de primeira diferença com pico fortemente negativo (perto de -0.5) no lag 1 costuma ser o sintoma clássico de 'super-diferenciação' (over-differencing), que induz a um modelo MA(1) com raiz não-inversível.",
+    "concept_slug": "super-diferenciacao",
+    "options": [
+      { "text": "O analista não modelou as quebras estruturais no termo de erro.", "is_correct": false, "specific_explanation": "Quebras estruturais aparecem como componentes duradouros de longo prazo, não especificamente como um corte em MA(1) artificial." },
+      { "text": "A série original já era estacionária ao redor de uma tendência determinística, e aplicar a diferença gerou super-diferenciação.", "is_correct": true, "specific_explanation": "Se a série é apenas 'trend-stationary', retirar a tendência regredindo contra o tempo seria o correto. Diferenciá-la cria uma correlação serial artificial no erro na forma de um processo de médias móveis negativo." },
+      { "text": "A série possuía uma sazonalidade estocástica ignorada que explodiu a variância de curto prazo.", "is_correct": false, "specific_explanation": "Sazonalidade estocástica não-tratada deixaria picos em lags sazonais prolongados, não no lag 1 regular." },
+      { "text": "A PACF foi ignorada, levando à aplicação do logaritmo quando a série demandava Box-Cox inverso.", "is_correct": false, "specific_explanation": "Não há relação direta entre a escolha de Box-Cox inverso e a presença desse comportamento clássico de superdiferenciação linear na ACF." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "No ciclo de Box-Jenkins, as etapas geralmente aceitas são Identificação, Estimação e Verificação (Diagnóstico). 'Considerando os resultados dos testes, qual o próximo passo?' - O que deve ser avaliado primordialmente durante a fase final de Verificação após estimar os coeficientes AR e MA?",
+    "image_url": null,
+    "general_explanation": "A Verificação tem por principal objetivo testar se os resíduos do modelo são independentes e identicamente distribuídos (Ruído Branco), por meio da análise de ACF/PACF dos resíduos e testes de correlação serial.",
+    "concept_slug": "box-jenkins-verificacao",
+    "options": [
+      { "text": "A estacionariedade da série original em níveis estritos sem diferenciação.", "is_correct": false, "specific_explanation": "Essa etapa deve ocorrer na fase de Identificação, não de Verificação, que age sobre o modelo já estimado." },
+      { "text": "A magnitude bruta da variância das inovações quando contrapostas aos erros previstos fora da amostra.", "is_correct": false, "specific_explanation": "A avaliação fora da amostra (forecast evaluation) pode vir depois, mas o passo imediato de verificação estatística interna do ajuste Box-Jenkins avalia resíduos in-sample." },
+      { "text": "O comportamento dos resíduos do modelo, devendo os mesmos ser indistinguíveis de um Ruído Branco (com ausência de autocorrelação estatisticamente significativa).", "is_correct": true, "specific_explanation": "É imperativo que qualquer dependência temporal sistemática (dinâmica) já tenha sido absorvida pelo modelo ARIMA estimado, devendo sobrar apenas choque aleatório (ruído branco)." },
+      { "text": "Se o teste KPSS na série diferenciada aponta a existência de duas raízes unitárias contíguas.", "is_correct": false, "specific_explanation": "De novo, os testes de ordem de integração (identificação) precedem a modelagem e a verificação." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Se em um gráfico de ACF de resíduos são encontradas barrinhas tracejadas ao redor do eixo horizontal marcando limites próximos de 1,96 / √T, o que esses limites exatos representam e qual o seu propósito analítico na modelagem de séries temporais?",
+    "image_url": null,
+    "general_explanation": "As faixas tracejadas representam os limites do intervalo de confiança de aproximadamente 95% para os coeficientes de autocorrelação calculados sob a hipótese nula de que a série verdadeira é um ruído branco.",
+    "concept_slug": "bandas-de-confianca-acf",
+    "options": [
+      { "text": "São os limiares de erro da distribuição t-Student com 1 grau de liberdade e testam se a variância dos resíduos é infinita.", "is_correct": false, "specific_explanation": "Elas derivam da normalidade assintótica (distribuição normal padrão associada ao Teorema do Limite Central) e não da t-Student de 1 G.L. e variância infinita (Cauchy)." },
+      { "text": "Representam as bandas de confiança (geralmente 95%) para testar a significância estatística individual de cada coeficiente de autocorrelação contra zero.", "is_correct": true, "specific_explanation": "Qualquer barra da ACF/PACF que ultrapasse essas linhas indica que essa defasagem possui autocorrelação que não é nula estatisticamente, violando (ou guiando) a premissa de ruído branco no resíduo." },
+      { "text": "São os determinantes de limite inferior e superior para a aplicação do operador de diferenciação D, dadas as condições de restrição não linear.", "is_correct": false, "specific_explanation": "As bandas apenas avaliam a significância da correlação no lag k, não determinam restrições do operador de diferença na série original numericamente." },
+      { "text": "É a faixa empírica dentro da qual se garante que o modelo tem o menor Critério de Informação de Akaike (AIC) do modelo testado.", "is_correct": false, "specific_explanation": "Banda de confiança gráfica não interage com a métrica comparativa de AIC que avalia log-verossimilhança global com penalização." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Na leitura da ACF, porque a barra na posição zero (Lag 0) sempre tem a altura de exatamente 1.0?",
+    "image_url": null,
+    "general_explanation": "A autocorrelação em defasagem zero calcula a correlação da variável consigo mesma simultaneamente. Por definição matemática de correlação, uma variável consigo mesma terá sempre correlação perfeita e positiva.",
+    "concept_slug": "acf-lag-zero",
+    "options": [
+      { "text": "Devido a premissa de Erro Padrão do ruído branco ser sempre unitário em um processo Gaussiano.", "is_correct": false, "specific_explanation": "Não é uma imposição de processo estocástico, é apenas uma identidade aritmética da fórmula de correlação linear (Pearson)." },
+      { "text": "Porque corresponde à correlação linear da série com ela mesma no mesmo instante do tempo (t = t).", "is_correct": true, "specific_explanation": "A covariância de Y_t com Y_t é a própria variância de Y_t, e a correlação (Cov/Var) resultará inegavelmente em 1, servindo de âncora gráfica referencial no plot." },
+      { "text": "Isso ocorre apenas em séries que atingiram estacionariedade perfeita pela primeira diferença.", "is_correct": false, "specific_explanation": "Qualquer série temporal computada apresentará ACF igual a 1 no Lag 0, quer ela seja estacionária ou altamente desordenada e com quebras." },
+      { "text": "É o resultado obrigatório do filtro Holt-Winters ajustado ao termo de sazonalidade.", "is_correct": false, "specific_explanation": "O lag 0 valer 1 em um correlograma nada tem a ver com os coeficientes de alisamento exponencial estocástico (Holt-Winters)." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Durante a construção de modelos, nota-se que dois modelos ARMA estacionários diferentes apresentam correlogramas (resíduos) válidos (dentro das bandas). Para decidir matematicamente 'qual o próximo passo' de seleção formal do melhor modelo, deve-se:",
+    "image_url": null,
+    "general_explanation": "Para selecionar entre modelos matemáticos competidores com resíduos saudáveis, os critérios de informação como Akaike (AIC) e Bayesiano/Schwarz (BIC) são calculados. Escolhe-se aquele com o menor valor, buscando parcimônia e alta verossimilhança.",
+    "concept_slug": "criterios-de-informacao",
+    "options": [
+      { "text": "Subtrair o número de parâmetros da estimativa da variância e maximizar esse resultado.", "is_correct": false, "specific_explanation": "O procedimento usual é a penalização na função de log-verossimilhança através de equações clássicas, e nós minimizamos o IC." },
+      { "text": "Proceder com a estimação do modelo GARCH(1,1) ignorando a média condicional ARMA identificada.", "is_correct": false, "specific_explanation": "Modelos da família ARCH/GARCH dependem do adequado tratamento da média (com ARMA) para terem resíduos não corrompidos em nível para a etapa da volatilidade." },
+      { "text": "Analisar as matrizes de confusão e sensibilidade dos dados passados e focar na métrica F1 Score ponderada.", "is_correct": false, "specific_explanation": "F1 score e matrizes de confusão são métricas para tarefas de classificação binária ou multiclasse em Machine Learning, inaplicáveis para previsão de séries quantitativas com ARIMA." },
+      { "text": "Comparar os valores de Critérios de Informação (como AIC, BIC ou HQ) para cada modelo, optando pelo que oferecer o menor valor, pois ele pune excesso de parâmetros.", "is_correct": true, "specific_explanation": "O princípio da parcimônia nos diz que adicionar parâmetros diminui a soma de resíduos, mas leva a over-fitting. Os critérios balanceiam ajuste vs simplicidade (penalidade do número de parâmetros estimados)." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "A respeito da Função de Autocorrelação Parcial (PACF), conceitualmente ela mede a correlação entre uma observação atual $y_t$ e uma observação defasada $y_{t-k}$, mas com qual condição específica sendo imposta?",
+    "image_url": null,
+    "general_explanation": "A Autocorrelação Parcial mede o grau de correlação linear 'direta' entre duas defasagens, removendo e neutralizando o efeito indireto repassado por todas as defasagens numéricas intermediárias.",
+    "concept_slug": "conceito-pacf",
+    "options": [
+      { "text": "Avaliando as observações assumindo que os erros são independentes, mantendo a não-estacionariedade fixada.", "is_correct": false, "specific_explanation": "A PACF não é condicionada a dados não estacionários ou avalia variância; calcula a correlação isolada de fato." },
+      { "text": "Eliminando (ou controlando por) os efeitos lineares exercidos pelas defasagens intermediárias (entre t e t-k).", "is_correct": true, "specific_explanation": "O próprio cálculo da PACF (via equação de Yule-Walker ou regressões iterativas) isola o impacto específico do lag avaliado, por isso o corte ocorre exato na ordem P num AR puro." },
+      { "text": "Garantindo que a sazonalidade seja controlada perfeitamente na sua formulação matricial.", "is_correct": false, "specific_explanation": "A PACF crua é calculada sem noção preestabelecida do que é ou não componente sazonal. O operador é estritamente cego quanto ao período da sazonalidade." },
+      { "text": "Obrigatoriamente neutralizando a média, mas multiplicando o termo estocástico por uma constante de decaimento.", "is_correct": false, "specific_explanation": "A PACF não altera os valores dos coeficientes com constantes redutoras impostas e artificiais." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Ao testar dois modelos SARIMA(p,d,q)x(P,D,Q)s, percebe-se que as raízes do polinômio Autorregressivo recaem dentro do círculo unitário. Qual é a principal consequência dessa modelagem subjacente e por que isso representa uma restrição de Box-Jenkins não cumprida?",
+    "image_url": null,
+    "general_explanation": "Para que um processo ARMA/ARIMA seja formalmente estacionário e preditivo, as raízes do seu polinômio AR devem residir 'fora' do círculo unitário, denotando que choques passados diluirão no futuro (série converge).",
+    "concept_slug": "estacionariedade-raizes-ar",
+    "options": [
+      { "text": "Implica que a série não é estacionária mesmo no seu componente de ajuste AR, explodindo no tempo a longo prazo e indicando mau dimensionamento ou falha de diferenciação prévia.", "is_correct": true, "specific_explanation": "Polinômios que geram raízes em módulo igual ou menor que 1 denotam processos explosivos ou estacionários-marginais (Integrated), violando a estrutura geradora dos parâmetros de Box-Jenkins." },
+      { "text": "Aumenta a precisão das previsões de curto prazo desde que o componente de médias móveis esteja do lado de fora do círculo unitário.", "is_correct": false, "specific_explanation": "Independentemente do MA, raízes AR menores que 1 geram previsões explosivas indesejáveis." },
+      { "text": "Reflete a correta identificação de um ruído puramente determinístico.", "is_correct": false, "specific_explanation": "Ruído puro e componentes determinísticos requerem raízes muito fora do limiar limite (tendendo ao infinito ou não existindo dinâmica AR)." },
+      { "text": "É a consequência direta do excesso de regularização Lasso utilizada pelo critério de informação Schwarz.", "is_correct": false, "specific_explanation": "Raízes dentro do círculo não têm relação com as penalidades LASSO ou Ridge aplicáveis ocasionalmente à econometria de painel e predição linear." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "A regressão espúria é um fenômeno de alto risco apontado em análise de séries não estacionárias sem o devido tratamento prévio. Na sua essência, o que significa deparar-se com uma regressão espúria de duas séries não estacionárias (Passeios Aleatórios independentes)?",
+    "image_url": null,
+    "general_explanation": "A regressão espúria ocorre quando duas séries altamente dependentes de seus passados e com tendências estocásticas próprias demonstram, por regressão linear (OLS), uma forte relação e significância estatística, quando na realidade não compartilham verdadeira relação de causalidade ou correlação subjacente.",
+    "concept_slug": "regressao-espuria",
+    "options": [
+      { "text": "Gera um R-quadrado muito alto e Estatística-t significativa indicando relação forte, embora ambas não tenham qualquer vínculo estrutural real.", "is_correct": true, "specific_explanation": "Este achado clássico de Granger e Newbold provou que métodos de OLS ignorando a raiz unitária falham fundamentalmente nas premissas dos intervalos de t e criam inferência gravemente falsa." },
+      { "text": "Ocasiona uma completa perda da capacidade de cálculo dos mínimos quadrados com a explosão da variância cruzada, impedindo o output no software.", "is_correct": false, "specific_explanation": "O software rodará os cálculos, calculará os betas e o R2 sem erros computacionais, o que torna a ilusão interpretativa ainda mais grave." },
+      { "text": "Acontece quando os coeficientes AR e MA da segunda variável anulam exata e propositadamente os da primeira, gerando raízes múltiplas espúrias no denominador.", "is_correct": false, "specific_explanation": "Esta é a definição de processos de cancelamento de raiz não intencional de um modelo univariado, e não do conceito OLS de regressão bidimensional espúria." },
+      { "text": "É uma vantagem em séries financeiras de alta frequência quando se deseja usar uma série para antever o ruído da outra antecipadamente em regime de co-integração.", "is_correct": false, "specific_explanation": "Se fosse um caso de regressão estaticamente real onde as tendências se alinham por fundamento de longo prazo, trataríamos como cointegração (algo desejado), o que é estritamente o oposto da regressão espúria." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Quando comparamos o gráfico da Funçao de Autocorrelação (ACF) de um processo MA(1) e a de um modelo AR(1), quais as diferenças fundamentais nos padrões dessas correlações defasadas?",
+    "image_url": null,
+    "general_explanation": "A ACF no modelo MA(1) tem influência apenas da janela local de ruído branco de 1 termo anterior, portanto terá sinal agudo no lag 1 e valerá estatisticamente zero em todos os demais. Para um AR(1), a memória se propaga de forma recíproca ao passado por substituição contínua e seu impacto descende (decai) suave e gradativamente a zero.",
+    "concept_slug": "acf-ar-vs-ma",
+    "options": [
+      { "text": "A ACF do AR(1) será sempre puramente oscilatória (alternando sinais), ao passo que o MA(1) deve apresentar decaimento linear.", "is_correct": false, "specific_explanation": "Um AR(1) com um parâmetro phi positivo não alternará sinais, decairá monotonicamente no quadrante positivo." },
+      { "text": "O MA(1) tem apenas a primeira defasagem (lag 1) da ACF não nula e depois torna-se um ruído; já o AR(1) exibe um padrão onde a ACF decai exponencialmente ao longo das defasagens sucessivas.", "is_correct": true, "specific_explanation": "O AR(1) se propaga pelo tempo (memória prolongada da média decrescendo). O MA(1) por construção afeta apenas um 'step' da correlação na função serial." },
+      { "text": "Tanto a ACF quanto a PACF de ambos os processos mostrarão decaimento geométrico, sem cortes exatos, exceto se a variância explodir rapidamente.", "is_correct": false, "specific_explanation": "Eles não são mistos (ARMA). Para processos puros de ordem 1, sempre haverá uma função com corte exato no lag 1 e a outra decaindo." },
+      { "text": "A ACF no MA(1) refletirá picos sazonais contínuos enquanto no AR(1) a correlação se tornará indefinida no curto prazo.", "is_correct": false, "specific_explanation": "Nenhum deles reflete ou emite picos sazonais se modelados estritamente na forma p=1 e q=1 e não-sazonais (s=0)." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Qual é a implicação prática caso os resíduos resultantes do nosso melhor modelo ARIMA(p,d,q) demonstrem significância estatística num teste de multiplicadores de Lagrange para Autocorrelação de Breusch-Godfrey?",
+    "image_url": null,
+    "general_explanation": "Tanto Breusch-Godfrey quanto o teste de Ljung-Box testam sob a hipótese nula que não existe correlação remanescente. Ao ser estatisticamente significativo (p-valor < alfa), confirmamos presença de autocorrelação nos erros, o modelo não captou toda dinâmica dos dados.",
+    "concept_slug": "diagnostico-residuos",
+    "options": [
+      { "text": "O modelo está sobreparametrizado (com variáveis e ordens desnecessárias) e requer a extração do termo MA e sua substituição por AR.", "is_correct": false, "specific_explanation": "A correlação de sobra muitas vezes exige acrescentar complexidade, não apenas substituí-la à cega sem observar de onde ela veio." },
+      { "text": "Foi encontrado e validado que os resíduos se assemelham perfeitamente a um processo de ruído branco, portanto o modelo é ideal.", "is_correct": false, "specific_explanation": "Encontrar 'significância' (rejeitar H0 em LM ou Ljung-Box) implica atestar falta de ajuste e resíduos NÃO são ruído branco." },
+      { "text": "O modelo escolhido é falho ou inadequado porque ainda existe dinâmica temporal deixada nos resíduos, o que torna os seus coeficientes não-ótimos e previsão comprometida.", "is_correct": true, "specific_explanation": "Seja testando as previsões in-sample ou fora de amostra, resíduos correlacionados significam que informações preditivas não foram extraídas totalmente pelos parâmetros ajustados." },
+      { "text": "Deveríamos imediatamente tratar a autocorrelação nos erros através de Transformação de Diferenciação Secundária (d=2).", "is_correct": false, "specific_explanation": "Dependendo da correlação presente no resíduo, geralmente um ajuste sutil incrementando um lag 'q' (MA) ou 'p' (AR) no erro corrigirá melhor o impasse." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Dentre os principais modelos sazonais Box-Jenkins para uma série temporal (Ex: SARIMA), o termo '(P, D, Q)' serve para captar especificamente:",
+    "image_url": null,
+    "general_explanation": "A parte Sazonal de um modelo SARIMA modela explicitamente as dependências temporais atreladas estritamente e separadamente às defasagens do intervalo sazonal periódico de interesse, simbolizado por 's'.",
+    "concept_slug": "parametros-sarima",
+    "options": [
+      { "text": "O padrão de volatilidade na variância do tempo a longo prazo provocado por eventos espúrios atípicos.", "is_correct": false, "specific_explanation": "GARCH é responsável por ajustar padrão na variância e volatilidade condicional." },
+      { "text": "O número de diferenciações totais em níveis regulares de alta frequência para reduzir o problema da quebra de heterocedasticidade.", "is_correct": false, "specific_explanation": "O termo 'd' minúsculo lida com as diferenças na parte regular (frequências continuas diárias ou mês a mês)." },
+      { "text": "As relações autorregressivas (P), diferenciações requeridas (D) e médias móveis (Q) restritas apenas às grandes defasagens periódicas (sazonais).", "is_correct": true, "specific_explanation": "Ex: Se for um ciclo mensal e houver picos na PACF apenas nas defasagens 12 e 24, é muito provável usar um coeficiente sazonal P = 1 ou P = 2, sem inflacionar artificialmente p comum para níveis de dezenas." },
+      { "text": "O agrupamento matricial necessário em vetores paralelos para o modelo de equações simultâneas de tempo contínuo com variáveis explanatórias defasadas.", "is_correct": false, "specific_explanation": "Essa é uma descrição mais aplicável à modelagem VAR (Vector Autoregression) e não descreve os inteiros de ordem paramétrica de um SARIMA." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Supondo que um analista opte por diferenciar sazonalmente uma série mensal não-estacionária, calculando $(1-B^{12}) y_t$, mas percebe que a ACF e a PACF do resultado continuam apresentando um decaimento muito lento com os lags regulares altamente relacionados. 'Considerando os resultados, qual o próximo passo?'",
+    "image_url": null,
+    "general_explanation": "Aplicar apenas a diferença sazonal (D=1) remove as tendências sazonais de 12 meses (ano vs ano). Contudo, a série pode ainda preservar forte persistência de curto prazo sequencial (tendência regular), requerendo também a aplicação combinada da diferença primária simples (d=1).",
+    "concept_slug": "combincao-diferencas",
+    "options": [
+      { "text": "Aplicar a diferença simples $(1-B)$ sobre o resultado anteriormente obtido, gerando uma série transformada.", "is_correct": true, "specific_explanation": "Muitas das séries da vida real (ex: venda varejista e PIB macroeconômico) exibem ambos tendências cíclicas estocásticas de nível e ciclos unitários periódicos combinados." },
+      { "text": "Proceder com a decomposição de cholesky para separar as defasagens e assumir os componentes principais não-correlacionados.", "is_correct": false, "specific_explanation": "Filtros de Componentes Principais com Cholesky são aplicados em modelos VAR Estruturais, não no tratamento padrão de raízes num problema de Box-Jenkins puro univariado." },
+      { "text": "Aplicar novamente a diferenciação sazonal, obtendo $(1-B^{12})^2 y_t$, pois ela não foi extraída devidamente por conta da inflação.", "is_correct": false, "specific_explanation": "O decaimento lento se encontra nas defasagens consecutivas 1, 2, 3 (a parte regular e não sazonal) e por isso exige um operador $(1-B)$ e não insistir no sazonal contínuo." },
+      { "text": "Paralisar as rotinas devido a que as séries econômicas jamais requerem múltiplas formas e origens de diferenciação simultaneamente.", "is_correct": false, "specific_explanation": "O famoso modelo de rotas aéreas (Air Passengers data) de Box-Jenkins é na essência um processo SARIMA que necessita das duas diferenciações em simultâneo como prática global." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Durante o diagnóstico de modelos em que as diferenças Δ e Δs foram aplicadas (d=1, D=1), o que seria esperado de um processo SARIMA corretamente especificado quando os componentes de médias móveis Q sazonais fossem muito significativos?",
+    "image_url": null,
+    "general_explanation": "Antes da identificação do modelo final, se fosse extraída puramente a série diferenciada (d=1,D=1) de um modelo que gera MA sazonal natural, haveria picos negativos característicos no lag múltiplo de 's' correspondente na ACF.",
+    "concept_slug": "identificacao-ma-sazonal",
+    "options": [
+      { "text": "Que a PACF das séries mostre um padrão oscilatório em defasagens múltiplas de 12 mas com decaimento lento.", "is_correct": false, "specific_explanation": "MAs puros geram comportamento oscilatório com longo prazo e lento decaimento nas funções parciais e cortes diretos e drásticos apenas nas defasagens da ACF." },
+      { "text": "Um pico significativo e isolado, muitas vezes negativo, presente unicamente nas defasagens múltiplas do período da sazonalidade s na ACF (ex: Lag 12).", "is_correct": true, "specific_explanation": "Sinais negativos marcados nesses lags periódicos na Função de Autocorrelação ditam um termo puramente de Q=1 MA de escala Sazonal." },
+      { "text": "Que a diferenciação contínua e as matrizes de resíduos anulem instantaneamente a verossimilhança computada.", "is_correct": false, "specific_explanation": "Isso apenas ocorreria num cenário de colinearidade perfeita catastrófica." },
+      { "text": "A ACF e PACF apresentarão comportamento de puro ruído branco contínuo em relação a Q sazonal, indicando a ineficácia dos lags.", "is_correct": false, "specific_explanation": "Se elas apresentassem ruído, não precisaríamos de termos de MA e os coeficientes ajustados não poderiam ser gerados a princípio em qualquer diagnóstico estatístico confiável." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Considere que a análise do comportamento temporal de uma série de índice pluviométrico apresenta oscilações recorrentes. Um analista tenta modelar diretamente a série usando dummys mensais, mas nota que as oscilações aumentam sua amplitude de maneira caótica de um ano pro outro. Por que o método pode ter sido ineficaz?",
+    "image_url": null,
+    "general_explanation": "Sazonalidades com características voláteis, de amplitude que muda caoticamente não respondem a modelos de média constantes por mês (sazonalidade determinística de dummy). Geralmente devem ser abordadas por um modelo que permita aos parâmetros flutuarem ou através de raízes estocásticas adaptativas com diferenciação Sazonal ou alisamento.",
+    "concept_slug": "sazonalidade-estocastica-vs-deterministica",
+    "options": [
+      { "text": "Porque ele não utilizou Mínimos Quadrados de Três Estágios (3SLS) sobre as variáveis.", "is_correct": false, "specific_explanation": "3SLS resolve simultaneidade (viés de endogeneidade cruzada no sistema), não mudança intrínseca do comportamento na variância ou raiz unitária univariada." },
+      { "text": "Dummies tratam a sazonalidade determinística e contínua de médias perfeitamente repetidas (nível rígido). Flutuações com mudanças não lineares exigem a modelagem da raiz e diferenças estocásticas mais apropriadas.", "is_correct": true, "specific_explanation": "A sazonalidade estocástica possui componente randômico que perturba a série temporal geradora constantemente; o método restrito das dummies mensais apenas retira médias longas paradas, sobrando resíduo caótico." },
+      { "text": "Séries pluviométricas são conceitualmente invariantes e puramente gaussianas estritamente dependentes de variáveis dummy trimestrais devido a seu decaimento exponencial contínuo.", "is_correct": false, "specific_explanation": "Muitas séries de clima tem natureza caótica, dependência interanual e distribuições gama, e as dummy dependem sempre do modelo imposto pelo pesquisador com relação à granularidade (não são por default trimestrais)." },
+      { "text": "O erro ocorreu por conta da aplicação do teste de heteroscedasticidade, o qual invalidou a significância estatística.", "is_correct": false, "specific_explanation": "Um teste estatístico por si próprio é uma ferramenta de avaliação da hipótese estatística e não de invalidar a operação física dos dados." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Ao prever múltiplos passos à frente (horizonte 'h') utilizando um modelo AR(1) estacionário em comparação com um modelo Passeio Aleatório (I(1)), qual o comportamento esperado dos intervalos de confiança dessas previsões?",
+    "image_url": null,
+    "general_explanation": "Em séries estacionárias, a variância das previsões converge para a variância incondicional da série e o intervalo de confiança se estabiliza. Num passeio aleatório puro (não estacionário), a incerteza cresce indefinidamente com a raiz quadrada do tempo.",
+    "concept_slug": "previsao-arima-estacionario-vs-rw",
+    "options": [
+      { "text": "Em ambos, o intervalo cresce ilimitadamente com h, visto que qualquer previsão no longo prazo perde sua fundamentação estatística teórica do modelo.", "is_correct": false, "specific_explanation": "Modelos estacionários de longo alcance estabilizam as bandas e as previsões se nivelam de volta à média empírica do processo incondicional estático subjacente." },
+      { "text": "No AR(1) estacionário, as bandas de previsão convergem assintoticamente para um limite determinado pela variância incondicional da série; no passeio aleatório, as bandas se abrem proporcionalmente à raiz do horizonte (h), sem limites teóricos intrínsecos.", "is_correct": true, "specific_explanation": "A estabilidade e estacionariedade garantem a reversão temporal à média incondicional e variância constante de longo prazo, controlando a incerteza máxima. Passeios aleatórios, contudo, vagam indeterminadamente expandindo as incertezas lineares." },
+      { "text": "No passeio aleatório, os intervalos convergem para a média dos limites de bandas da série passada; já no AR(1) o erro se soma a cada lag projetado inflando ao infinito.", "is_correct": false, "specific_explanation": "Os efeitos ocorrem estritamente ao revés, tendo o AR sido atrelado a erro infinito nas previsões de banda de limites, o que falseia a teoria de raízes convergentes aplicadas à modelagem Box Jenkins empírica." },
+      { "text": "Depende fundamentalmente se a diferenciação log-linear da variância atingiu o primeiro e o último quantil na fronteira das distribuições dos choques previstos pelo modelo estacionário de Box e Cox.", "is_correct": false, "specific_explanation": "Uma mistura confusa de conceitos que não dita as características da matriz de previsão empírica dos intervalos baseados nas inovações gaussianas simuladas analiticamente propostas." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "A Inversibilidade é um conceito fundamental na modelagem de componentes de Média Móvel (MA). Se o polinômio do operador de Média Móvel possui uma raiz real exata associada de valor modular menor que 1, o que podemos afirmar?",
+    "image_url": null,
+    "general_explanation": "Um processo MA apenas possui uma representação autoregressiva equivalente (AR(infinito)) e decaimento exclusivo em PACF convergente caso cumpra com o critério de Inversibilidade: a raiz analítica do seu operador ser forçosamente maior do que um em grandeza bruta fora do círculo unitário.",
+    "concept_slug": "inversibilidade-ma",
+    "options": [
+      { "text": "Trata-se de um modelo com raiz invertível plenamente configurada sob as bases do processo MA.", "is_correct": false, "specific_explanation": "Para haver inversibilidade, as raízes devem residir unicamente fora do Círculo Unitário." },
+      { "text": "O polinômio indica falha grave da estacionariedade fraca.", "is_correct": false, "specific_explanation": "Modelos MA puros são sempre incondicionalmente e sempre estacionários fracos por força da sua equação definidora estritamente linear." },
+      { "text": "O componente gerador imposto da série temporal indica um problema, uma vez que sua raiz não-inversível fará com que qualquer choque temporal histórico seja ponderado de forma explosiva e crescente ao ser convertido na representação AR.", "is_correct": true, "specific_explanation": "Para expressar um MA adequadamente nos termos observáveis e em seus resíduos passados ponderados de forma reversa e decadente, as raízes do polinômio na teoria devem jazer fora do Círculo Unitário." },
+      { "text": "Indica uma configuração canônica de raiz pura em estado estável na fronteira exata e precisa da diferença primária contínua.", "is_correct": false, "specific_explanation": "Nonsense gerado aleatoriamente e incorreto factualmente e conceitualmente." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Quando comparamos o teste de raiz unitária Phillips-Perron (PP) ao teste de Dickey-Fuller Aumentado (ADF), qual é a principal justificativa analítica que motiva a utilização complementar das técnicas desenvolvidas por Phillips e Perron na econometria?",
+    "image_url": null,
+    "general_explanation": "Ambos testam para raiz unitária. O ADF corrige autocorrelação incluindo defasagens da variável dependente. O PP corrige de modo não-paramétrico sobre a estatística, dispensando defasagens e tolerando heterocedasticidade.",
+    "concept_slug": "teste-phillips-perron",
+    "options": [
+      { "text": "O teste de Phillips e Perron é um método que lida nativamente com erros heteroscedásticos e autocorrelationados a partir de uma correção matemática não paramétrica direta nos limites assintóticos do modelo, em contraste ao aumento de defasagens propostas por Dickey-Fuller.", "is_correct": true, "specific_explanation": "O diferencial do PP é a ausência de lags de diferença e sua contrapartida de aplicar nos resultados os filtros Newey-West diretos na métrica t." },
+      { "text": "O Phillips Perron parte diretamente para análise restritiva simultânea paramétrica cruzando o termo linear estático.", "is_correct": false, "specific_explanation": "Phillips-Perron baseia-se numa correção não-paramétrica, invés do método de aumento dos defasagens paramétricas contíguas do Dickey-Fuller." },
+      { "text": "Porque o Phillips-Perron se foca na avaliação estrita do comportamento das raízes do componente exato unicamente de média móvel Q.", "is_correct": false, "specific_explanation": "O teste de raiz não engloba testes de Q atrelado ao comportamento de médias móveis." },
+      { "text": "Eles são integralmente a mesmíssima coisa sob óptica de formulações estritamente idênticas e derivadas exatas nos códigos.", "is_correct": false, "specific_explanation": "Eles divergem fundamentalmente nas correções da equação principal para lidar de modos intrinsecamente opostos da dependência nos resíduos." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "O que enuncia o consagrado Teorema da Decomposição de Wold e sua importância na análise das séries puramente estacionárias regulares?",
+    "image_url": null,
+    "general_explanation": "Wold garante que todo processo estacionário pode ser decomposto na soma de um componente puramente determinístico temporal e um componente estocástico de Média Móvel de infinitos retardos (Soma de ruídos passados MA(Infinito)).",
+    "concept_slug": "teorema-de-wold",
+    "options": [
+      { "text": "A asseveração teórica que postula que todo processo temporal cov-estacionário pode ser decomposto em uma soma perfeita de um componente de pura determinística fixa de tempo e um modelo de Média Móvel infinito das inovações brancas geradas sequencialmente.", "is_correct": true, "specific_explanation": "Este conceito atesta inequivocamente porque o modelo AR(p) sempre encontra equivalência numa forma MA(∞) gerador puro." },
+      { "text": "Que a diferenciação contínua nos sistemas limitados do Ljung-Box convergem em série de Taylor sem necessidade estrita da estacionariedade na base temporal.", "is_correct": false, "specific_explanation": "Wold trata inequivocamente de processos estritamente cov-estacionários empíricos." },
+      { "text": "O princípio econométrico que denota inviabilidade das séries I(0) de serem integradas em processos com matriz covariância simétrica infinita.", "is_correct": false, "specific_explanation": "Wold determina o contrário, dando legitimidade ao processo limite MA infinito nas representações puras I(0)." },
+      { "text": "Uma lei dos limites das proporções logísticas defasadas dos dados em que atesta a correlação zero estrita no modelo de erros simétricos não lineares não paramétricos.", "is_correct": false, "specific_explanation": "Sem sentido e desconectado da base fundamental do postulado de Hermam Wold." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Durante as estimações, a Máxima Verossimilhança Exata (MLE Exato) apresenta qual grande superioridade teórica sobre os Mínimos Quadrados Condicionais na estimação de um ARMA?",
+    "image_url": null,
+    "general_explanation": "O MLE Exato (usualmente via Filtro de Kalman) não perde as primeiras observações da amostra ao condicionar os defasagens iniciais, sendo superior em pequenas amostras e integrando todos os dados à log-verossimilhança.",
+    "concept_slug": "estimacao-mle",
+    "options": [
+      { "text": "Incorpora à distribuição as primeiras observações conjuntas da amostra sem condicioná-las a zero, eliminando a fraqueza intrínseca dos OLS condicionados que perdem as primeiras posições.", "is_correct": true, "specific_explanation": "Isso reflete o rigor da econometria, onde a perda por truncamento nas primeiras posições de lag prejudica OLS severamente numa modelagem em que os n são curtos." },
+      { "text": "Provê a neutralização perfeita, restrita e instantânea sobre raízes não reversíveis contíguas univariadas de todos os passeios não paramétricos integrados subjacentes.", "is_correct": false, "specific_explanation": "O MLE requer processos estacionários e não corrige raízes unitárias não diferenciadas na modelagem Box-Jenkins base." },
+      { "text": "Dispensa completamente que as inovações no ruído se assemelhem às premissas e distribuição estatística paramétrica normal multivariada conjunta.", "is_correct": false, "specific_explanation": "Ao contrário; o MLE apoia-se intensamente nas hipóteses empíricas atreladas à Normal multivariada para construir as funções analíticas de verossimilhança." },
+      { "text": "Obriga o uso exclusivo de análise de diferenças secundárias conjuntas na fase prévia com o método estrito de correlação dos momentos.", "is_correct": false, "specific_explanation": "O MLE atua na estimação de parâmetros AR e MA e não se restringe a diferenças de painel espacial ou métodos de momentos restritos secundários." }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Sob o aspecto prático num correlograma e PACF, o comportamento empírico real atrelado à função ACF num modelo autorregressivo puro de ordem 2 estacionário (AR(2)) apresenta-se especificamente como:",
+    "image_url": null,
+    "general_explanation": "No AR(2), a PACF corta em p=2. A ACF exibe um comportamento oscilatório (amortecimento harmônico ou decaimento sinoidal em direção a zero devido a raízes complexas).",
+    "concept_slug": "comportamento-acf-ar2",
+    "options": [
+      { "text": "Um decaimento infinito que pode se apresentar em formato gradual ou seguindo rigorosamente ondas de caráter oscilatório simétricas que amortecem em direção a zero.", "is_correct": true, "specific_explanation": "Um AR(2) muitas vezes apresenta raízes complexas que se transparecem inequivocamente como ondas decrescentes harmônicas." },
+      { "text": "Um corte abrupto exato sem margem de erro perfeitamente e apenas contínuo logo imediatamente após o segundo lag.", "is_correct": false, "specific_explanation": "Quem corta bruscamente em p=2 não é a ACF, mas a Função de Autocorrelação Parcial (PACF)." },
+      { "text": "Picos extremamente grandes alternados em ciclos que jamais decaem e nunca convergem a zero.", "is_correct": false, "specific_explanation": "Se os decaimentos jamais oscilassem para zero, a série falharia na premissa estacionária do AR(2)." },
+      { "text": "Ausência perfeita e constante de qualquer picos e sinais de valores e defasagens nas dez primeiras ordens da estrutura.", "is_correct": false, "specific_explanation": "A ausência completa de autocorrelações puras implica puramente na identificação de ruído branco de base." }
+    ]
+  }
+]

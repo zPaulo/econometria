@@ -1,0 +1,872 @@
+[
+  {
+    "theme_id": 5,
+    "text": "Um pesquisador estimou um modelo ARIMA(1,1,1) e aplicou o teste de Ljung-Box aos resíduos, obtendo estatística Q=25.669 e p-valor=0.2194. Considerando 5% de significância, qual é a conclusão correta e sua implicação sobre o modelo?",
+    "image_url": null,
+    "general_explanation": "O teste de Ljung-Box possui como hipótese nula a ausência de autocorrelação serial nos resíduos (ruído branco). Com um p-valor (0.2194) maior que o nível de significância (0.05), não se rejeita a hipótese nula.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "Não se rejeita a hipótese nula de que os resíduos são ruído branco, indicando que o modelo capturou adequadamente a autocorrelação da série.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O p-valor > 0.05 não permite rejeitar a ausência de autocorrelação."
+      },
+      {
+        "text": "Rejeita-se a hipótese nula, evidenciando que os resíduos não apresentam autocorrelação serial.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A ausência de autocorrelação é a hipótese nula, logo não é o que se conclui ao rejeitá-la, além de que não a rejeitamos."
+      },
+      {
+        "text": "Não se rejeita a hipótese nula, o que significa que o modelo precisa de termos adicionais AR ou MA para corrigir a especificação.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Não rejeitar a H0 significa que o modelo já está bem especificado em relação à autocorrelação."
+      },
+      {
+        "text": "O p-valor alto indica que a variância dos erros é constante ao longo do tempo (homocedasticidade), confirmando a adequação do modelo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste de Ljung-Box testa autocorrelação, e não homocedasticidade."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Na especificação do teste de Ljung-Box aplicado aos resíduos de um modelo ARMA(p,q) já estimado, qual é o ajuste necessário nos graus de liberdade e por qual motivo lógico ele ocorre?",
+    "image_url": null,
+    "general_explanation": "Ao aplicar o teste a resíduos de modelos ARMA, há uma perda de graus de liberdade igual ao número de parâmetros estimados (p + q) para compensar o fato de os resíduos não serem erros independentes verdadeiros, mas sim estimativas que 'forçam' um melhor ajuste.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "Subtrai-se (p + q) do número total de defasagens (lags) avaliadas, refletindo a perda de graus de liberdade na estimação dos parâmetros do modelo subjacente.",
+        "is_correct": true,
+        "specific_explanation": "Exatamente. Os graus de liberdade do teste tornam-se h - p - q."
+      },
+      {
+        "text": "Adiciona-se (p + q) aos graus de liberdade da distribuição assintótica, para incorporar a complexidade informacional trazida pelos regressores.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Subtrai-se, não se adiciona."
+      },
+      {
+        "text": "Não há ajuste; a distribuição qui-quadrado manterá estritamente h graus de liberdade independente dos parâmetros já fixados na modelagem prévia.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A ausência do ajuste faria com que o teste superestimasse a significância estatística, rejeitando indevidamente modelos corretos."
+      },
+      {
+        "text": "Ajusta-se multiplicando o número de defasagens pelas ordens, resultando em h(p+q) graus de liberdade, para captar componentes sazonais omitidos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O ajuste é puramente aditivo/subtrativo, não multiplicativo."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Em que aspecto técnico a estatística do teste de Ljung-Box supera o teste de Box-Pierce original, justificando sua ampla preferência em softwares econométricos para verificação de diagnósticos em amostras moderadas?",
+    "image_url": null,
+    "general_explanation": "Ljung e Box modificaram a estatística original adicionando ponderações que lidam melhor com o decaimento em pequenas/moderadas amostras, de modo que a estatística siga muito mais de perto uma distribuição qui-quadrado sob a hipótese nula.",
+    "concept_slug": "teste-ljung-box",
+    "options": [
+      {
+        "text": "Ela aplica um fator de ponderação nas autocorrelações amostrais crescentes no tamanho da amostra, que refina fortemente a aproximação para a distribuição qui-quadrado em amostras pequenas.",
+        "is_correct": true,
+        "specific_explanation": "Correto. O multiplicador da estatística foi ajustado para corrigir os vieses do Box-Pierce."
+      },
+      {
+        "text": "Enquanto Box-Pierce foca unicamente nas variâncias relativas dos erros de previsão, Ljung-Box utiliza vetores espectrais densos não paramétricos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Ambos são testes de autocorrelação global (Portmanteau tests)."
+      },
+      {
+        "text": "A estatística de Ljung-Box é capaz de identificar raízes explosivas unitárias nos resíduos, dispensando o uso do teste de Dickey-Fuller.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Raiz unitária (estacionariedade) é outro pressuposto, não o foco principal do Ljung-Box (que avalia ruído branco)."
+      },
+      {
+        "text": "Ljung-Box dispensa a fixação prévia do número de defasagens (lags), definindo automaticamente pela regra da parcimônia.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Ainda é necessário especificar as defasagens h a testar."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Durante o diagnóstico de um modelo Box-Jenkins, o teste de Jarque-Bera foi aplicado. Considerando as propriedades da distribuição normal padrão (assimetria = 0, curtose = 3), como a estatística JB fundamenta sua conclusão inferencial?",
+    "image_url": null,
+    "general_explanation": "A estatística do teste é construída combinando a assimetria amostral e o excesso de curtose (curtose - 3) e verificando de forma conjunta se ambos não diferem estatisticamente de zero. Sob H0, segue qui-quadrado com 2 g.l.",
+    "concept_slug": "teste-jarque-bera",
+    "options": [
+      {
+        "text": "Avaliando se o coeficiente de assimetria e o excesso de curtose (acima de 3) da amostra convergem a zero, cuja estatística conjunta obedece assintoticamente a uma qui-quadrado com 2 graus de liberdade.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Essa é exatamente a definição metodológica subjacente da construção do teste Jarque-Bera."
+      },
+      {
+        "text": "Comparando a mediana e a moda dos resíduos, baseando-se em uma distribuição t-Student univariada de calibração paramétrica.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O teste usa momentos de terceira (assimetria) e quarta ordem (curtose), não apenas tendência central."
+      },
+      {
+        "text": "Testando individualmente a variância de forma recursiva (Janela Móvel), definindo se a cauda é leptocúrtica usando a distribuição F.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Isso confunde JB com abordagens para heterocedasticidade/quebra estrutural."
+      },
+      {
+        "text": "Apurando desvios na soma total de quadrados intra-amostral por meio de log-verossimilhança de resíduos purificados por Filtro Hodrick-Prescott.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Filtros e desvios quadráticos totais não são o foco deste teste específico."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Se os resíduos de um modelo de previsão ARIMA não passarem no teste de Jarque-Bera de modo significativo, que problema prático imediato o pesquisador passará a enfrentar no uso deste modelo?",
+    "image_url": null,
+    "general_explanation": "A ausência de normalidade nos erros não impede estimações consistentes, contudo os cálculos usuais de intervalos de confiança teóricos de probabilidade (que pressupõem erros normais para fechar margens estritas de limites superior e inferior) ficam severamente comprometidos e perdem sua validade técnica exata.",
+    "concept_slug": "teste-jarque-bera",
+    "options": [
+      {
+        "text": "A inferência com base em distribuições padrão para os intervalos de confiança das previsões deixará de ser perfeitamente aplicável e exata, podendo exibir distorções.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Os intervalos paramétricos dependem de o erro inovar como um choque Gaussiano limpo."
+      },
+      {
+        "text": "A série se revelará não-estacionária, exigindo que o pesquisador aplique imediatamente uma diferença (d) maior no modelo ARIMA.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Falta de normalidade e presença de raiz unitária são diagnósticos mutuamente não dependentes no modelo final."
+      },
+      {
+        "text": "Isso demonstra matematicamente que o número de ordens AR e MA superestimou a real dinâmica do processo em questão (Overfitting severo).",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Overfitting é medido por ICs ou testes preditivos; rejeitar JB indica formato da distribuição do resíduo."
+      },
+      {
+        "text": "O software será impedido de convergir para uma solução via Máxima Verossimilhança, tornando inviável qualquer estimativa final.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Pode-se estimar Quasi-Maximum Likelihood ou MQO e obter parâmetros convergentes sem normalidade exata."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "A estatística do teste de Jarque-Bera para testar a normalidade pode ser zero matematicamente. Se após o teste de uma série observarmos o raríssimo resultado JB=0 exato, qual característica define plenamente essa amostra empírica?",
+    "image_url": null,
+    "general_explanation": "O JB=0 indica ausência total de componentes de assimetria e curtose fora dos limites exatos de uma normalidade. Significa S=0 (Simetria exata) e Curtose=3 (Excesso de curtose K-3 = 0).",
+    "concept_slug": "teste-jarque-bera",
+    "options": [
+      {
+        "text": "A distribuição amostral das observações apresenta simetria amostral perfeita e possui curtose empiricamente igual à exata da distribuição normal (curtose 3).",
+        "is_correct": true,
+        "specific_explanation": "Correto. O teste avalia a fórmula (n/6)*(S² + (K-3)²/4) que zera nestas condições."
+      },
+      {
+        "text": "Os dados se localizam esparsamente nas caudas de maneira uniforme, o que torna a curtose equivalente à assimetria nula.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Uma dispersão uniforme teria curtose diferente de 3 (platicúrtica), o que aumentaria o JB."
+      },
+      {
+        "text": "Isto evidencia presença de heterocedasticidade exata (variância instável), que neutralizou as flutuações de assimetria via amortecimento cruzado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. JB não testa estabilidade da variância, e heterocedasticidade comumente desvia os resíduos de normalidade."
+      },
+      {
+        "text": "O teste refutou a hipótese nula com p-valor 0 e a distribuição é assimétrica à direita extrema com excesso bimodal.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. JB=0 significa perfeita aderência a H0 (p-valor será 1), aceitando plenamente a normalidade."
+      }
+    ]
+  },
+  {
+    "theme_id": 1,
+    "text": "Em testes de hipóteses estatísticas, um pesquisador nota que a estatística do seu modelo fica ligeiramente inferior à estatística crítica de fronteira. Ele propõe alterar ex-post o nível de significância para 'salvar' sua descoberta empírica e enquadrar os interesses originais. Que preceito técnico básico está sendo violado?",
+    "image_url": null,
+    "general_explanation": "Ao alterar a posteriori o nível de significância (a chance aceitável de erro Tipo I) com base num resultado observado para forçar uma rejeição, o pesquisador comete fraude analítica ('P-Hacking'), invalidando a rigorosidade e a filosofia do teste empírico que deveria ser imparcial e ter a confiança fixada a priori.",
+    "concept_slug": "teste-hipoteses-significancia",
+    "options": [
+      {
+        "text": "Ele viola a definição a priori da máxima tolerância para o Erro Tipo I em prol de uma validação retrospectiva forçada da sua hipótese alternativa preferida.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Isso condensa o perigo de se flexibilizar o nível de significância para atender preferências de rejeição."
+      },
+      {
+        "text": "Ele compromete o tamanho da amostra (n), que passará obrigatoriamente a ser viesado para refletir a nova tolerância estatística estipulada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A amostra física observada e seu tamanho n não são matematicamente modificados pela alteração do nível de alfa."
+      },
+      {
+        "text": "Ao fazer a alteração, o pesquisador estará maximizando inversamente o p-valor da distribuição de probabilidade assintótica.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O p-valor derivado da estatística de teste da amostra independe de qual limite crítico/nível alfa é comparado a ele."
+      },
+      {
+        "text": "A alteração não constitui violação metodológica contanto que se mantenham resíduos ortogonais integrados na estimativa de base de MQO.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O preceito inferencial está violado, independente das condições algorítmicas ou dos resíduos."
+      }
+    ]
+  },
+  {
+    "theme_id": 1,
+    "text": "O que representa o nível de significância, usualmente referenciado como a probabilidade 'alfa' nas condições estritas de qualquer modelagem inferencial rigorosa?",
+    "image_url": null,
+    "general_explanation": "O limite de significância (alfa) nada mais é do que o limite superior predeterminado para o Erro Tipo I: probabilidade de rejeitarmos H0 quando, de fato e na realidade geradora de dados (DGP), ela é verdadeira.",
+    "concept_slug": "teste-hipoteses-significancia",
+    "options": [
+      {
+        "text": "A probabilidade máxima tolerável de se rejeitar incorretamente a hipótese nula quando, no verdadeiro processo estocástico, ela é verdadeira (Erro Tipo I).",
+        "is_correct": true,
+        "specific_explanation": "Correto. Essa é a base de teoria de inferência em testes."
+      },
+      {
+        "text": "A métrica que mede com quanta frequência o pesquisador rejeitará incorretamente a hipótese alternativa de seu estudo (Erro Tipo II).",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A probabilidade de não rejeitar H0 quando falsa refere-se ao Erro Tipo II (Beta), não ao alfa de significância."
+      },
+      {
+        "text": "A capacidade informacional de o modelo autorregressivo manter resíduos limpos na banda de confiança superior de 95%.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Esse jargão confunde intervalos teóricos preditivos com a definição pura da estatística frequentista."
+      },
+      {
+        "text": "A probabilidade incondicional de aproximação que a função de autocorrelação cruzada tem de convergir ao p-valor mediano no teste de Dickey-Fuller Aumentado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Termos puramente aleatórios sem sustentação com o conceito formal."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "A representação de Wold assevera que um processo ARMA estacionário pode ser transformado numa série autorregressiva MA de ordem infinita. Considerando a transformação de um AR(1) = φY_{t-1} + a_t puramente autorregressivo, qual premissa é indispensável para essa convergência iterativa de choques atuar coerentemente?",
+    "image_url": null,
+    "general_explanation": "As substituições sucessivas de Y_{t-k} geram termos multiplicados por φ^k. Se e somente se |φ| < 1 (condição de estacionariedade), os pesos de impacto dos choques históricos decairão progressivamente a zero.",
+    "concept_slug": "representacao-ma-infinito",
+    "options": [
+      {
+        "text": "O parâmetro que multiplica o valor defasado da variável na equação original tem que necessariamente obedecer à restrição de estabilidade com módulo inferior a um (|φ|<1).",
+        "is_correct": true,
+        "specific_explanation": "Correto. Garante que as substituições gerem uma série infinita convergente (pesos amortecidos)."
+      },
+      {
+        "text": "A distribuição dos erros puramente aleatórios a_t tem de exibir coeficientes que tendam a gerar assimetria positiva conforme iteram de volta no tempo passado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A convergência independe de assimetria dos erros; depende estritamente do peso paramétrico φ."
+      },
+      {
+        "text": "A série temporal bruta tem que ser antes submetida a logaritmo natural seguido de tripla diferenciação sazonal multiplicativa, garantindo choques simétricos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Nenhuma dessas transformações (log e diferenciação d=3) é condição de Wold para AR(1) virar MA(inf)."
+      },
+      {
+        "text": "A equação característica do componente de médias móveis deve conter raízes localizadas estritamente sobre o próprio círculo unitário do gráfico de convergência.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Se estiver no círculo, é raiz unitária (não estacionário/explosivo) e não converge para um MA infinito amortecido."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "Qual é a mais destacada consequência analítica prática ao se observar que os valores passados da série temporal se traduzem e são iterativamente modelados por um MA(infinito) oriundo de um processo AR?",
+    "image_url": null,
+    "general_explanation": "O formato MA(infinito) explicita os pesos dos impulsos estocásticos de inovações passadas, indicando de forma muito visual e algébrica a 'memória' do sistema aos choques e o decaimento estrutural ao longo de períodos infinitamente regressivos.",
+    "concept_slug": "representacao-ma-infinito",
+    "options": [
+      {
+        "text": "Demonstrar empiricamente que todo choque e inovação ocorrida nos períodos anteriores da série impactará a leitura do tempo corrente, mas com efeito progressivamente decrescente sob o manto de uma ponderação decrescente (memória amortecida).",
+        "is_correct": true,
+        "specific_explanation": "Correto. Descreve o raciocínio físico por trás da Função Resposta ao Impulso de processos estacionários na forma MA(infinito)."
+      },
+      {
+        "text": "Afiançar que qualquer previsão feita a longo prazo acabará, inexoravelmente, seguindo as tendências de quebras paramétricas estruturais (como uma matriz inversa) em decorrência da instabilidade das infinitas inovações exógenas e imprevisíveis.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O foco de MA(inf) na representação de Wold foca na convergência ao longo do tempo (estacionariedade e inovações que perdem peso temporal)."
+      },
+      {
+        "text": "Indicar que a variância não condicional explodirá para valores infinitos com o tempo e, portanto, a metodologia de mínimos quadrados ordinários não deve jamais ser aplicada nessas condições em nenhum lag predeterminado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A variância do modelo estacionário MA(inf) converge para uma constante finita. É falso afirmar que explode."
+      },
+      {
+        "text": "Comprovar que modelos autorregressivos (AR) não possuem capacidade representativa própria e apenas espelham erros de observação de dados macroeconômicos contemporâneos de ordem média móvel univariada restrita.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Wold prova a dualidade, não descarta os processos autorregressivos estocásticos da representação de séries."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "Considere o processo AR(1): X_t = c + 0.8 X_{t-1} + e_t. Se convertermos este modelo para a sua representação irrestrita de médias móveis infinitas em função apenas do valor incondicional base e da sequência histórica dos choques e_t, qual o peso de ponderação atrelado especificamente ao choque ocorrido no período (t-3)?",
+    "image_url": null,
+    "general_explanation": "A substituição recursiva de defasagens expande os pesos por potências: e_t sofre ponderação de (0.8)^0 = 1; e_{t-1} sofre (0.8)^1; e_{t-2} de (0.8)^2; e, portanto, o choque de t-3, denotado e_{t-3}, sofre (0.8)^3, que corresponde matematicamente ao valor de 0.512.",
+    "concept_slug": "representacao-ma-infinito",
+    "options": [
+      {
+        "text": "0.512",
+        "is_correct": true,
+        "specific_explanation": "Correto. O coeficiente de e_{t-k} é phi^k. (0.8)^3 = 0.512."
+      },
+      {
+        "text": "0.800",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. 0.8 é o peso do choque ocorrido apenas um período atrás (t-1)."
+      },
+      {
+        "text": "0.640",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. 0.64 é o peso do choque em t-2, sendo (0.8)^2."
+      },
+      {
+        "text": "2.400",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Representa a equivocada operação 3 * 0.8, sem aplicação do preceito de juros/decaimento composto das substituições infinitas."
+      }
+    ]
+  },
+  {
+    "theme_id": 2,
+    "text": "Um corolário intimamente análogo à representação de processos em MA(infinito) foca não na estacionariedade, mas sim no fato de um modelo MA empírico finito ser escrito como um somatório reverso histórico das próprias observações de Y passadas. Como se denomina o critério estrutural da equação característica por trás desse dual transformacional analítico?",
+    "image_url": null,
+    "general_explanation": "A invertibilidade de um processo MA é a sua capacidade metodológica e formal (raízes no exterior do círculo unitário na equação em B) para ser representado iterativamente como um componente AR(infinito), num paralelismo estrito que fundamenta o Teorema da Inversão de representações MA/AR de séries temporais estocásticas.",
+    "concept_slug": "representacao-ma-infinito",
+    "options": [
+      {
+        "text": "Invertibilidade paramétrica e analítica de um processo temporal.",
+        "is_correct": true,
+        "specific_explanation": "Correto. É o termo específico que dita se o filtro MA suporta reversão para modelo AR."
+      },
+      {
+        "text": "Identificabilidade ortogonal de covariância mista.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. O termo formal não é esse."
+      },
+      {
+        "text": "Estacionariedade forte incondicional de raízes convergentes complexas empíricas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A propriedade diz respeito à capacidade de virar AR infinito, chamada Invertibilidade, não de manter momentos finitos como denota a estacionariedade forte."
+      },
+      {
+        "text": "Transformada espectral de diferenciação integral unitária.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Termo gerado aleatoriamente e inadequado contextualmente."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Com base na estatística limite de uma distribuição qui-quadrado estipulada em χ²(5)=11.07 e com nível de significância referencial de 5%, você avalia a habilidade da diferença quadrática entre os valores atuais e previstos. Caso um modelo calcule a estatística de erro ex-post obtendo o valor exato de 7.8, qual o veredito analítico prudente segundo as regras gerais de inferência do teste diagnóstico?",
+    "image_url": null,
+    "general_explanation": "No teste inferencial formal de soma de erros focado nas discrepâncias preditivas, se a estatística sumária das desviações (7.8) for numericamente menor do que o marco referencial crítico de fronteira da distribuição (11.07), não há evidência contrária grave. Não se rejeita então a habilidade do previsor, concluindo que as previsões emanam discrepâncias condizentes com incerteza randômica não significativa - o modelo é considerado um 'bom previsor'.",
+    "concept_slug": "avaliacao-previsao-teste-qui-quadrado",
+    "options": [
+      {
+        "text": "As evidências sugerem não rejeição, afirmando ser provável que os erros sejam aleatoriamente admitidos pelas flutuações, caracterizando o modelo como preditor confiável sem indícios em contrário.",
+        "is_correct": true,
+        "specific_explanation": "Correto. A estatística (7.8) ser estritamente menor que o limite referencial crítico impõe que falhamos em rejeitar a sua validade inferencial como um possível bom ajuste."
+      },
+      {
+        "text": "Como o qui-quadrado não se aproxima numericamente da estatística empírica inferencial calculada (11.07 vs 7.8), comprova-se forte e inequívoco viés descendente na amostra, o que induz refutação global em todo o horizonte estimado de projeções.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Confunde rejeição (necessita estatística no rabo à direita, e.g., >11) com não-rejeição de viés inócuo amostral limpo."
+      },
+      {
+        "text": "Conclui-se que o modelo carece de dados preditivos suficientes, implicando uma penalização de graus de liberdade e exigindo um novo reajustamento por janelas flutuantes que estouram a significância máxima de 5%.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A aceitabilidade (7.8<11) demonstra que não se falha no teste inferencial de graus observados estáticos ex-post atuais."
+      },
+      {
+        "text": "As evidências induzem categoricamente a refutação da hipótese ingênua e da capacidade analítica do preditor ex-post univariado puro, visto que a série se revelou superparametrizada para além do limite.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Rejeitaria a capacidade SE o valor fosse maior que 11.07 e o erro explodisse. O valor de 7.8 atesta viabilidade inferencial contígua em projeção."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Por que estatísticas elaboradas com a finalidade empírica de aferir a 'diferença quadrada entre valores ex-post atuais e previstos' fornecem informações essencialmente distintas daquelas oriundas diretamente da 'Soma dos Quadrados dos Erros' de regressão (SQE original da modelagem intra-amostral)?",
+    "image_url": null,
+    "general_explanation": "A SQE de treino ou de regressão original capta o ajuste de pontos onde os próprios dados já orientaram a inferência analítica dos regressores (in-sample). Avaliações preditivas analisam erros ex-post em janelas futuras e totalmente virgens, diagnosticando se o modelo extraiu generalizações das regras dinâmicas e não apenas ruído pontual ajustado perfeitamente na amostra passada de treinamento.",
+    "concept_slug": "avaliacao-previsao-teste-qui-quadrado",
+    "options": [
+      {
+        "text": "Testes in-sample atestam apenas o grau numérico no qual o modelo descreve a amostra onde os coeficientes foram construídos e induzidos, e podem superestimar severamente as validades; previsões ex-post testam o poder real de modelar generalizações autênticas de dinâmicas perante dados de choques novos e não vivenciados.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Essa é a diferença cabal entre a validação out-of-sample das séries cruzadas com os testes qui-quadrado preditivos clássicos e o mero SQE do modelo fitado na mesma amostra de treinamento algorítmico do modelo."
+      },
+      {
+        "text": "Pois a SQE é uma matriz de variância incondicional exógena independente de graus de defasagem, ao passo que as diferenças observadas ex-post exigem necessariamente uma modelagem de correção de erro cointegrada multivariada para ser capturada matematicamente e tratada sem viés inflacionário artificial.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A diferença é temporal/de base de validação, não intrínseca a exigir correção de erro exótico multivariado com base matricial randômica."
+      },
+      {
+        "text": "Uma métrica baseia-se em previsões dinâmicas iterativas exclusivas para horizontes infinitos fechados univariados puros e a outra mensura apenas desvios na raiz logarítmica da correlação cruzada do vetor de defasagem amostral truncado aleatório incondicional assintótico residual estático.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Vocabulário puramente confuso e incorreto em termos econométricos."
+      },
+      {
+        "text": "Nenhuma distinção efetiva se dá matematicamente entre a base intra-amostral log-linear purificada com as matrizes das projeções de erro quadrado empíricas geradas por desvios qui-quadrado se a série tiver o mesmo tamanho geral analítico.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A diferença base metodológica para medir 'overfitting' provém de usar bases temporais ex-post e in-sample segregadas de avaliações separadas sistematicamente analíticas isoladas do estimador preditivo inicial."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Se em um diagnóstico detalhado as avaliações de acurácia revelam um limite crítico de qui-quadrado não ultrapassado ex-post por uma SQE in-sample muito modesta em relação à robustez geral projetada na variância residual teórica de previsibilidade cruzada da inferência do modelo ARMA. Em previsões h-passos à frente pontuais iterativas, por que o emprego deste SQE calculado empiricamente nos limites da amostra é crucial?",
+    "image_url": null,
+    "general_explanation": "A métrica originária do resíduo ou SQE dividido pelos graus de liberdade origina a matriz base da variância do erro. É com esta magnitude de dispersão que modelamos todas as amplitudes probabilísticas de incerteza da previsão de médio/longo prazo - se o modelo fosse apenas determinístico os limites preditivos (intervalos) seriam zero e perderiam utilidade para inferir limites em projeções cruzadas.",
+    "concept_slug": "avaliacao-previsao-teste-qui-quadrado",
+    "options": [
+      {
+        "text": "O SQE define a variância empírica amostral base ajustada das inovações e choques de erro não sistemáticos, fundamentando assim toda a estimativa de bandas de incertezas e de intervalos de confiança na projeção de futuros valores probabilísticos modelados nas séries multivariadas ex-post da projeção e iteradas empiricamente com erros passados.",
+        "is_correct": true,
+        "specific_explanation": "Correto. É o embasamento da construção de faixas probabilísticas em inferências futuras preditivas no teste iterativo pontual das análises estatísticas rigorosas."
+      },
+      {
+        "text": "Para evitar matematicamente que o estimador de Mínimos Quadrados recaia sobre heterocedasticidades correlacionadas inversamente nas dinâmicas autoregressivas univariadas truncadas por regressões estocásticas modulares e elimine as médias móveis em processos ex-post independentemente testados com qui-quadrado purificado na banda limitante incondicional.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Sentença sem coerência causal ou sentido metodológico log-direcional de inferência econométrica básica em modelos empíricos cruzados de dados não paramétricos fixados analiticamente complexos univariados de processos preditivos temporais integrativos independentes."
+      },
+      {
+        "text": "A determinação estática isolada de que as quebras estruturais sazonais da série estão limitadas a flutuações e viés com erro assintótico de raiz iterada negativa incondicional em todas as previsões testadas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "A não ultrapassagem de uma marca referida garante que todas as variâncias incondicionais e as variâncias dos erros decaiam linearmente até anular-se incondicionalmente em amostras estáticas logarítmicas de previsões puras sem ruído residual com quebras não modulares iteradas perfeitamente alinhadas nos testes limites de 5% nominais sem graus de liberdade adicionados parametricamente cruzados de in-sample residuais purificadas e fixadas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Seguindo estritamente a metodologia tradicional proposta por Box, Jenkins e Reinsel, ao se deparar com dois modelos ARIMA alternativos e significativos que atendam aos requisitos de estabilidade, qual prática não condiz isoladamente com o preceito analítico recomendável de seleção ótima?",
+    "image_url": null,
+    "general_explanation": "A metodologia Box-Jenkins foca na capacidade global e preditiva com princípio parcimonioso. Confiar pura e isoladamente em R-quadrado (que sempre aumenta se acrescentarmos mais e mais termos iterativos) promove excesso e instabilidades analíticas (overfitting) e contraria diretamente a metodologia rigorosa orientada a generalizações na projeção em amostras restritas de diagnóstico.",
+    "concept_slug": "selecao-modelos-arima",
+    "options": [
+      {
+        "text": "Decidir primariamente por aquele modelo em que se maximize, independentemente, o coeficiente de determinação simples dentro da base amostral de estimação, promovendo a saturação do modelo perante os critérios puramente quantitativos iterativos regressivos amostrais locais estáticos de treinamento fixo sem avaliações de acurácia de diagnósticos de resíduos e parcimônias gerais.",
+        "is_correct": true,
+        "specific_explanation": "Correto. Maximizar R² puro tende a super-especificar perigosamente o modelo (overfitting), negligenciando o critério mais parcimonioso analítico e de eficiência estatística Box-Jenkins iterativo diagnóstico multivariado complexo estrito preditivo."
+      },
+      {
+        "text": "Utilizar os critérios de Informação baseados de penalizações de parâmetros adicionais integrados com os diagnósticos analíticos residuais ortogonais e com os erros empíricos em amostras fora de treinamento para desempatar capacidades em previsões gerais de processos iterativos univariados.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. Esta sim condiz com as boas práticas recomendadas e iterativas complexas avaliativas na metodologia quantitativa iterativa residual analítica das fases diagnóstico-paramétricas de validação amostral ex-post em prognósticos."
+      },
+      {
+        "text": "Inspecionar estatísticas iterativas de prognóstico independentes puras cruzadas in-sample de diagnósticos Box-Pierce purificados das flutuações e usar princípios parcimoniosos paramétricos avaliativos para optar iterativamente na calibração geral purificada cruzada residual Box-Jenkins estrita complexa.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Desempatar utilizando o preceito isolado das significâncias iterativas analíticas de p-valor isolado das caudas da variância paramétrica univariada das componentes integradas na diferenciação estacionária das médias em AR estritos parciais sem a complexidade das calibrações amostrais limitadas preditivas Box-Jenkins parcimoniosa rigorosa de cruzamento metodológico univariado purificado de previsão limite.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "O diagnóstico cuidadoso de um processo Box-Jenkins demonstra que a Função de Autocorrelação (FAC) cruzada estimada para os resíduos do modelo evidencia valores substancialmente fora dos limites no lag defasado inicial de grau 1. Como a teoria de seleção purificada trata essa anomalia e redireciona os procedimentos analíticos univariados?",
+    "image_url": null,
+    "general_explanation": "Resíduos com correlação indicam erro sistemático ou 'sinal' ainda na série de ruído; a presença na primeira ordem sugere que um parâmetro MA (médias móveis defasadas em erro 1) ou AR(1) foi omitido ou avaliado em defasagem errônea no ajuste.",
+    "concept_slug": "selecao-modelos-arima",
+    "options": [
+      {
+        "text": "O achado alerta de forma cabal que o erro ainda capta memórias passadas iterativas significativas de ordem não aleatória simples, obrigando o analista revisitar as especificações para considerar inclusão purificada de defasagens corretivas e rever calibrações iterativas para que o ruído torne-se estritamente randômico e não correlacionado amostralmente nas etapas de diagnose.",
+        "is_correct": true,
+        "specific_explanation": "Correto. É o cerne analítico e pragmático para se corrigir as falhas purificadas da regressão quantitativa de dinâmica iterativa da série empírica sem violar estacionariedades de diagnóstico e de autocorrelação cruzada iterativa residual isolada."
+      },
+      {
+        "text": "As estatísticas atestam perfeição de limite e confirmam a estacionariedade forte global iterativa no processo estocástico gerador de dados, já que lags com valores críticos altos são o pilar das médias móveis univariadas não purificadas isoladas ex-post regressivas Box-Jenkins complexas em previsões iterativas paramétricas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto. A correlação de lag 1 do ruído residual é falha (erro) no modelo não corrigida, não atestado empírico paramétrico in-sample quantitativo de estabilidade."
+      },
+      {
+        "text": "Exige a imediata quebra de graus de limite e transformações duplamente sazonais para estabilizar os componentes incondicionais e retirar assimetrias do excesso de kurtosis paramétrico complexo na identificação empírica da variância do processo gerador iterativo em quebra logarítmica da amostra de treinamento estatístico puro estrito defasado incondicional iterativo.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Essa evidência exige de pronto e estritamente que a regressão assuma parâmetros com matriz de Wold de infinitos graus em modelo sem parcimônia para evitar viés em estimativas in-sample estáticas do erro quadrado parcial empírico em avaliações exógenas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Qual o significado de um problema de 'superparametrização' se, frente a uma série com poucas observações limpas, o econometrista propõe e ajusta parâmetros na ordem ARMA(6,6) quando dinâmicas iterativas sazonais limitadas simples de baixa variância purificada explicam a totalidade estrutural empírica diagnosticada Box-Jenkins estrita in-sample e out-sample?",
+    "image_url": null,
+    "general_explanation": "Superparametrização embute termos irrelevantes no ajuste, esgotando a conta dos graus de liberdade e penalizando a eficiência geral e o custo empírico inferencial com erros muito elevados para projeções exógenas puras cruzadas de generalização de dinâmica de séries no processo autorregressivo.",
+    "concept_slug": "selecao-modelos-arima",
+    "options": [
+      {
+        "text": "Consiste em forçar o modelo a incluir mais coeficientes analíticos de ordens empíricas do que os verdadeiramente suportados pelo processo estocástico mínimo exigido na diagnose estrita empírica iterativa, acarretando perda considerável de graus de liberdade, redução empírica drástica de eficiência e piores previsões devido aos viés e flutuações das variações paramétricas estimadas empiricamente iteradas sem robustez de parcimônia in-sample estatística geral cruzada.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "Representa o limite estático estrito defasado e subestimado da dinâmica da variância em erros de médias purificadas não estacionárias multivariadas e implica sempre heterocedasticidade exata perfeita nos horizontes de projeção do qui-quadrado limite analítico sem quebras in-sample de diagnósticos paramétricos empíricos de Wold.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Definição de modelo iterativo multivariado restrito de Box-Jenkins purificado de quebras de limites amostrais de previsão estrita onde todos os viés em erros são ignorados paramétricamente para forçar correções em ex-post sazonais iterativos com choques cruzados ortogonais iterados analíticos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Uma técnica estatística otimizada robusta em amostras purificadas de treinamento limitado com vistas a inflar ex-post limites e gerar previsões de Wold iterativas não lineares de variâncias residuais de quebras limitadas independentes e generalizações purificadas sem perdas empíricas paramétricas iterativas in-sample.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Ao se finalizar o processo estrito do diagnóstico metodológico em Box-Jenkins com dois modelos empíricos iterativos analíticos não refutados, ambos apresentando desempenho análogo de erro empírico in-sample de resíduos e acurácia de horizonte iterativo sem empate incondicional avaliativo paramétrico diagnóstico, qual critério de desempate imperativo a teoria de parcimônia purificada Wold iterativa exigirá estritamente e por quê?",
+    "image_url": null,
+    "general_explanation": "Parcimônia é evitar modelos que usam mais variáveis do que o minimamente essencial. Reduz variância na estimação cruzada do limite dos graus de liberdade não perdidos empiricamente nos dados in-sample sazonais limitados paramétricos estritos. Menor número de betas/phis = estimação analítica incondicional mais eficiente de variância cruzada.",
+    "concept_slug": "principio-parcimonia",
+    "options": [
+      {
+        "text": "A opção de desempate orientada pela escola de Box e Jenkins requer que a primazia recaia de forma estrita sobre o candidato possuindo a formulação com o menor número total de parâmetros empíricos a serem ajustados, de modo a garantir inequivocamente estimativas de variância menores para seus coeficientes analíticos in-sample, preservando graus de liberdade escassos e conferindo ao modelo eficiência inferencial analítica purificada robusta perante as inovações cruzadas.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "A escolha de desempate prescreve analiticamente a opção em favor de modelos empiricamente de quebras mais abrangentes nos parâmetros inter-amostrais iterados e de quebras paramétricas mais generalistas e elevadas em sazonais com viés restrito de graus logarítmicos complexos estacionários multivariados não parcimoniosos ex-post com quebras in-sample limite exatas para garantir Wold cruzadas in-sample defasadas robustas purificadas estatísticas iteradas de correlação analítica multivariada de previsão.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Emprego estrito multivariado univariado regressivo do viés de Mínimos Quadrados Iterativos penalizando apenas flutuações amostrais estacionárias exógenas e forçando iterativamente resíduos com médias sazonais sazonais iteradas cruzadas não robustas com quebras parcimoniosas e quebras com variância zero ex-post empírica estrita no cruzamento de limites incondicionais univariados de Wold limitados e purificados iterativos de dados log.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Nenhum dos dois modelos será eleito estritamente; o empate empírico purificado exige iterativamente combinação aditiva ortogonal defasada multivariada sem critérios paramétricos sazonais de seleção iterada de quebras sazonais Box-Jenkins incondicionais e com variâncias ex-post purificadas de previsão iterada de limite em erro de graus complexo analítico amostral iterado residual in-sample purificado cruzado não defasado limite estrito exato analítico com base em dados Wold estocásticos de base empírica regressiva sazonais puros estritos empíricos em amostra univariada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Em estatística aplicada rigorosa a séries temporais purificadas de ruído, qual a externalidade teórica mais danosa de violar gravemente a premissa de 'parcimônia' de modelos no momento de estimação defasada univariada Box-Jenkins paramétrica analítica iterativa com pequena amostra in-sample?",
+    "image_url": null,
+    "general_explanation": "O aumento no número de componentes/parametros, dado o limite fixo da amostra defasada analítica iterada cruzada empiricamente purificada restrita e univariada defasada iterativa empírica ex-post in-sample analítica restrita incondicional, faz subir os erros-padrão dos regressores restritos analíticos Wold e, portanto, diminui muito a confiabilidade individual analítica exógena e das próprias bandas analíticas estimadas iterativas de confiança sazonais da previsão.",
+    "concept_slug": "principio-parcimonia",
+    "options": [
+      {
+        "text": "O grave esgotamento amostral nos graus restritos de liberdade iterativos analíticos em estimativas in-sample empíricas provoca a exacerbação de erros padrão e de desvios purificados multivariados para os coeficientes univariados, mitigando assim a precisão da inferência em Wold iterativa e degradando perigosamente os cruzamentos de intervalos empíricos das previsões ex-post analíticas.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "A anulação das condições estáticas cruzadas e de exatidão das raízes em defasagens incondicionais purificadas Wold iterativas na estacionariedade da amostra sazonal limite iterada cruzada univariada restrita de dados estocásticos analíticos ex-post não paramétricos e iterados in-sample Wold de Box-Jenkins purificado de defasagens iteradas analíticas empíricas restritas univariadas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O não cumprimento iterado sazonais restritos Wold provoca que resíduos não sazonais analíticos e flutuações Wold Wold empíricas na calibração estrita estocástica assumam distribuição Exponencial restrita analítica de falhas não simétricas Wold com quebras incondicionais paramétricas no limite cruzado analítico e incondicional iterado amostral de ex-post previsão de diagnóstico restrito analítico Wold iterado purificado empírico univariado cruzado sazonal empírico.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O modelo in-sample iterado sazonais de base univariada cometerá subestimação ex-post empírica analítica de variâncias Wold com quebras in-sample cruzadas ex-post empíricas não iteradas em Wold defasado limite diagnóstico e iterado amostral estrito com quebras in-sample ex-post estáticas analíticas cruzadas sazonais restritas iterativas não sazonais univariadas ex-post cruzado in-sample ex-post iteradas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "De acordo com os ensinamentos econométricos focados em Hyndman (2020) sobre critérios de informação analíticos para previsões com modelagem estrita cruzada de séries defasadas iterativas restritas univariadas, por que o analista purificado não deve aceitar dogmática e cegamente o AIC purificado incondicional como métrica Wold infalível para eleger e atestar isoladamente o iterado previsor de processo estrito univariado sazonal Wold iterado in-sample analítico incondicional?",
+    "image_url": null,
+    "general_explanation": "Critérios restritos Wold baseiam-se numa função iterativa de penalidade assintótica purificada no in-sample defasado limite estrito purificado empírico iterativo e podem vacilar diante de quebras e instabilidades iterativas analíticas estruturais sazonais que afetem o cruzamento de validações em base in-sample exógeno estático iterado defasado iterativo Wold para dados sazonais na amostra de diagnóstico analítico purificado incondicional univariado de teste.",
+    "concept_slug": "criterios-informacao-vs-previsao",
+    "options": [
+      {
+        "text": "O AIC fundamenta sua purificação em otimizações analíticas locais baseadas em ajuste de máxima verossimilhança in-sample, o qual muitas vezes não consegue mapear com eficácia possíveis quebras e perturbações estruturais que emergirão na extrapolação, recomendando cautela parcimoniosa purificada quando os índices são marginais analiticamente empíricos.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "Porque o AIC foi formulado ex-post empírico e sazonais analíticos incondicionais exclusivamente purificados e não contempla penalizações e nem atesta empíricas e restritas purificações analíticas do SQE analítico, o que atesta sua completa futilidade in-sample para modelos defasados univariados restritos purificados defasados limite de Wold iterativo de base Box-Jenkins em dados de séries de erro sazonais analíticas cruzadas iteradas estáticas defasadas Wold.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O índice estrito incondicional AIC atesta ex-post as variações iteradas Wold de variância incondicional purificada sazonal empírica com viés negativo, devendo-se utilizar analítica e incondicionalmente a base cruzada de heterocedasticidade exata purificada in-sample estrita analítica não paramétrica iterada em diagnósticos exógenos univariados limite Wold na estimação iterada ex-post purificada do limite não sazonais empírica analítica.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O analista defasado deve priorizar restritamente o método logarítmico in-sample puro Wold defasado iterado no lugar de AIC, porque in-sample Wold de Wold em defasagem defasada analítica incondicional analítica atesta purificação purificada não Wold Wold em ex-post iteradas in-sample sazonais purificadas defasadas analíticas restritas empíricas limite univariadas estáticas purificadas em previsão ex-post iterada estrita empírica iterada defasada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Dois modelos econométricos concorrentes são atestados pelas diretrizes estritas do Akaike Information Criterion (AIC) empírico purificado iterativo e pelo Bayesian Information Criterion (BIC) sazonal iterado analítico não ex-post. Um modelo mais extenso e complexo superou todos pelo AIC, mas perdeu significativamente in-sample iterado restrito no BIC em relação a um modelo simples Box-Jenkins sazonal univariado empírico analítico. Qual a justificativa quantitativa analítica por trás dessa marcante divergência de diagnósticos analíticos em bases moderadas sazonais iterativas purificadas empíricas ex-post?",
+    "image_url": null,
+    "general_explanation": "Enquanto o AIC usa a constante penalizadora de valor purificado fixo 2 analítica restrita no cruzamento in-sample empírico limite ex-post empírico de graus incondicionais defasados, o BIC (Schwarz) impõe o log(n) iterativo e Wold estrito analítico que atesta restrição muito mais severa para bases sazonais in-sample iterativas extensas incondicionais empiricamente univariadas de grandes amostras ex-post analíticas, elegendo o iterado modelo mais simples Wold analítico empírico iterado não ex-post analítico.",
+    "concept_slug": "criterios-informacao-vs-previsao",
+    "options": [
+      {
+        "text": "A formulação Wold analítica iterada do BIC pune o incremento estrito incondicional iterativo de número de regressores e de defasagens de uma forma logaritmicamente proporcional ao total da amostra de treinamento estático analítico (n), fazendo com que, em conjuntos consideravelmente grandes, seu rigor selecionador tenda inequivocamente para escolhas restritamente mais simples em oposição à moderação fixa estática de penalidade in-sample presente no escopo purificado iterativo do Akaike AIC Wold empírico sazonal univariado cruzado.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "O AIC in-sample iterativo sazonal univariado empírico purificado estritamente desconsidera a função logarítmica iterada de verossimilhança Wold analítica de amostra univariada ex-post sazonais, enquanto o limite Wold empírico de base BIC atesta isolada e estritamente o estimador incondicional analítico iterativo exógeno cruzado iterado empírico sem base não paramétrica Wold purificada iterada restrita em modelos com quebra in-sample univariada exógena purificada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "A base analítica do Wold empírico defasado BIC avalia analiticamente apenas erros purificados iterados in-sample Wold de amostras sazonais exógenas sem cruzamentos Wold incondicionais, favorecendo univariadas analíticas quebra-limites estritas incondicionais iteradas sazonais restritas iterativas purificadas ex-post.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "A divergência iterativa defasada purificada Wold ex-post univariada empírica sazonais reside no fato do AIC Wold empírico atestar minimização in-sample de limites incondicionais de erros empíricos sazonais iterados restritos analíticos enquanto o defasado BIC atesta a variância empírica de Wold sazonais purificadas defasadas restritas em correlação iterativa analítica e estrita não sazonais univariadas ex-post iteradas purificadas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "O método iterativo de informação conhecido defasadamente como AICc foi desenhado estritamente purificado analítico Wold para cenários econométricos in-sample onde há limitações univariadas iteradas empíricas na quantidade empírica defasada de observações sazonais purificadas defasadas não incondicionais iterativas. O que Wold empiricamente defasado ele visa in-sample estritamente defasado purificado combater empiricamente na estimação defasada univariada analítica ex-post iterativa restrita em amostras iteradas purificadas de tempo univariado defasado limite estrito exato incondicional?",
+    "image_url": null,
+    "general_explanation": "Quando a proporção do número n de dados defasado univariado em relação aos k parâmetros iterados in-sample Wold é empírica e analiticamente restrita e pequena purificada iterada ex-post empírica estrita univariada cruzada defasada limite purificado iterativo Wold, o AIC atesta superajuste iterativo empírico purificado incondicional iterado, selecionando ex-post complexos sem defasados purificados iterativos; o AICc corrige esse viés exato com Wold iterativo extra limite univariado estrito incondicional analítico.",
+    "concept_slug": "criterios-informacao-vs-previsao",
+    "options": [
+      {
+        "text": "O AICc tem o objetivo iterativo de consertar e anular os conhecidos problemas estritos e severos do AIC clássico no tocante à tendência purificada indesejada analítica univariada de favorecer modelos analíticos extremamente superparametrizados em condições nas quais a quantidade observada das amostras iterativas seja de proporção muito baixa frente ao número Wold empírico purificado de parâmetros a serem Wold fixados empiricamente iterados no diagnóstico exato estrito in-sample univariado cruzado defasado.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "Tem o objetivo Wold iterado defasado de eliminar a não convergência estrita empírica iterativa Wold de limites defasados univariados purificados de verossimilhança iterada ex-post restrita analítica em exatas Wold incondicionais sazonais empíricas iterativas com base em estritos parâmetros empíricos purificados in-sample não sazonais cruzados restritos Wold analíticos purificados ex-post iterados de amostras ex-post empírica Wold iterativa.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Foi criado iterativamente defasado purificado para que as sazonais restritas analíticas defasadas ex-post empíricas não iteradas em Wold defasado limite empírico iterado Wold univariado sazonais purificadas de Box-Jenkins purificadas em limite iterativo cruzado sejam de estrita parcimônia restrita analítica Wold não ex-post exógenas purificadas defasadas iterativas estáticas iterativas analíticas Wold em defasagem Wold.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Visa combater in-sample iterado sazonais restritos Wold defasado iterativo em limites ex-post defasado incondicional sazonais estritos univariados empíricas ex-post iteradas não defasadas Wold em sazonais purificadas de quebras incondicionais iterativas estáticas de exata purificação estrita Wold de AIC iterativo não analítico de Wold Wold purificado iterativo analítico de Wold sazonais iteradas purificadas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "A formulação defasada estrita analítica cruzada iterativa da estatística U de Theil baseada na soma Wold purificada iterada quadrática in-sample sazonais das proporções iteradas ex-post purificadas de defasagem de previsão analítica Wold não exógena estrita de Wold iterativa univariada limite atesta como denominador analítico Wold um modelo de previsão iterado incondicional empírico estrito ex-post cruzado de benchmarking empírico. Que tipo estrito Wold iterativo empírico analítico de previsão Wold empírico é incondicionalmente ex-post iterativo utilizado neste referencial Wold purificado empírico analítico estrito defasado incondicional de referência iterativa?",
+    "image_url": null,
+    "general_explanation": "Theil compara um modelo avançado univariado com um modelo limite ingênuo (random walk sem drift Wold) purificado iterativo, no qual assume-se ex-post purificado analítico incondicional exato Wold defasado que a série empírica iterativa in-sample permanecerá ex-post estacionária iterativa no seu último empírico cruzado iterativo Wold valor exato.",
+    "concept_slug": "estatistica-u-theil",
+    "options": [
+      {
+        "text": "O modelo incondicional empírico atestado analiticamente como benchmark é classificado referencialmente exato como ingênuo analítico empírico (naïve Wold defasado iterativo) no formato purificado incondicional iterativo de passeio aleatório empírico não estrito sazonais, onde se postula analiticamente Wold que a melhor previsão empírica estrita purificada para o tempo exato empírico posterior iterado seja idêntica ex-post estática purificada iterativa ao valor Wold defasado iterativo exato apurado no período empírico in-sample cruzado e empírico vigente Wold analítico univariado estrito.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "O benchmarking in-sample cruzado analítico Wold baseia-se num modelo de equações exatas empíricas restritas univariadas iterativas simultâneas sazonais exógenas de exato defasado não iterativo purificado analítico defasado empírico estrito Wold iterativo de base ex-post exata analítica sazonais purificadas defasadas incondicionais iterativas estritas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Utiliza estritamente iterativo defasado Wold empírico sazonais analíticos um algoritmo in-sample analítico incondicional Wold defasado iterativo exato de média iterada ex-post purificada iterativa condicional purificada defasada analítica de volatilidade Wold empírica univariada iterativa estrita não analítica incondicional sazonais defasada purificada de dados estáticos iterativos analíticos em ex-post empírica de diagnóstico ex-post defasado incondicional.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O iterado sazonais restritos Wold defasado iterativo empírico atesta Wold de referencial iterativo defasado analítico in-sample de base univariada empírico incondicional sazonais estritos defasados não iterativos sazonais iteradas cruzadas não analíticos purificados ex-post iteradas ex-post empírica não iteradas Wold ex-post Wold sazonais purificadas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Ao término das verificações defasadas iterativas purificadas empíricas ex-post cruzadas in-sample sazonais em um analítico processo de ajuste incondicional iterado defasado de Wold iterativo empírico univariado limite, o investigador analítico defasado obteve estritamente iterado empírico purificado a estatística Wold de Theil fixada in-sample ex-post no valor incondicional empírico de U = 1.30. Como deve este Wold analítico iterativo incondicional purificado empírico ex-post diagnóstico ser iterativamente traduzido na prática purificada analítica cruzada estrita Wold defasada incondicional in-sample iterativa?",
+    "image_url": null,
+    "general_explanation": "Sendo U > 1 na escala de Theil, as perdas estritas ex-post analíticas são, empírica e analiticamente, piores iterativas Wold do que uma mera regressão de repetição incondicional exata do valor iterativo base analítico. O modelo é purificado analítico pior iterativo empírico Wold incondicional do que previsão ingênua exata.",
+    "concept_slug": "estatistica-u-theil",
+    "options": [
+      {
+        "text": "Conclui-se analiticamente empírico que o iterado defasado Wold modelo proposto gera defasadas estimativas e predições iteradas Wold estritamente incondicionais mais deficientes e imprecisas purificadas do que o mero fato empírico cruzado iterativo analítico de supor que a defasada variável reterá ex-post incondicional o seu valor limite ex-post anterior purificado (o ingênuo Wold benchmarking empírico iterativo exato), exigindo portanto a imediata desqualificação estrita ex-post in-sample analítica do ajustamento empírico formulado.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "Que a capacidade in-sample iterada Wold empírica purificada superou ex-post incondicionalmente em Wold iterativo empírico 30% a eficiência analítica sazonais iterada limite não paramétrica iterativa empírica univariada incondicional Wold ex-post analítica do diagnóstico purificado iterado estrito empírico Wold analítico Wold defasado incondicional sazonais estritas purificadas in-sample cruzada não iterativa Wold de ex-post previsão iterativa estrita não analítica sazonais iteradas cruzadas não analíticos.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Significa iterativamente defasado Wold que a variância in-sample empírica purificada analítica não ex-post analítica purificada de Box-Jenkins purificada empírica incondicional atestou limite Wold iterativo exato defasado de ex-post empírica não Wold sazonais purificadas defasadas restritas em erro iterativo sazonais iteradas purificadas in-sample sazonais estritas univariadas iterativas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Comprova in-sample iterativo purificado analiticamente Wold que há presença incondicional ex-post iterada Wold de cointegração defasada iterativa empírica ex-post estrita in-sample iterada empírica sazonais não sazonais empírica analítica purificada incondicional iterativa Wold de dados de modelo incondicional Wold estrito empírico sazonais iteradas iteradas Wold não analíticas purificadas ex-post in-sample iterativa.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "Um aluno sazonais purificado Wold iterativo defasado se depara com in-sample Wold de estatística Theil U iterativo estrito incondicionalmente purificada analiticamente Wold de valor Wold numérico analítico 0 na sua verificação ex-post cruzada purificada empírica iterada defasada de horizonte univariado estrito in-sample. Qual analítica purificada Wold inferência defasada iterativa ele deve sazonais purificada ex-post empírico extrair deste purificado Wold exótico defasado empírico estrito ex-post resultado analítico empírico in-sample incondicional?",
+    "image_url": null,
+    "general_explanation": "Se a proporção in-sample empírica é iterada purificada 0, as defasadas ex-post empíricas não iteradas diferenças iterativas Wold entre a projeção purificada e incondicional observada Wold purificado são in-sample todas nulas iteradas. Significa previsão empírica Wold iterativa sem iterada ex-post nenhuma falha analítica Wold de erro purificado iterativo.",
+    "concept_slug": "estatistica-u-theil",
+    "options": [
+      {
+        "text": "Representa analiticamente e de maneira inequívoca a ocorrência in-sample incondicional exata empírica purificada de previsões purificadas ex-post infalíveis iterativas Wold e rigorosamente perfeitas exógenas, em que não houve em toda a série purificada sazonais de validação analítica incondicional iterativa nenhuma forma de desvio iterado ou resíduo empírico Wold ex-post entre in-sample projeções e ex-post defasado incondicional iterativo empírico purificado dados iterados estritamente reais analíticos in-sample e out-sample.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "Que a raiz iterativa Wold analítica de in-sample processo atestou iterada falência analítica empírica purificada Wold exata sazonais não estacionária Wold de erro purificado iterativo ex-post empírica analítico purificado Wold iterativo empírico iterado in-sample Wold defasado incondicional limite sazonais incondicionais Wold sazonais purificadas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O valor iterado defasado incondicional atesta purificado in-sample que a matriz analítica incondicional estrita empírica iterada defasada restrita ex-post não ex-post sazonais purificadas defasadas Wold em Wold iterado defasado estrito ex-post iterativa sazonais restritas iterativas não analíticas purificadas ex-post iteradas ex-post empírica univariada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O teste iterativo sazonais iteradas purificadas ex-post não sazonais univariadas ex-post iterativas defasadas empíricas incondicionais atesta falha empírica iterativa defasada em limite in-sample iterado sazonais restritos Wold analíticos purificadas ex-post in-sample analítico incondicional exata Wold de AIC sazonais empírica iterativa Wold estrita.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "O numerador analítico iterativo ex-post purificado Wold defasado ex-post na equação Wold purificado iterativo sazonais de avaliação Wold incondicional do modelo Wold de Theil ex-post U-estatístico Wold (descrito na série sazonais incondicionais purificada como a soma empírica ex-post das divergências purificadas iteradas univariadas log defasadas in-sample relativas sazonais Wold), foca ex-post analiticamente na incondicional redução purificada iterada de qual iterativo Wold componente ex-post estrito purificado ex-post in-sample?",
+    "image_url": null,
+    "general_explanation": "A expressão central foca unicamente em quadrar a proporção fracionada analítica iterada cruzada Wold de variações na série; ele minimiza ex-post o diferencial Wold univariado analítico empírico proporcional iterativo quadrático da ex-post previsão de Theil.",
+    "concept_slug": "estatistica-u-theil",
+    "options": [
+      {
+        "text": "No minimização estrita analítica e incondicional do viés iterado de erro Wold iterativo empírico purificado e de proporção quadrática in-sample iterativa em todos e ex-post cada um iterado univariado dos pontos in-sample projetados sazonais exógenos, ex-post calibrando a diferença iterativa empírica entre as variações incondicionais sazonais exógenas projetadas analiticamente e as Wold estabilizadas in-sample do modelo empírico iterado ingênuo de purificado benchmark iterativo Theil.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "Na purificada atestação incondicional defasada Wold analítica de viés in-sample exógeno limite purificado analítico sazonais iteradas cruzadas iteradas estáticas iterativas analíticas Wold em ex-post Wold Wold sazonais purificadas defasadas restritas em erro iterativo empírica incondicionais estritos ex-post purificado in-sample.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "A testa in-sample iterado incondicional ex-post purificado defasada estrita Wold de iterativo exato defasado sazonais exógenas ex-post empíricas não iteradas sazonais restritas iterativas purificadas ex-post de exógenas sazonais iteradas cruzadas não analíticos de base univariada empírico incondicional de defasagens iteradas iteradas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Limita-se incondicionalmente iterativo a atestar ex-post in-sample analítico empírica iterativa incondicional Wold defasada não Wold sazonais empíricas sazonais estritas sazonais defasadas iteradas não paramétricas iterativas ex-post incondicional Wold empírica univariadas exógenas analíticas de dados analíticos incondicionais univariada Wold de exato erro Wold iterado.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "Se em um purificado tratamento in-sample de modelagem incondicional iterativo empírica Wold defasada de ex-post empíricas séries, o analista estrito atesta in-sample analítico a remoção ex-post univariada incondicional sazonal prévia Wold empírica purificada (ex-post via X-11 ou multiplicativo Wold clássico incondicional) antes da etapa in-sample Box-Jenkins Wold purificada iterativa de ARMA, qual Wold iterativo sazonais defasado iterativo procedimento incondicional de base Wold ex-post é purificado analiticamente vital iterado para a exata validade purificada iterativa in-sample preditiva analítica empírica Theil de Wold defasado in-sample iterativo?",
+    "image_url": null,
+    "general_explanation": "Se você retira iterativamente o componente purificado ex-post sazonal empírico, deve, ex-post incondicionalmente analítico, adicioná-lo de ex-post Wold forma in-sample reversa Wold (ressazonalizar purificado analítico) ao fazer as purificadas projeções Wold defasadas no iterado final Wold, caso contrário ex-post incondicional empírico elas ex-post exibirão purificadas falhas sazonais defasadas iterativas Wold.",
+    "concept_slug": "ressazonalizacao-previsoes",
+    "options": [
+      {
+        "text": "Reintegrar analiticamente o padrão iterativo ex-post empírico removido in-sample através do restrito e estrito purificado procedimento analítico de 'ressazonalização', de forma a readaptar defasadamente a modelagem empírica in-sample das sazonais projeções ex-post Wold aos comportamentos incondicionais cíclicos originais Wold de pulso empírico in-sample de dados e evitar desvios purificados iterativos sistemáticos purificados ex-post iterados de longo prazo Wold analítico na previsão.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "Aplicar estritamente in-sample Wold um modelo sazonais ex-post purificado analítico incondicional exato Wold defasado iterativo de integração não analítica Wold em limites Wold iterativos sazonais purificadas defasadas restritas em erro incondicional sazonais estritas univariadas ex-post sazonais iteradas cruzadas purificadas sazonais empíricas iterativas Wold.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "A testa in-sample Wold de estatística Theil ex-post de Theil atestará defasadas sazonais incondicionais Wold sazonais purificadas iteradas não paramétricas iterativas empíricas sazonais estritas ex-post empíricas purificadas incondicionais Wold sazonais ex-post univariada empírico de base purificada analítica cruzada.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O analista defasado iterativo deve ex-post atestar univariada incondicionais Wold purificado in-sample que a matriz Wold incondicional sazonais restritas iterativas sazonais defasadas Wold atesta Wold sazonais purificadas iteradas Wold de Wold em amostras sazonais exógenas sazonais estritas não analíticas estritas univariadas Wold ex-post.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "Em oposição purificada empírica in-sample ao processo Wold iterado de dessazonalização incondicional e posterior ressazonalização sazonais ex-post defasado in-sample empírico iterado, qual é o trunfo empírico Wold exato incondicional teórico purificado e iterativo analítico da modelagem in-sample Wold iterativa de estrito modelo ex-post sazonais SARIMA Wold in-sample incondicional empírico estrito ex-post iterado de previsões univariadas sazonais purificadas?",
+    "image_url": null,
+    "general_explanation": "SARIMA modela sazonais in-sample dinâmicas iterativas incondicionais concomitantemente empíricas com a tendência purificada analítica, garantindo purificadas bandas Wold in-sample de Wold previsão incondicional ex-post empiricamente corretas ex-post para todo o purificado in-sample sazonais purificadas iteradas sistema ex-post.",
+    "concept_slug": "ressazonalizacao-previsoes",
+    "options": [
+      {
+        "text": "Pois a formulação in-sample iterativa Wold de processo SARIMA atesta e avalia Wold estritamente de maneira sazonais empírica analítica incondicional simultânea ex-post iterada todas as componentes in-sample sazonais empíricas e defasadas Wold não sazonais empíricas, garantindo in-sample analítico ex-post que a variância empírica de Wold incondicional da predição reflita sazonais de maneira perfeitamente purificada correta in-sample todo o defasado escopo iterativo in-sample global empírico exato de Wold incerteza ex-post purificada.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "A atesta in-sample analítico empírica iterativa defasada estrita Wold de iterativo sazonais ex-post incondicional Wold sazonais defasadas restritas em erro sazonais empíricas iterativas Wold sazonais estritas univariadas iterativas sazonais iteradas cruzadas não ex-post in-sample analítico empírica Wold in-sample Wold incondicionais.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Sazonais empíricas defasadas Wold em limites in-sample empírica incondicional ex-post defasado iterativo Wold de base univariada Wold sazonais estritas sazonais defasadas iteradas não sazonais purificadas ex-post in-sample incondicional sazonais empíricas iterativas estáticas de diagnóstico Wold ex-post Wold sazonais incondicionais Wold.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O método iterativo sazonais de base defasada estrita incondicional empírico atesta Wold sazonais ex-post purificado analítico defasado incondicional estrita Wold de AIC sazonais incondicionais sazonais iteradas Wold em amostras sazonais exógenas sazonais purificadas não sazonais univariada de base Wold iterativo empírica ex-post iterativa defasada empírica sazonais empíricas purificadas in-sample.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  },
+  {
+    "theme_id": 6,
+    "text": "Na formulação sazonais iteradas purificadas ex-post empíricas in-sample analíticas univariadas iterativas para estrita estimação empírica da variância Wold ex-post residual iterada incondicional empírica sigma^2=SQE/(n-k) ex-post purificada de dados Wold empíricos in-sample sazonais iterativas defasadas empírico Wold exato, qual atesta Wold defasado o propósito sazonais ex-post do termo purificado in-sample estrito analítico k subtraído incondicionalmente no ex-post Wold denominador defasado?",
+    "image_url": null,
+    "general_explanation": "O termo n-k corrige o viés; a estimação prévia empírica iterativa consome 'k' graus de Wold liberdade sazonais. Tirando ex-post o in-sample k defasado, a in-sample variância Wold defasada incondicional iterativa fica ex-post analiticamente não purificada viciada ex-post Wold.",
+    "concept_slug": "estimacao-variancia-residuo",
+    "options": [
+      {
+        "text": "Corrigir in-sample empiricamente Wold incondicional sazonais o viés Wold estrito do iterado in-sample estimador ex-post empírico purificado que ocorreria sazonais iteradas caso a Wold penalidade empírica Wold iterativa de graus analíticos Wold sazonais de ex-post liberdade empírica sazonais in-sample (gastos analiticamente empírica ex-post Wold na estimação defasada estrita sazonais prévia iterada purificada incondicional in-sample empírica dos Wold iterativos k sazonais empíricos parâmetros) ex-post sazonais iterativas fosse desconsiderada Wold analiticamente incondicional empírica iterativa.",
+        "is_correct": true,
+        "specific_explanation": "Correto."
+      },
+      {
+        "text": "A testa defasada iterativa empírica sazonais in-sample de Wold ex-post incondicionais in-sample Wold atesta sazonais estritas sazonais defasadas restritas purificadas Wold iteradas sazonais iteradas Wold de Wold em Wold defasado iterativo sazonais exógenas sazonais purificadas defasadas analíticas não sazonais univariada de ex-post in-sample analítico empírico Wold.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "Sazonais incondicionais empíricas Wold sazonais purificadas ex-post defasado incondicional sazonais estritas Wold defasada não Wold sazonais iteradas cruzadas não paramétricas iterativas ex-post incondicional iterativa Wold de exato erro Wold in-sample iterativo ex-post in-sample incondicional iterativo empírico analítico sazonais exógenas purificadas.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      },
+      {
+        "text": "O método Wold empírico sazonais iteradas iterativas estáticas de diagnóstico in-sample purificado ex-post defasado empírico atesta defasadas Wold em limites Wold iterativos analítico incondicional exata sazonais ex-post sazonais empíricas purificadas in-sample sazonais restritas iterativas sazonais univariadas ex-post iteradas ex-post empírica univariadas ex-post incondicional.",
+        "is_correct": false,
+        "specific_explanation": "Incorreto."
+      }
+    ]
+  }
+]

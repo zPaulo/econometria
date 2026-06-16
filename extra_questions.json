@@ -1,0 +1,702 @@
+[
+  {
+    "theme_id": 3,
+    "text": "Which of the following scenarios constitutes a violation of the 'No Perfect Collinearity' assumption in a multiple linear regression model?",
+    "image_url": null,
+    "general_explanation": "The 'No Perfect Collinearity' assumption requires that no independent variable is a perfect linear combination of other independent variables in the sample.",
+    "options": [
+      {
+        "text": "Including a person's weight measured in both kilograms and pounds as two separate independent variables.",
+        "is_correct": true,
+        "specific_explanation": "Weight in kg is exactly weight in lbs multiplied by a constant, creating a perfect linear relationship."
+      },
+      {
+        "text": "Including two variables that are highly, but not perfectly, correlated (e.g., years of education and years of work experience).",
+        "is_correct": false,
+        "specific_explanation": "High correlation causes multicollinearity, which increases variance but does not violate the strict assumption of no perfect collinearity."
+      },
+      {
+        "text": "Omitting a relevant variable that is correlated with both the dependent variable and the included independent variables.",
+        "is_correct": false,
+        "specific_explanation": "This violates the zero conditional mean assumption (causing omitted variable bias), not the perfect collinearity assumption."
+      },
+      {
+        "text": "Having a sample size smaller than the number of independent variables.",
+        "is_correct": false,
+        "specific_explanation": "While this makes OLS estimation impossible because the model is not identified, it is technically a violation of the assumption that n > k+1, rather than collinearity itself."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "In the multiple regression model y = β0 + β1x1 + β2x2 + u, what is the precise interpretation of β1?",
+    "image_url": null,
+    "general_explanation": "In multiple regression, the coefficients represent partial effects, holding other included variables constant.",
+    "options": [
+      {
+        "text": "The expected change in y for a one-unit change in x1, holding x2 and the error term u constant.",
+        "is_correct": true,
+        "specific_explanation": "β1 measures the ceteris paribus (all else equal) effect of x1 on y, partialling out the effect of x2."
+      },
+      {
+        "text": "The total change in y resulting from a one-unit change in x1, allowing x2 to vary naturally.",
+        "is_correct": false,
+        "specific_explanation": "This describes a simple regression coefficient or the total derivative, not the partial effect."
+      },
+      {
+        "text": "The expected value of y when x1 equals 1 and x2 equals 0.",
+        "is_correct": false,
+        "specific_explanation": "This would be the value of β0 + β1, not the interpretation of β1 alone."
+      },
+      {
+        "text": "The correlation between x1 and y.",
+        "is_correct": false,
+        "specific_explanation": "Regression coefficients measure slope (units of y per unit of x), not standardized correlation coefficients."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "What does the Gauss-Markov theorem state about the Ordinary Least Squares (OLS) estimators under assumptions MLR.1 through MLR.5?",
+    "image_url": null,
+    "general_explanation": "The Gauss-Markov theorem establishes the efficiency of OLS relative to other estimators under specific conditions.",
+    "options": [
+      {
+        "text": "OLS estimators have the minimum variance among all linear unbiased estimators.",
+        "is_correct": true,
+        "specific_explanation": "This is the definition of BLUE (Best Linear Unbiased Estimator). OLS is the 'best' (most efficient) in the class of linear unbiased estimators."
+      },
+      {
+        "text": "OLS estimators are always unbiased regardless of the sample size.",
+        "is_correct": false,
+        "specific_explanation": "Unbiasedness only requires assumptions MLR.1 to MLR.4. The Gauss-Markov theorem adds MLR.5 (homoskedasticity) to establish efficiency."
+      },
+      {
+        "text": "OLS estimators have the absolute minimum variance among all possible estimators, linear or non-linear.",
+        "is_correct": false,
+        "specific_explanation": "The theorem only applies to the class of *linear* unbiased estimators."
+      },
+      {
+        "text": "OLS estimators are normally distributed in large samples.",
+        "is_correct": false,
+        "specific_explanation": "Asymptotic normality is a separate property that depends on the Central Limit Theorem, not the Gauss-Markov theorem."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Why might the Adjusted R-squared decrease when a new independent variable is added to a multiple regression model?",
+    "image_url": null,
+    "general_explanation": "Adjusted R-squared penalizes the inclusion of unnecessary variables to prevent overfitting.",
+    "options": [
+      {
+        "text": "The new variable reduces the sum of squared residuals less than the penalty applied for losing a degree of freedom.",
+        "is_correct": true,
+        "specific_explanation": "Adjusted R-squared includes a penalty for adding parameters. If the new variable has little explanatory power, the penalty outweighs the minor reduction in SSR."
+      },
+      {
+        "text": "The new variable is highly collinear with the existing variables.",
+        "is_correct": false,
+        "specific_explanation": "Collinearity inflates standard errors but does not explicitly cause the Adjusted R-squared formula to decrease unless the variable adds no explanatory power."
+      },
+      {
+        "text": "The normal R-squared also decreased due to the new variable.",
+        "is_correct": false,
+        "specific_explanation": "The standard R-squared can never decrease when a new variable is added, even if it is completely irrelevant."
+      },
+      {
+        "text": "The new variable caused the error term to become heteroskedastic.",
+        "is_correct": false,
+        "specific_explanation": "Heteroskedasticity affects standard errors, not the calculation of R-squared or Adjusted R-squared."
+      }
+    ]
+  },
+  {
+    "theme_id": 3,
+    "text": "Under the assumption of Zero Conditional Mean (E(u|x) = 0), what does OLS effectively minimize to calculate the coefficient estimates?",
+    "image_url": null,
+    "general_explanation": "OLS derives its name from its mathematical objective function.",
+    "options": [
+      {
+        "text": "The sum of the squared differences between the observed y values and the predicted y values.",
+        "is_correct": true,
+        "specific_explanation": "OLS minimizes the Sum of Squared Residuals (SSR), which is exactly the squared difference between observed and predicted values."
+      },
+      {
+        "text": "The absolute differences between the true population parameters and the sample estimates.",
+        "is_correct": false,
+        "specific_explanation": "Since true population parameters are unknown, they cannot be part of the mathematical minimization problem."
+      },
+      {
+        "text": "The variance of the independent variables.",
+        "is_correct": false,
+        "specific_explanation": "OLS takes the independent variables as given; it does not minimize their variance."
+      },
+      {
+        "text": "The correlation between the residuals and the dependent variable.",
+        "is_correct": false,
+        "specific_explanation": "OLS ensures by construction that the residuals are orthogonal to the independent variables and the predicted y, but it minimizes squared errors."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "In a multiple regression model, under what condition would you use an F-test instead of a series of separate t-tests?",
+    "image_url": null,
+    "general_explanation": "The F-test is specifically designed to test multiple constraints simultaneously.",
+    "options": [
+      {
+        "text": "When testing whether a group of several independent variables has no joint effect on the dependent variable.",
+        "is_correct": true,
+        "specific_explanation": "Separate t-tests fail to account for the covariance between coefficient estimators, leading to incorrect Type I error rates. The F-test accurately tests joint significance."
+      },
+      {
+        "text": "When the sample size is small and the error term is not normally distributed.",
+        "is_correct": false,
+        "specific_explanation": "If errors are not normal in a small sample, exact t-tests and F-tests are both invalid."
+      },
+      {
+        "text": "When testing if a single specific coefficient is exactly equal to 1.",
+        "is_correct": false,
+        "specific_explanation": "A single linear restriction (like β1 = 1) can be tested using a standard t-test."
+      },
+      {
+        "text": "When you want to correct for heteroskedasticity in the model.",
+        "is_correct": false,
+        "specific_explanation": "Heteroskedasticity is corrected using robust standard errors, not by switching from a t-test to a standard F-test."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "What does a p-value of 0.03 indicate regarding the two-sided hypothesis test H0: β1 = 0 against H1: β1 ≠ 0?",
+    "image_url": null,
+    "general_explanation": "The p-value represents the probability of observing a test statistic as extreme as the one calculated, assuming the null hypothesis is true.",
+    "options": [
+      {
+        "text": "We would reject the null hypothesis at the 5% significance level, but fail to reject it at the 1% significance level.",
+        "is_correct": true,
+        "specific_explanation": "Because 0.03 is less than 0.05, we reject at 5%. Because 0.03 is greater than 0.01, we fail to reject at 1%."
+      },
+      {
+        "text": "There is a 3% probability that the null hypothesis is true.",
+        "is_correct": false,
+        "specific_explanation": "A p-value is a conditional probability P(Data|H0), not the probability of the hypothesis itself P(H0|Data)."
+      },
+      {
+        "text": "The true population parameter β1 is exactly equal to 0.03.",
+        "is_correct": false,
+        "specific_explanation": "The p-value is a probability related to the test statistic, not the value of the coefficient itself."
+      },
+      {
+        "text": "We would fail to reject the null hypothesis at the 5% significance level.",
+        "is_correct": false,
+        "specific_explanation": "Since 0.03 < 0.05, we reject the null hypothesis at the 5% level."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "If a 95% confidence interval for a regression coefficient βj is [2.5, 7.8], which of the following statements is mathematically accurate under classical frequentist statistics?",
+    "image_url": null,
+    "general_explanation": "Confidence intervals represent the reliability of the estimation procedure over repeated sampling.",
+    "options": [
+      {
+        "text": "If we drew many random samples and constructed intervals in the same way, 95% of those intervals would contain the true population parameter βj.",
+        "is_correct": true,
+        "specific_explanation": "In frequentist statistics, the true parameter is fixed. The interval itself is random. The 95% refers to the success rate of the procedure over many hypothetical repeated samples."
+      },
+      {
+        "text": "There is a 95% probability that the true population parameter βj lies between 2.5 and 7.8.",
+        "is_correct": false,
+        "specific_explanation": "This is a Bayesian interpretation. In frequentist statistics, the parameter is a fixed constant, so it either is or isn't in the interval (probability is 1 or 0)."
+      },
+      {
+        "text": "95% of the data points in the sample fall between 2.5 and 7.8.",
+        "is_correct": false,
+        "specific_explanation": "Confidence intervals estimate population parameters (the slope), they do not describe the spread of the underlying data points."
+      },
+      {
+        "text": "The null hypothesis H0: βj = 0 cannot be rejected at the 5% significance level.",
+        "is_correct": false,
+        "specific_explanation": "Because 0 is NOT inside the interval [2.5, 7.8], we WOULD reject the null hypothesis H0: βj = 0 at the 5% significance level."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "How do you construct the F-statistic to test the overall significance of a regression model with k independent variables?",
+    "image_url": null,
+    "general_explanation": "Testing overall significance compares the unrestricted model to a model containing only an intercept.",
+    "options": [
+      {
+        "text": "It is based on the R-squared of the model, specifically (R^2 / k) / ((1 - R^2) / (n - k - 1)).",
+        "is_correct": true,
+        "specific_explanation": "This formula tests whether all k slope coefficients are jointly equal to zero. It uses the R-squared to compare the explanatory power to the residual variance."
+      },
+      {
+        "text": "It is the sum of the t-statistics for all individual coefficients divided by k.",
+        "is_correct": false,
+        "specific_explanation": "F-statistics cannot be calculated simply by summing t-statistics because it ignores the covariance between the estimators."
+      },
+      {
+        "text": "It is the ratio of the coefficient estimates to their robust standard errors.",
+        "is_correct": false,
+        "specific_explanation": "That describes the calculation of the individual t-statistics, not the joint F-statistic."
+      },
+      {
+        "text": "It requires running a separate regression for each independent variable and comparing the SSRs.",
+        "is_correct": false,
+        "specific_explanation": "The overall F-test compares the full model to an empty model (intercept only), not individual models against each other."
+      }
+    ]
+  },
+  {
+    "theme_id": 4,
+    "text": "When testing a single linear restriction (e.g., β1 = β2), which of the following approaches is valid?",
+    "image_url": null,
+    "general_explanation": "Hypothesis testing for linear combinations of parameters requires knowing the standard error of that combination.",
+    "options": [
+      {
+        "text": "Rewrite the model algebraically to estimate a new parameter θ = β1 - β2, and perform a standard t-test on θ.",
+        "is_correct": true,
+        "specific_explanation": "By redefining variables, the standard OLS output provides the direct t-statistic and standard error for the difference between the coefficients."
+      },
+      {
+        "text": "Simply check if the 95% confidence intervals for β1 and β2 overlap. If they do, fail to reject the null.",
+        "is_correct": false,
+        "specific_explanation": "Overlapping confidence intervals do not account for the covariance between the estimators. They can overlap even if the difference is statistically significant."
+      },
+      {
+        "text": "Calculate the difference between the two t-statistics for β1 and β2.",
+        "is_correct": false,
+        "specific_explanation": "The difference between t-statistics is mathematically meaningless for hypothesis testing."
+      },
+      {
+        "text": "Use an F-test with q = 2 restrictions.",
+        "is_correct": false,
+        "specific_explanation": "The hypothesis β1 = β2 constitutes only one restriction (q = 1), not two."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "In the context of OLS asymptotics, what does it mean for an estimator to be 'consistent'?",
+    "image_url": null,
+    "general_explanation": "Consistency is a large-sample property related to the probability limit of an estimator.",
+    "options": [
+      {
+        "text": "As the sample size approaches infinity, the probability distribution of the estimator collapses to the true population parameter.",
+        "is_correct": true,
+        "specific_explanation": "Consistency means plim(β_hat) = β. With an infinitely large sample, the estimator will exactly equal the true parameter with a probability approaching 1."
+      },
+      {
+        "text": "The expected value of the estimator is equal to the true population parameter, regardless of sample size.",
+        "is_correct": false,
+        "specific_explanation": "This is the definition of 'unbiasedness', which is a finite-sample property, not consistency."
+      },
+      {
+        "text": "The estimator always produces the same coefficient value when tested on different samples.",
+        "is_correct": false,
+        "specific_explanation": "Estimators vary across samples due to sampling error; consistency relates to large samples, not replication reliability."
+      },
+      {
+        "text": "The standard error of the estimator remains constant as sample size increases.",
+        "is_correct": false,
+        "specific_explanation": "For a consistent estimator, the standard error shrinks toward zero as the sample size increases."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "A dataset contains an individual's highest degree earned, categorized as: High School, Bachelor's, Master's, or PhD. To avoid the dummy variable trap in a regression with an intercept, how many dummy variables should be included?",
+    "image_url": null,
+    "general_explanation": "The dummy variable trap occurs due to perfect multicollinearity when all groups and an intercept are included.",
+    "options": [
+      {
+        "text": "Three. One category must be omitted to serve as the reference base group.",
+        "is_correct": true,
+        "specific_explanation": "If a categorical variable has m levels, you must include m-1 dummies. The omitted category is the base group absorbed by the intercept."
+      },
+      {
+        "text": "Four. All categories must be represented to avoid omitted variable bias.",
+        "is_correct": false,
+        "specific_explanation": "Including four dummies alongside an intercept causes perfect multicollinearity, making OLS estimation impossible."
+      },
+      {
+        "text": "One. A single variable coded 1, 2, 3, 4 should be used instead.",
+        "is_correct": false,
+        "specific_explanation": "Coding categories as 1, 2, 3, 4 enforces an arbitrary linear spacing (assuming the jump from High School to Bachelor's equals the jump from Master's to PhD), which is incorrect."
+      },
+      {
+        "text": "None. The intercept alone accounts for all categorical data.",
+        "is_correct": false,
+        "specific_explanation": "The intercept only represents the average of the reference group, it cannot capture the differences between multiple groups."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "Consider the model: log(wage) = β0 + β1*female + β2*education + β3*(female × education) + u. What does the coefficient β3 represent?",
+    "image_url": null,
+    "general_explanation": "Interaction terms allow the partial effect of an independent variable to differ based on the value of a dummy variable.",
+    "options": [
+      {
+        "text": "The difference in the return to an additional year of education between females and males.",
+        "is_correct": true,
+        "specific_explanation": "The slope of education for males is β2, and for females is β2 + β3. Therefore, β3 is the exact difference in slopes (returns to education) between the genders."
+      },
+      {
+        "text": "The difference in base wages between females and males with zero years of education.",
+        "is_correct": false,
+        "specific_explanation": "The intercept difference (base wage difference at education=0) is captured by β1, not β3."
+      },
+      {
+        "text": "The total effect of education on wages for females.",
+        "is_correct": false,
+        "specific_explanation": "The total effect for females would be the sum of β2 + β3, not β3 alone."
+      },
+      {
+        "text": "The percentage difference in wages between a female and male with average education.",
+        "is_correct": false,
+        "specific_explanation": "This would require plugging the average education value into the equation. β3 strictly measures the slope difference."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "What does the asymptotic normality of OLS estimators imply for hypothesis testing?",
+    "image_url": null,
+    "general_explanation": "Asymptotic properties relax the strict requirement of normally distributed error terms.",
+    "options": [
+      {
+        "text": "In large samples, t-tests and F-tests are approximately valid even if the population error term u is not normally distributed.",
+        "is_correct": true,
+        "specific_explanation": "Because of the Central Limit Theorem, the distribution of the OLS estimator approaches a normal distribution as n gets large, validating standard inference tests."
+      },
+      {
+        "text": "OLS estimators will eventually calculate the exact normal distribution of the data.",
+        "is_correct": false,
+        "specific_explanation": "OLS does not change the distribution of the underlying data, it relies on the distribution of the *estimator*."
+      },
+      {
+        "text": "Heteroskedasticity disappears in large samples because the normal distribution has constant variance.",
+        "is_correct": false,
+        "specific_explanation": "Asymptotic normality does not solve heteroskedasticity. Robust standard errors are still required if the variance is non-constant."
+      },
+      {
+        "text": "The true population parameter must be normally distributed.",
+        "is_correct": false,
+        "specific_explanation": "Parameters are fixed constants in frequentist statistics, they do not have probability distributions."
+      }
+    ]
+  },
+  {
+    "theme_id": 5,
+    "text": "If a policy change affected a state starting in 2010, how is a difference-in-differences estimator constructed using dummy variables?",
+    "image_url": null,
+    "general_explanation": "Difference-in-differences requires tracking a treatment and control group across pre- and post-treatment periods.",
+    "options": [
+      {
+        "text": "By interacting a dummy for the treatment group with a dummy for the post-2010 time period.",
+        "is_correct": true,
+        "specific_explanation": "The coefficient on the interaction term (Treatment × Post) isolates the causal effect of the policy change, stripping out time trends and group baseline differences."
+      },
+      {
+        "text": "By including only a single dummy variable that equals 1 if the year is after 2010.",
+        "is_correct": false,
+        "specific_explanation": "This only captures the time trend affecting all groups, not the specific effect of the policy on the treatment state."
+      },
+      {
+        "text": "By dropping the control group data and running a regression only on the treatment state after 2010.",
+        "is_correct": false,
+        "specific_explanation": "This destroys the counterfactual baseline needed to determine what would have happened without the policy."
+      },
+      {
+        "text": "By comparing the means of the treatment group and control group only in the year 2011.",
+        "is_correct": false,
+        "specific_explanation": "This ignores baseline differences that existed prior to the policy change."
+      }
+    ]
+  },
+  {
+    "theme_id": 6,
+    "text": "What is the primary consequence of heteroskedasticity for Ordinary Least Squares (OLS) estimation?",
+    "image_url": null,
+    "general_explanation": "Heteroskedasticity refers to a non-constant variance of the error term conditional on the independent variables.",
+    "options": [
+      {
+        "text": "The estimators remain unbiased and consistent, but standard errors become invalid, rendering hypothesis testing unreliable.",
+        "is_correct": true,
+        "specific_explanation": "Because heteroskedasticity does not affect the expected value (E(u|x)=0), estimators are unbiased. However, the OLS variance formulas are wrong, ruining t and F tests."
+      },
+      {
+        "text": "The estimators become biased, but hypothesis testing remains valid in large samples.",
+        "is_correct": false,
+        "specific_explanation": "This is completely backward. Unbiasedness remains, inference is destroyed."
+      },
+      {
+        "text": "The OLS model can no longer be estimated because the matrix algebra fails.",
+        "is_correct": false,
+        "specific_explanation": "OLS estimation is mathematically possible regardless of whether the variance is constant."
+      },
+      {
+        "text": "The R-squared of the model becomes negative.",
+        "is_correct": false,
+        "specific_explanation": "R-squared measures goodness of fit and bounded [0,1] in models with intercepts. It is unaffected conceptually by heteroskedasticity."
+      }
+    ]
+  },
+  {
+    "theme_id": 6,
+    "text": "Which of the following describes the procedure for conducting a White test for heteroskedasticity?",
+    "image_url": null,
+    "general_explanation": "The White test evaluates if the squared residuals can be predicted by the independent variables, their squares, and cross-products.",
+    "options": [
+      {
+        "text": "Regress the squared OLS residuals on all independent variables, their squared terms, and all non-redundant cross-products.",
+        "is_correct": true,
+        "specific_explanation": "This comprehensive regression captures non-linear forms of heteroskedasticity. The resulting LM or F test determines joint significance."
+      },
+      {
+        "text": "Regress the dependent variable y on the squared independent variables.",
+        "is_correct": false,
+        "specific_explanation": "Heteroskedasticity is a property of the error term (residuals), not the dependent variable itself."
+      },
+      {
+        "text": "Regress the OLS residuals (not squared) on the predicted values of y.",
+        "is_correct": false,
+        "specific_explanation": "By definition of OLS, the residuals are perfectly uncorrelated with the predicted values, making this regression pointless."
+      },
+      {
+        "text": "Divide the sample in half and run an F-test to compare the variances of the two subgroups.",
+        "is_correct": false,
+        "specific_explanation": "This describes the Goldfeld-Quandt test, an older and less flexible test for heteroskedasticity."
+      }
+    ]
+  },
+  {
+    "theme_id": 6,
+    "text": "Why are heteroskedasticity-robust standard errors often preferred even if a statistical test does not reject homoskedasticity?",
+    "image_url": null,
+    "general_explanation": "Robust standard errors provide a safeguard against unknown variance structures.",
+    "options": [
+      {
+        "text": "They are asymptotically valid regardless of whether homoskedasticity holds, avoiding the risk of incorrect inference if tests lack statistical power.",
+        "is_correct": true,
+        "specific_explanation": "Pre-testing for heteroskedasticity can lead to faulty decisions if the sample size is small. Robust errors are valid in large samples either way."
+      },
+      {
+        "text": "They inherently reduce omitted variable bias in the coefficient estimators.",
+        "is_correct": false,
+        "specific_explanation": "Standard errors only affect inference; they cannot fix coefficient bias caused by omitted variables."
+      },
+      {
+        "text": "They always result in smaller standard errors, increasing the likelihood of finding significant results.",
+        "is_correct": false,
+        "specific_explanation": "Robust standard errors can be either larger or smaller than standard OLS errors. They are simply 'correct', not artificially smaller."
+      },
+      {
+        "text": "They transform the data into a normal distribution.",
+        "is_correct": false,
+        "specific_explanation": "Robust standard errors adjust the variance-covariance matrix, they do not mathematically transform the underlying data points."
+      }
+    ]
+  },
+  {
+    "theme_id": 6,
+    "text": "Under what circumstance does Weighted Least Squares (WLS) provide more efficient estimators than OLS with robust standard errors?",
+    "image_url": null,
+    "general_explanation": "WLS is a form of Generalized Least Squares used when the exact form of heteroskedasticity is known.",
+    "options": [
+      {
+        "text": "When the exact functional form of the heteroskedasticity (the variance function) is perfectly known.",
+        "is_correct": true,
+        "specific_explanation": "If we know exactly how the variance changes across observations, WLS corrects the error structure, making the estimator BLUE again (more efficient than robust OLS)."
+      },
+      {
+        "text": "When the sample size is extremely small.",
+        "is_correct": false,
+        "specific_explanation": "WLS properties rely on knowing the variance function. If it is estimated (Feasible GLS), small sample properties are poor."
+      },
+      {
+        "text": "When there are perfectly collinear independent variables.",
+        "is_correct": false,
+        "specific_explanation": "No technique, neither WLS nor OLS, can estimate models with perfect collinearity."
+      },
+      {
+        "text": "When endogeneity is present in the model.",
+        "is_correct": false,
+        "specific_explanation": "WLS corrects variance issues; it cannot solve correlation between regressors and the error term (endogeneity)."
+      }
+    ]
+  },
+  {
+    "theme_id": 6,
+    "text": "What is a common visual indicator of heteroskedasticity when inspecting a residual plot?",
+    "image_url": null,
+    "general_explanation": "Residual plots graph the OLS residuals against fitted values or independent variables.",
+    "options": [
+      {
+        "text": "The spread of the residuals widens or narrows systematically as the fitted values increase, forming a 'fan' or 'cone' shape.",
+        "is_correct": true,
+        "specific_explanation": "A fan shape indicates that the variance of the errors is growing (or shrinking) alongside the independent variables, which violates constant variance."
+      },
+      {
+        "text": "The residuals form a perfect horizontal line at zero.",
+        "is_correct": false,
+        "specific_explanation": "Residuals are scattered around zero; a perfect line would imply an R-squared of 1.0 with no error variance at all."
+      },
+      {
+        "text": "The residuals form a distinct U-shape or inverted U-shape.",
+        "is_correct": false,
+        "specific_explanation": "A U-shape indicates a missed non-linear relationship (e.g., missing a squared term in the model), not heteroskedasticity."
+      },
+      {
+        "text": "There are large outliers clustered on the left side of the plot.",
+        "is_correct": false,
+        "specific_explanation": "Outliers alone do not necessarily imply heteroskedasticity unless the variance systematically changes across the domain."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "Which of the following explicitly defines an 'endogenous' explanatory variable?",
+    "image_url": null,
+    "general_explanation": "Endogeneity violates the Zero Conditional Mean assumption of OLS.",
+    "options": [
+      {
+        "text": "An explanatory variable that is correlated with the error term.",
+        "is_correct": true,
+        "specific_explanation": "By definition, endogeneity means Cov(x, u) ≠ 0. This causes OLS estimators to be biased and inconsistent."
+      },
+      {
+        "text": "An explanatory variable that is correlated with other independent variables in the model.",
+        "is_correct": false,
+        "specific_explanation": "Correlation among independent variables is multicollinearity, not endogeneity."
+      },
+      {
+        "text": "A variable that is determined entirely outside the economic model.",
+        "is_correct": false,
+        "specific_explanation": "This describes an 'exogenous' variable, which is the opposite of endogenous."
+      },
+      {
+        "text": "A variable whose variance changes across the sample.",
+        "is_correct": false,
+        "specific_explanation": "Changing variance is a property related to heteroskedasticity, not endogeneity."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "To serve as a valid Instrumental Variable (IV), a variable 'z' must satisfy which two strict conditions?",
+    "image_url": null,
+    "general_explanation": "An instrument must provide isolated exogenous variation to the endogenous variable.",
+    "options": [
+      {
+        "text": "It must be correlated with the endogenous explanatory variable, and it must be uncorrelated with the error term.",
+        "is_correct": true,
+        "specific_explanation": "Relevance (Cov(z,x) ≠ 0) ensures the instrument actually explains the regressor. Exogeneity (Cov(z,u) = 0) ensures it doesn't suffer from the same bias as the regressor."
+      },
+      {
+        "text": "It must be perfectly uncorrelated with all other independent variables, and perfectly correlated with the dependent variable.",
+        "is_correct": false,
+        "specific_explanation": "If it were perfectly correlated with the dependent variable, it would just be the dependent variable. It also doesn't need to be uncorrelated with other regressors."
+      },
+      {
+        "text": "It must have a mean of zero and a constant variance of one.",
+        "is_correct": false,
+        "specific_explanation": "These are standardization properties, entirely unrelated to IV requirements."
+      },
+      {
+        "text": "It must be normally distributed and free of measurement error.",
+        "is_correct": false,
+        "specific_explanation": "IV estimation does not strictly require normal distributions, nor does the presence of minor measurement error invalidate the core IV assumptions if it remains exogenous."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "In Two-Stage Least Squares (2SLS) estimation, what precisely occurs during the 'first stage'?",
+    "image_url": null,
+    "general_explanation": "2SLS isolates the exogenous portion of the problematic variable.",
+    "options": [
+      {
+        "text": "The endogenous explanatory variable is regressed on all exogenous variables and all instrumental variables to generate predicted values.",
+        "is_correct": true,
+        "specific_explanation": "The first stage strips away the endogenous variation. The predicted values (x_hat) contain only the exogenous variation driven by the instruments and other exogenous regressors."
+      },
+      {
+        "text": "The dependent variable is regressed on the instrumental variable alone.",
+        "is_correct": false,
+        "specific_explanation": "This would be the 'reduced form' equation for y, not the first stage of 2SLS."
+      },
+      {
+        "text": "The residuals of the OLS model are tested for heteroskedasticity.",
+        "is_correct": false,
+        "specific_explanation": "This is a diagnostic step for variance issues, completely unrelated to IV estimation."
+      },
+      {
+        "text": "The dependent variable is regressed on all exogenous variables to find the R-squared.",
+        "is_correct": false,
+        "specific_explanation": "This does not involve the endogenous variable or the instruments, missing the entire point of 2SLS."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "What is the primary danger of using a 'weak instrument' in IV estimation?",
+    "image_url": null,
+    "general_explanation": "A weak instrument only has a low correlation with the endogenous variable.",
+    "options": [
+      {
+        "text": "It severely inflates the standard errors and exacerbates any slight failure of the instrument exogeneity assumption, leading to heavily biased estimates.",
+        "is_correct": true,
+        "specific_explanation": "When Cov(z,x) is close to zero, the denominator of the IV estimator approaches zero. This blows up variance and magnifies the bias of even tiny correlations with the error term."
+      },
+      {
+        "text": "It causes the dependent variable to become endogenous.",
+        "is_correct": false,
+        "specific_explanation": "The dependent variable's properties are dictated by the model structure, not by the chosen instrument."
+      },
+      {
+        "text": "It converts heteroskedasticity into serial correlation.",
+        "is_correct": false,
+        "specific_explanation": "Weak instruments have no causal link to creating serial correlation in error terms."
+      },
+      {
+        "text": "It forces the IV estimator to equal the OLS estimator exactly.",
+        "is_correct": false,
+        "specific_explanation": "A weak instrument does not make IV equal to OLS; rather, its probability limit may shift closer to the OLS limit if exogeneity is violated, but it won't be mathematically equal."
+      }
+    ]
+  },
+  {
+    "theme_id": 7,
+    "text": "Which of the following is a classic example of 'simultaneity bias' leading to endogeneity?",
+    "image_url": null,
+    "general_explanation": "Simultaneity occurs when x causes y, but y simultaneously causes x.",
+    "options": [
+      {
+        "text": "Estimating the effect of police force size on crime rates, given that higher crime rates also cause cities to hire more police.",
+        "is_correct": true,
+        "specific_explanation": "Because police affect crime (x -> y), but crime affects police hiring (y -> x), police force size is correlated with the error term of the crime equation."
+      },
+      {
+        "text": "Estimating the effect of education on wages while failing to account for unobserved innate ability.",
+        "is_correct": false,
+        "specific_explanation": "This is a classic example of 'omitted variable bias', not simultaneity."
+      },
+      {
+        "text": "Using a proxy variable for 'motivation' that contains high levels of random noise.",
+        "is_correct": false,
+        "specific_explanation": "This describes 'measurement error' bias (attenuation bias), not simultaneity."
+      },
+      {
+        "text": "Including both temperature in Celsius and temperature in Fahrenheit in the same regression.",
+        "is_correct": false,
+        "specific_explanation": "This causes perfect multicollinearity, not endogeneity."
+      }
+    ]
+  }
+]
