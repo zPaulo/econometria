@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>&lt;ScriptCase&gt; :: Ambiente de Produ&ccedil;&atilde;o</title>
+    <meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+    <meta http-equiv="Last-Modified" content="Tue, 16 Jun 2026 17:23:16 GMT"/>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+    <meta http-equiv="Cache-Control" content="max-age=15, s-maxage=0, private"/>
+    <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="author" content="NetMake"/>
+    <meta name="generator" content="ScriptCase"/>
+    <link rel="stylesheet" type="text/css" href="../../lib/css/prod.css"/>
+    <script src="../../third/jquery/js/jquery.js"></script>
+    <link rel="stylesheet" href="../../third/semantic-ui/semantic.css">
+    <script src="../../third/semantic-ui/semantic.js"></script>
+    <link rel="stylesheet" href="../../third/font-awesome/6/css/all.min.css">
+
+    <script>
+    function toggePass(el){
+        $(el).toggleClass('slash');
+        if ($(el).closest('div.input').find('input').get(0).type == 'password') {
+            $(el).closest('div.input').find('input').get(0).type = 'text';
+        } else {
+            $(el).closest('div.input').find('input').get(0).type = 'password';
+        }
+    }
+    </script>
+    <style>
+        .nm_help_red{
+            color: red !important;
+        }
+        .nm_help_green{
+            color: green !important;
+        }
+        .login-container{
+            min-width: 560px;
+            max-width: 560px;
+            position: relative;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 4px;
+            padding: 2rem 0 0rem 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .group{
+            padding: 0 2rem;
+
+        }
+    </style>
+        <script language="javascript">
+        $(document).ready(function(){
+            $("#butotnmodalclose").click(function(){
+                $('.ui.modal').modal('hide');
+            });
+            $("#back-api").click(function(e){
+                e.preventDefault();
+                document.form_prod.option.value = 'api';
+                document.form_prod.target       = 'nm_iframe';
+                document.form_prod.submit();
+            });
+            $("#prod-change-password").removeAttr('onclick');
+            $("#prod-change-password").addClass('disabled');
+            $("[name='field_pass_new']").on('input',function() {
+                nm_validar_pass($(this));
+            });
+            $("[name='field_pass_conf']").on('input',function(){
+                nm_validar_pass($(this));
+                if($("[name='field_pass_conf']").val() == $("[name='field_pass_new']").val()){
+                    $('#nm_help_pass_four').removeClass('nm_help_red').addClass('nm_help_green');
+                }else{
+                    $('#nm_help_pass_four').removeClass('nm_help_green').addClass('nm_help_red');
+                }
+            });
+            $("[name='field_pass_old']").on('input',function(){
+                nm_valida_input($(this));
+            });
+            function nm_valida_input(input){
+                if(input.val().length > 0 ){
+                    nm_validar_pass($("[name='field_pass_new']"));
+                    nm_validar_pass($("[name='field_pass_conf']"));
+                    //$("#prod-change-password").attr("onclick","nm_set_option('change_pass', '', 'nm_iframe')");
+                    //$("#prod-change-password").removeClass('disabled');
+                }else{
+                    $("#prod-change-password").removeAttr("onclick");
+                    $("#prod-change-password").addClass('disabled');
+                }
+            }
+            function nm_validar_pass(field) {
+                if(field.val().length == 0 || field.val() == ''){
+                    $('#nm_help_pass_first').removeClass('nm_help_green').addClass('nm_help_red');
+                    $('#nm_help_pass_second').removeClass('nm_help_green').addClass('nm_help_red');
+                    $('#nm_help_pass_third').removeClass('nm_help_green').addClass('nm_help_red');
+                    $("#prod-change-password").removeAttr("onclick");
+                    $("#prod-change-password").addClass('disabled');
+                }else{
+                    var check_length,check_letter,check_num = false;
+                    var possuiMaiuscula = /[A-Z]/.test(field.val());
+                    var possuiMinuscula = /[a-z]/.test(field.val());
+                    var possuiNumeros   = /\d/.test(field.val());
+                    if (field.val().length >= 8) {
+                        $('#nm_help_pass_first').removeClass('nm_help_red').addClass('nm_help_green');
+                        check_length = true;
+                    } else {
+                        $('#nm_help_pass_first').removeClass('nm_help_green').addClass('nm_help_red');
+                    }
+                    if (possuiMaiuscula && possuiMinuscula) {
+                        $('#nm_help_pass_second').removeClass('nm_help_red').addClass('nm_help_green');
+                        check_letter = true;
+                    }else{
+                        $('#nm_help_pass_second').removeClass('nm_help_green').addClass('nm_help_red');
+                    }
+                    if (possuiNumeros) {
+                        $('#nm_help_pass_third').removeClass('nm_help_red').addClass('nm_help_green');
+                        check_num = true;
+                    }else{
+                        $('#nm_help_pass_third').removeClass('nm_help_green').addClass('nm_help_red');
+                    }
+
+                    if(check_length == true && check_letter == true && check_num == true){
+                        if($("[name='field_pass_conf']").val() == $("[name='field_pass_new']").val() && $("[name='field_pass_conf']").val() != '' && $("[name='field_pass_new']").val() != ''){
+                            $('#nm_help_pass_four').removeClass('nm_help_red').addClass('nm_help_green');
+                            $("#prod-change-password").attr("onclick","nm_set_option('change_pass', '', 'nm_iframe')");
+                            $("#prod-change-password").removeClass('disabled');
+                        }else{
+                            $("#prod-change-password").removeAttr('onclick');
+                            $("#prod-change-password").addClass('disabled');
+                            $('#nm_help_pass_four').removeClass('nm_help_green').addClass('nm_help_red');
+                        }
+                    }else{
+                        $("#prod-change-password").removeAttr("onclick");
+                        $("#prod-change-password").addClass('disabled');
+                    }
+
+                }
+            }
+            $('#recover_password').click(function(e){
+                    e.preventDefault();
+                    document.form_prod.option.value = 'code_page';
+                    document.form_prod.submit();
+            });
+
+            var x = document.form_prod.option.value;
+            if(x == 'code_page'){
+                document.form_prod.option.value = 'recover_password';
+            }else if(x == 'change_pass_page'){
+                document.form_prod.option.value = 'change_pass';
+            }
+
+        });
+
+        function confirmDeleteProfile(var_id) {
+    		event.stopPropagation();
+    		event.preventDefault();
+    		$("#id_modal_confirm_delete_content").html("<h4>Tem certeza que deseja deletar esse perfil?<br>A interface não irá mais criticar a criação desse perfil.</h4>");
+            $("#id_modal_confirm_delete").modal({
+                blurring: true,
+                onApprove: function(){
+                    nm_set_option('api_delete_profile', var_id, 'nm_iframe');
+                },
+            }).modal('show');
+        }
+
+        function confirmDeletePreProfile(str_opt, str_par, str_target)
+        {
+            if(confirm("Tem certeza que deseja deletar esse perfil?<br>A interface não irá mais criticar a criação desse perfil.") == true)
+            {
+                nm_set_option(str_opt, str_par, str_target);
+            }
+        }
+
+        function nm_set_option(str_opt, str_par, str_target)
+        {
+            var valid = true;
+            $('input:required').each(function (i, t){
+                if(! $(t).is(":visible")){ return; }
+                if( $(t).val() == '' || $(t).val() == null ){
+                    $(t).addClass('field-error');
+                    $(t).focus();
+                    valid = false;
+                }
+            });
+
+            if(!valid){
+                return;
+            }
+            if (str_opt == 'profile_new')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/admin_sys_allconections_create_wizard.php?rand=140bb32cbbdb6160";
+            }
+            else if (str_opt == 'profile_edit')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/admin_sys_allconections_create_wizard.php?conn_open=S&rand=e18a72f2da2f5a73";
+            }
+            else if (str_opt == 'profile_new_2')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/admin_sys_allconections_create_wizard_2.php?rand=9596613c295ba010";
+            }
+            else if (str_opt == 'profile_edit_2')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/admin_sys_allconections_create_wizard_2.php?conn_open=S&rand=18d08f28afd39add";
+            }
+            else if (str_opt == 'diagnosis')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/"+ str_opt +".php?rand=19afe1d8732edbb5";
+            }
+
+            else
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/nm_ini_manager3.php?rand=a693be7abc4bf016";
+            }
+
+            document.form_prod.option.value = str_opt;
+            document.form_prod.opt_par.value = str_par;
+            document.form_prod.target = str_target;
+            document.form_prod.submit();
+        }
+            </script>
+</head>
+<body class="nmPage">
+<div class="ui modal tiny" id="id_modal_success">
+    <div class="content" id="id_modal_success_content">
+    	<h4>Dados salvos com sucesso.</h4>
+    </div>
+    <div class="actions">
+        <div class="ui button primary cancel small">Fechar</div>
+    </div>
+</div>
+<form name="form_prod" action="/cadastro/_lib/prod/lib/php/nm_ini_manager3.php?rand=4c1b5b2a7054e482"
+      method="post" target="_top" class="ui form">
+<input type="hidden" name="option" value="login"/>
+<input type="hidden" name="opt_par" value=""/>
+<br />
+<b>Fatal error</b>:  Uncaught Error: Call to undefined function nm_prod_display_login() in /opt/Scriptcase/v9-php81/wwwroot/cadastro/_lib/prod/lib/php/nm_ini_manager3.php:491
+Stack trace:
+#0 {main}
+  thrown in <b>/opt/Scriptcase/v9-php81/wwwroot/cadastro/_lib/prod/lib/php/nm_ini_manager3.php</b> on line <b>491</b><br />
+

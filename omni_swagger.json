@@ -1,0 +1,641 @@
+﻿{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API ServiÃ§os Emporium Omni",
+        "description": "Essa API tem como objetivo a manipulaÃ§Ã£o de serviÃ§os gerais do Emporium Omni",
+        "contact": {
+            "email": "desenvolvimento@conecto.com.br"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "description": "API de Desenvolvimento",
+            "url": "http://192.168.4.215:8080/api/omni"
+        },
+        {
+            "description": "API de ProduÃ§Ã£o",
+            "url": "https://becrux.conecto.com.br:8080/api/omni"
+        }
+    ],
+    "paths": {
+        "/api/omni/methods": {
+            "get": {
+                "summary": "Consulta de metodos de pagamento do cliente",
+                "description": "ServiÃ§o para consultar os metodos de pagamento do cadastrados para o cliente",
+                "tags": [
+                    "Metodos de Pagamento"
+                ],
+                "parameters": [
+                    {
+                        "name": "customer_id_type",
+                        "in": "query",
+                        "required": true,
+                        "description": "Tipo de identificaÃ§Ã£o. (1 - CPF, 2 - CNPJ...)",
+                        "schema": {
+                            "type": "int"
+                        }
+                    },
+                    {
+                        "name": "customer_id",
+                        "in": "query",
+                        "required": true,
+                        "description": "CPF/CNPJ do cliente",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Result"},
+                                        {"$ref": "#/components/schemas/Method"}
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Falha no servidor"
+                    }
+                }
+            }
+        },
+        "/api/omni/methods/create": {
+            "post": {
+                "summary": "Criar meio de pagamento",
+                "description": "ServiÃ§o para gravar meio de pagamento para o cliente",
+                "tags": [
+                    "Metodos de Pagamento"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "method": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "esitefapi",
+                                        "description": "esitefapi (Para pagamento online), cashondelivery (Pagamento na entrega)"
+                                    },
+                                    "media_id": {
+                                        "type": "integer",
+                                        "required": true,
+                                        "example": 1,
+                                        "description": "Id da finalizadora no Emporium"
+                                    },
+                                    "customer_id_type": {
+                                        "type": "integer",
+                                        "required": true,
+                                        "example": 1,
+                                        "description": "Tipo de identificaÃ§Ã£o. (1 - CPF, 2 - CNPJ...)"
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "12345678910",
+                                        "description": "CPF/CNPJ do cliente"
+                                    },
+                                    "card_number": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "1234123412341234",
+                                        "description": "NÃºmero do cartÃ£o de crÃ©dito/dÃ©bito"
+                                    },
+                                    "card_brand": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "",
+                                        "description": "Bandeira do cartÃ£o (visa, mastercard, elo, etc...)"
+                                    },
+                                    "full_name": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "FULANO DE TAL",
+                                        "description": "Nome impresso no cartÃ£o"
+                                    },
+                                    "tef_token": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "JDB+hLdMjnlbqdr",
+                                        "description": "Token do cartÃ£o no eSiTEF"
+                                    },
+                                    "tef_nita": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "JDB+hLdMjnlbqdr",
+                                        "description": "IdentificaÃ§Ã£o do armazenamento no eSiTEF"
+                                    },
+                                    "expiry_date": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "09/28",
+                                        "description": "Data de validade do cartÃ£o. ('09/28' Oou '09/2028')"
+                                    },
+                                    "selected": {
+                                        "type": "boolean",
+                                        "required": false,
+                                        "example": true,
+                                        "description": "Marca metodo como padrÃ£o do cliente"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultSuccess"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Falha no servidor"
+                    }
+                }
+            }
+        },
+        "/api/omni/methods/update": {
+            "post": {
+                "summary": "Alterar meio de pagamento",
+                "description": "ServiÃ§o para alterar meio de pagamento do cliente",
+                "tags": [
+                    "Metodos de Pagamento"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "method": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "esitefapi",
+                                        "description": "Tipo de metodo: esitefapi (Para pagamento online), cashondelivery (Pagamento na entrega)"
+                                    },
+                                    "media_id": {
+                                        "type": "integer",
+                                        "required": true,
+                                        "example": 1,
+                                        "description": "Id da finalizadora no Emporium"
+                                    },
+                                    "customer_id_type": {
+                                        "type": "integer",
+                                        "required": true,
+                                        "example": 1,
+                                        "description": "1 - CPF, 2 - CNPJ..."
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "12345678910",
+                                        "description": "CPF/CNPJ do cliente"
+                                    },
+                                    "card_number": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "1234123412341234",
+                                        "description": "NÃºmero do cartÃ£o de crÃ©dito/dÃ©bito"
+                                    },
+                                    "card_brand": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "",
+                                        "description": "Bandeira do cartÃ£o (visa, mastercard, elo, etc...)"
+                                    },
+                                    "full_name": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "FULANO DE TAL",
+                                        "description": "Nome impresso no cartÃ£o"
+                                    },
+                                    "tef_token": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "JDB+hLdMjnlbqdr",
+                                        "description": "Token do cartÃ£o no eSiTEF"
+                                    },
+                                    "tef_nita": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "JDB+hLdMjnlbqdr",
+                                        "description": "IdentificaÃ§Ã£o do armazenamento no eSiTEF"
+                                    },
+                                    "expiry_date": {
+                                        "type": "string",
+                                        "required": false,
+                                        "example": "09/28",
+                                        "description": "Data de validade do cartÃ£o. ('09/28' Oou '09/2028')"
+                                    },
+                                    "selected": {
+                                        "type": "boolean",
+                                        "required": false,
+                                        "example": true,
+                                        "description": "Marca metodo como padrÃ£o do cliente"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultUpdate"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Falha no servidor"
+                    }
+                }
+            }
+        },
+        "/api/omni/methods/delete/{id}": {
+            "delete": {
+                "summary": "Excluir meio de pagamento",
+                "description": "ServiÃ§o para excluir meio de pagamento do cliente",
+                "tags": [
+                    "Metodos de Pagamento"
+                ],
+                "operationId": "getUserById",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultDelete"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Falha no servidor"
+                    }
+                }
+            }
+        },
+        "/api/omni/methods/select": {
+            "post": {
+                "summary": "Marcar meio de pagamento como selecionado",
+                "description": "ServiÃ§o para marcar como selecionado um meio de pagamento do cliente",
+                "tags": [
+                    "Metodos de Pagamento"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "method": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "esitefapi",
+                                        "description": "esitefapi (Para pagamento online), cashondelivery (Pagamento na entrega)"
+                                    },
+                                    "media_id": {
+                                        "type": "integer",
+                                        "required": true,
+                                        "example": 1,
+                                        "description": "Id da finalizadora no Emporium"
+                                    },
+                                    "customer_id": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "12345678910",
+                                        "description": "CPF/CNPJ do cliente"
+                                    },
+                                    "card_number": {
+                                        "type": "string",
+                                        "required": true,
+                                        "example": "1234123412341234",
+                                        "description": "NÃºmero do cartÃ£o de crÃ©dito/dÃ©bito"
+                                    },
+                                    "selected": {
+                                        "type": "boolean",
+                                        "required": false,
+                                        "example": true,
+                                        "description": "Marca metodo como padrÃ£o do cliente"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultUpdate"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Falha no servidor"
+                    }
+                }
+            }
+        },
+        "/api/omni/payments/create": {
+            "post": {
+                "summary": "Criar pagamento",
+                "description": "ServiÃ§o para realizar pagamento",
+                "tags": [
+                    "Pagamentos"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "payment": {
+                                        "type": "object",
+                                        "required": true,
+                                        "properties": {
+                                            "store_key": {
+                                                "type": "string",
+                                                "required": true,
+                                                "example": "2",
+                                                "description": "NÃºmero da loja"
+                                            },
+                                            "pos_number": {
+                                                "type": "integer",
+                                                "required": false,
+                                                "example": 200,
+                                                "description": "NÃºmero do PDV"
+                                            },
+                                            "request_number": {
+                                                "type": "integer",
+                                                "required": true,
+                                                "example": 123,
+                                                "description": "NÃºmero do pedido"
+                                            },
+                                            "channel": {
+                                                "type": "string",
+                                                "required": true,
+                                                "example": "omni",
+                                                "description": "Origem da geraÃ§Ã£o do pedido (omni, cibus, venditorApp)"
+                                            },
+                                            "method": {
+                                                "type": "string",
+                                                "required": true,
+                                                "example": "esitefapi",
+                                                "description": "Metodo de pagamento ('cashondelivery' ou 'esitefapi')"
+                                            },
+                                            "media_id": {
+                                                "type": "integer",
+                                                "required": false,
+                                                "example": 3,
+                                                "description": "Id da finalizadora"
+                                            },
+                                            "amount": {
+                                                "type": "float",
+                                                "required": true,
+                                                "example": 9.99,
+                                                "description": "Valor a ser pago"
+                                            },
+                                            "card_number": {
+                                                "description": "NÃºmero do cartÃ£o de crÃ©dito/dÃ©bito",
+                                                "type": "string",
+                                                "example": "1234123412341234"
+                                            },
+                                            "card_last_four": {
+                                                "description": "Ãltimos dÃ­gitos do cartÃ£o",
+                                                "type": "string",
+                                                "example": "1234"
+                                            },
+                                            "card_brand": {
+                                                "description": "Bandeira do cartÃ£o (visa, mastercard, elo, etc...)",
+                                                "type": "string",
+                                                "example": "visa"
+                                            },
+                                            "full_name": {
+                                                "type": "string",
+                                                "required": false,
+                                                "example": "FULANO DE TAL",
+                                                "description": "Nome impresso no cartÃ£o"
+                                            },
+                                            "tef_token": {
+                                                "type": "string",
+                                                "required": false,
+                                                "example": "JDB+hLdMjnlbqdr",
+                                                "description": "Token do cartÃ£o no eSiTEF"
+                                            },
+                                            "tef_nita": {
+                                                "type": "string",
+                                                "required": false,
+                                                "example": "JDB+hLdMjnlbqdr",
+                                                "description": "IdentificaÃ§Ã£o do armazenamento no eSiTEF"
+                                            },
+                                            "expiry_date": {
+                                                "type": "string",
+                                                "required": false,
+                                                "example": "09/28",
+                                                "description": "Data de validade do cartÃ£o. ('09/28' Oou '09/2028')"
+                                            },
+                                            "security_code": {
+                                                "type": "integer",
+                                                "required": false,
+                                                "example": 400,
+                                                "description": "CÃ³digo de seguranÃ§a"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResultSuccess"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Falha no servidor"
+                    },
+                    "422": {
+                        "description": "Erro interno ao criar pagamento - eSitef Offline"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Result": {
+                "properties": {
+                    "status": {
+                        "description": "Status http",
+                        "type": "integer",
+                        "example": 200
+                    },
+                    "code": {
+                        "description": "Codigo de sucesso",
+                        "type": "string",
+                        "example": "S000000"
+                    },
+                    "message": {
+                        "description": "Mensagem",
+                        "type": "string",
+                        "example": "Consulta realizada com sucesso"
+                    }
+                },
+                "type": "object"
+            },
+            "ResultDelete": {
+                "properties": {
+                    "status": {
+                        "description": "Status http",
+                        "type": "integer",
+                        "example": 202
+                    },
+                    "code": {
+                        "description": "Codigo de sucesso",
+                        "type": "string",
+                        "example": "S000004"
+                    },
+                    "message": {
+                        "description": "Mensagem",
+                        "type": "string",
+                        "example": "ExclusÃ£o realizada com sucesso"
+                    }
+                },
+                "type": "object"
+            },
+            "ResultSuccess": {
+                "properties": {
+                    "status": {
+                        "description": "Status http",
+                        "type": "integer",
+                        "example": 202
+                    },
+                    "code": {
+                        "description": "Codigo de sucesso",
+                        "type": "string",
+                        "example": "S000002"
+                    },
+                    "message": {
+                        "description": "Mensagem",
+                        "type": "string",
+                        "example": "InclusÃ£o realizada com sucesso"
+                    }
+                },
+                "type": "object"
+            },
+            "ResultUpdate": {
+                "properties": {
+                    "status": {
+                        "description": "Status http",
+                        "type": "integer",
+                        "example": 202
+                    },
+                    "code": {
+                        "description": "Codigo de sucesso",
+                        "type": "string",
+                        "example": "S000003"
+                    },
+                    "message": {
+                        "description": "Mensagem",
+                        "type": "string",
+                        "example": "AlteraÃ§Ã£o realizada com sucesso"
+                    }
+                },
+                "type": "object"
+            },
+            "Method": {
+                "title": "Metodos do cliente",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "description": "Id interno do metodo",
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "customer_id": {
+                                    "description": "CPF/CNPJ do cliente",
+                                    "type": "string",
+                                    "example": "12345678910"
+                                },
+                                "customer_id_type": {
+                                    "description": "Tipo de identificaÃ§Ã£o. (1 - CPF, 2 - CNPJ...)",
+                                    "type": "integer",
+                                    "example": "1"
+                                },
+                                "method": {
+                                    "description": "Tipo de metodo: esitefapi (Para pagamento online), cashondelivery (Pagamento na entrega)",
+                                    "type": "string",
+                                    "example": "esitefapi"
+                                },
+                                "media_id": {
+                                    "description": "Id da finalizadora no Emporium",
+                                    "type": "integer",
+                                    "example": "1"
+                                },
+                                "type": {
+                                    "description": "Tipo de pagamento (debit, credit, cash...)",
+                                    "type": "string",
+                                    "example": "credit"
+                                },
+                                "card_number": {
+                                    "description": "NÃºmero do cartÃ£o de crÃ©dito/dÃ©bito",
+                                    "type": "string",
+                                    "example": "1234123412341234"
+                                },
+                                "card_last_four": {
+                                    "description": "Ãltimos dÃ­gitos do cartÃ£o",
+                                    "type": "string",
+                                    "example": "1234"
+                                },
+                                "card_brand": {
+                                    "description": "Bandeira do cartÃ£o (visa, mastercard, elo, etc...)",
+                                    "type": "string",
+                                    "example": "visa"
+                                },
+                                "selected": {
+                                    "description": "Data da Ãºltima alteraÃ§Ã£o do termo",
+                                    "type": "string",
+                                    "example": "2023-01-01 00:00:00"
+                                }
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
+

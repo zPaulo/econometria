@@ -1,9 +1,7 @@
-import { createClient } from '@libsql/client';
+import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 
-const db = createClient({
-  url: 'file:econometria.db',
-});
+
 
 export async function GET(request) {
   try {

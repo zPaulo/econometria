@@ -1,0 +1,656 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>&lt;ScriptCase&gt; :: Ambiente de Produ&ccedil;&atilde;o</title>
+    <meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>
+    <meta http-equiv="Last-Modified" content="Tue, 16 Jun 2026 17:15:14 GMT"/>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+    <meta http-equiv="Cache-Control" content="max-age=15, s-maxage=0, private"/>
+    <meta http-equiv="Cache-Control" content="post-check=0, pre-check=0"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="author" content="NetMake"/>
+    <meta name="generator" content="ScriptCase"/>
+    <link rel="stylesheet" type="text/css" href="../../lib/css/prod.css"/>
+    <script src="../../third/jquery/js/jquery.js"></script>
+    <link rel="stylesheet" href="../../third/semantic-ui/semantic.css">
+    <script src="../../third/semantic-ui/semantic.js"></script>
+    <link rel="stylesheet" href="../../third/font-awesome/6/css/all.min.css">
+    <script>
+        function toggePass(el){
+            $(el).toggleClass('slash');
+            if ($(el).closest('div.input').find('input').get(0).type == 'password') {
+                $(el).closest('div.input').find('input').get(0).type = 'text';
+            } else {
+                $(el).closest('div.input').find('input').get(0).type = 'password';
+            }
+        }
+    </script>
+    <style>
+        .nm_help_red{
+            color: red !important;
+        }
+        .nm_help_green{
+            color: green !important;
+        }
+        .login-container{
+            min-width: 560px;
+            max-width: 560px;
+            position: relative;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 4px;
+            padding: 2rem 0 0rem 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .group{
+            padding: 0 2rem;
+
+        }
+    </style>
+        <script language="javascript">
+    	function nm_function_check_len_cap(str){
+			var response = false;
+			if(str != '' && str.length == 4){
+                $.ajax({
+                    type: 'POST',
+                    url: "./devel/lib/php/notrash.php",
+                    async:false
+                }).done(function(data) {
+                	code_bool = nm_function_check_len_code($('[name="field_pass_code"]').val());
+                    if(data == '"'+str+'"'){
+                        cap_bool = true;
+                    }else{
+                        cap_bool = false;
+                    }
+                    nm_function_valid_btn(code_bool,cap_bool);
+                });
+			}else{
+                nm_function_valid_btn(false,false);
+            }
+		}
+        function nm_function_check_len_code(str){
+            if(str != '' || str.lenght >0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        function nm_function_valid_btn(x,y){
+            if(!x && y){
+                $("#loginbutton").removeAttr("href");
+                $("#loginbutton").addClass('disabled');
+                if($("#btnresendcode").text().slice(-2) != '  '){
+                    $("#btnresendcode").removeClass('disabled');
+                }
+            }else if(x && y){
+                $("#loginbutton").attr("href","javascript: document.form_prod.submit();");
+                $("#loginbutton").removeClass('disabled');
+                if($("#btnresendcode").text().slice(-2) != '  '){
+                    $("#btnresendcode").removeClass('disabled');
+                }
+            }else{
+                $("#loginbutton").removeAttr("href");
+                $("#loginbutton").addClass('disabled');
+                $("#btnresendcode").addClass('disabled');
+            }
+        }
+       function nm_function_resize(){
+            $(document).ready(function(){
+                $(".ui.container>img").css("display","none");
+                $(".login-container").css("max-width","100%");
+                $(".login-container").css("height","100%");
+                $(".login-container").css("min-width","100%");
+                $(".login-container").css("padding","0");
+            })
+        }
+        function nm_function_code_timeout(element){
+                        var duracao = 45;
+            var contador = setInterval(function() {
+                document.getElementById(element).innerHTML = duracao + "s ";
+                duracao--;
+                if (duracao <= 0) {
+                    clearInterval(contador);
+                    document.getElementById("btnresendcode").innerHTML = "Reenviar código";
+                    nm_function_check_len_cap($('[name="field_pass_captcha"]').val());
+                }
+            }, 1000);
+        }
+        $(document).ready(function(){
+        	$('[name="field_pass_captcha"]').on('input',function(){
+                nm_function_check_len_cap($(this).val());
+		    });
+		    var refreshButton = document.querySelector(".refresh-captcha");
+            if(refreshButton){
+                refreshButton.onclick = function() {
+                    $("#field_pass_captcha").focus();
+                    document.querySelector(".captcha-image").src = './devel/lib/php/secureimage.php?' + Date.now();
+                }
+            }
+			$('[name="field_pass_code"]').on('input',function(){
+                nm_function_check_len_cap($('[name="field_pass_captcha"]').val());
+			});
+            if($('#loginbutton').length == 0){
+                $.ajax({
+                    url:"/cadastro/_lib/prod/lib/php/devel/iface/update.php?rand=c511a349bf61a932",
+                    type:"POST",
+                    async:true,
+                    data:{
+                        ajax:'nm',
+                        nm_action: 'check_version'
+                    },
+                    success: function(retorno){
+                        r = JSON.parse(retorno);
+
+                        if(r.status =='outdated'){
+                            $('#text_content_update').html(r.msg);
+                            $('#check_upd_msg').modal({
+                                onApprove : function() {
+                                    $(".item-menu").each(function(){
+                                        $(this).removeClass('active');
+                                    });
+                                    $("#update").addClass('active');	
+                                  	nm_set_option('update', '', 'nm_iframe')
+                                }
+                              }).modal('show');
+                        }
+                    }
+                });
+            }
+
+            if ($('#code-timeout').length > 0) {
+                nm_function_code_timeout('code-timeout');
+            }
+            
+            $("#btnresendcode").click(function(e){
+                e.preventDefault();
+                document.form_prod.option.value = 'code_page';
+                document.form_prod.opt_par.value = '';
+                document.form_prod.submit();
+            });
+
+            $("#id-about").click(function(e){
+                e.preventDefault();
+                $('#about_window').modal('show');
+            });
+
+            $("#loginbuttonback").click(function(e){
+                e.preventDefault();
+                document.form_prod.option.value = '';
+                document.form_prod.option.opt_par = '';
+                document.form_prod.submit();
+            });
+
+            $("#butotnmodalclose").click(function(){
+                $('.ui.modal').modal('hide');
+            });
+            $(".item-menu").each(function(){
+                $(this).click(function(){
+                    $(".item-menu").each(function(){
+                        $(this).removeClass('active');
+                    });
+                    $(this).addClass('active');
+                })
+            });
+            
+            function set_active_menu_item(str_id){
+    			$(".item-menu").each(function(){
+                    $(this).removeClass('active');
+                });
+                $("#"+str_id).addClass('active');
+    		}
+
+
+			$("#loginbutton").removeAttr("href");
+            $("#loginbutton").addClass('disabled');
+            $('[name="field_pass"]').on('input',function(){
+				if($(this).val() != '' || $(this).val().lenght >0){
+					$("#loginbutton").attr("href","javascript: document.form_prod.submit();");
+                    $("#loginbutton").removeClass('disabled');
+				}else{
+					$("#loginbutton").removeAttr("href");
+            		$("#loginbutton").addClass('disabled');
+				}
+			});
+            
+			$('[name="field_pass_new"]').on('input',function(){
+				nm_function_valida_all();
+			});
+			$('[name="field_pass_conf"]').on('input',function(){
+				nm_function_valida_all();
+			});
+			$('[name="field_pass_email"]').on('input',function(){
+				bool_mail = nm_function_valida_field_pass_email();
+				if(bool_mail){
+					$("#loginbutton").attr("href","javascript: document.form_prod.submit();");
+                    $("#loginbutton").removeClass('disabled');
+				}else{
+					$("#loginbutton").removeAttr("href");
+            		$("#loginbutton").addClass('disabled');
+				}
+			});
+
+            function nm_function_valida_all(){
+            	bool_new  = nm_function_valida_field_pass_new();
+            	bool_conf = nm_function_valida_field_pass_conf();
+            	if($("[name='field_pass_email']").val() != undefined){
+            		bool_mail = nm_function_valida_field_pass_email();
+            	}else{
+            		bool_mail = true;
+            	}
+            	
+            	if(bool_new && bool_conf && bool_mail){
+					$("#loginbutton").attr("href","javascript: document.form_prod.submit();");
+                    $("#loginbutton").removeClass('disabled');
+				}else{
+					$("#loginbutton").removeAttr("href");
+            		$("#loginbutton").addClass('disabled');
+				}
+            }
+            
+			function nm_function_valida_field_pass_new(p_opt=''){
+				var str_obj    	= $("[name='field_pass_new']");
+				var str_conf   	= $("[name='field_pass_conf']");
+				var str_size   	= nm_function_check_len(str_obj.val());
+				var str_letter 	= nm_function_check_letter(str_obj.val());
+				var str_num    	= nm_function_check_num(str_obj.val());
+				var btn	   		= false;
+				if(str_size){
+					if(p_opt==''){
+						$('#nm_help_pass_first').removeClass('nm_help_red').addClass('nm_help_green');
+					}
+				}else{
+					if(p_opt==''){
+						$('#nm_help_pass_first').removeClass('nm_help_green').addClass('nm_help_red');
+					}
+				}
+				if(str_letter){
+					if(p_opt==''){
+						$('#nm_help_pass_second').removeClass('nm_help_red').addClass('nm_help_green');
+					}
+				}else{
+					if(p_opt==''){
+						$('#nm_help_pass_second').removeClass('nm_help_green').addClass('nm_help_red');
+					}
+				}
+				if(str_num){
+					if(p_opt==''){
+						$('#nm_help_pass_third').removeClass('nm_help_red').addClass('nm_help_green');
+					}
+				}else{
+					if(p_opt==''){
+						$('#nm_help_pass_third').removeClass('nm_help_green').addClass('nm_help_red');
+					}
+				}
+				if(str_conf.val() == str_obj.val()){
+					if(p_opt==''){
+						$('#nm_help_pass_four').removeClass('nm_help_red').addClass('nm_help_green');
+					}
+				}else{
+					if(p_opt==''){
+						$('#nm_help_pass_four').removeClass('nm_help_green').addClass('nm_help_red');
+					}
+				}
+				if(str_size && str_letter && str_num && str_conf.val() == str_obj.val()){
+					btn = true;
+				}else{
+					btn = false;
+				}
+				return btn;
+			}
+			function nm_function_valida_field_pass_conf(p_opt=''){
+				var str_obj		= $("[name='field_pass_conf']");
+				var str_new    	= $("[name='field_pass_new']");
+				var str_btn	   	= false;
+				
+				if(str_new.val() == str_obj.val()){
+					if(p_opt == ''){
+						$('#nm_help_pass_four').removeClass('nm_help_red').addClass('nm_help_green');
+					}
+					btn = true;
+				}else{
+					if(p_opt == ''){
+						$('#nm_help_pass_four').removeClass('nm_help_green').addClass('nm_help_red');
+					}
+					btn = false;
+				}
+				return btn;
+			}
+			function nm_function_valida_field_pass_email(){
+				var btn  = false;
+				var str_obj  = $("[name='field_pass_email']");
+				var str_mail = nm_function_check_email(str_obj.val());
+				var str_conf = nm_function_valida_field_pass_conf('mail');
+				var str_new  = nm_function_valida_field_pass_new('mail');
+				if(str_mail){
+					$('#nm_help_pass_five').removeClass('visible').addClass('hidden');
+					btn = true;
+				}else{
+					$('#nm_help_pass_five').removeClass('hidden').addClass('visible');
+					btn = false;
+				}
+				
+				if(str_conf && str_new && str_mail){
+					btn = true;
+				}else{
+					btn = false;
+				}
+				
+				return btn;
+			}
+			
+			function nm_function_check_len(str){
+				var response = false;
+				if(str != '' && str.length >= 8){
+					response = true;
+				}
+				return response;
+			}
+			function nm_function_check_letter(str){
+				var response = false;
+				var str_upper = /[A-Z]/.test(str);
+                var str_lower = /[a-z]/.test(str);
+                if(str_upper && str_lower){
+                	response = true;
+                }
+                return response;
+			}
+			function nm_function_check_num(str){
+				var response  = false;
+				var str_num   = /\d/.test(str);
+				if(str_num){
+					response = true;
+				}
+				return response;
+				
+			}
+			function nm_function_check_email(str){
+				var response = false;
+				if(str == '' || str.length == 0){
+					response = true;
+				}else{
+					var str_mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
+    				if(str_mail){
+    					response = true;
+    				}
+				}
+				return response;
+			}
+            function toggePass(el){
+                $(el).toggleClass('slash');
+                if ($(el).closest('div.input').find('input').get(0).type == 'password') {
+                    $(el).closest('div.input').find('input').get(0).type = 'text';
+                } else {
+                    $(el).closest('div.input').find('input').get(0).type = 'password';
+                }
+            }
+            $('#recover_password').click(function(e){
+                    e.preventDefault();
+                    document.form_prod.option.value = 'code_page';
+                    document.form_prod.submit();
+            });
+
+            var x = document.form_prod.option.value;
+            if(x == 'code_page'){
+                document.form_prod.option.value = 'recover_password';
+            }else if(x == 'change_pass_page'){
+                document.form_prod.option.value  = 'change_pass';
+                document.form_prod.opt_par.value = 'conf_rec_pass';
+            }
+
+        });
+
+        function confirmDeletePreProfile(str_opt, str_par, str_target)
+        {
+            if(confirm("Tem certeza que deseja deletar esse perfil?<br>A interface não irá mais criticar a criação desse perfil.") == true)
+            {
+                nm_set_option(str_opt, str_par, str_target);
+            }
+        }
+        
+        function show_update_modal(str_msg, str_tipo, str_action='') {
+        	$("#id_modal_update_msg").html('');
+        	$("#id_btn_modal_update_close").html('');
+        	$("#id_modal_update_progress").modal('hide');
+        	$("#id_modal_update_msg").html(str_msg);
+        	if(str_tipo == 'step_ini'){
+        		$("#id_btn_modal_update_close").html('Fechar');
+        		$("#id_btn_modal_update_close").addClass('disabled');
+        		$("#id_modal_update_loading_icon").show();
+        	}else if(str_tipo == 'step_end'){
+        		if(str_action == 'logout'){
+        			$("#id_btn_modal_update_close").html('Sair');
+        		}else{
+        			$("#id_btn_modal_update_close").html('Fechar');
+        		}
+        		$("#id_btn_modal_update_close").removeClass('disabled');
+        		$("#id_modal_update_loading_icon").hide();
+        	}else if(str_tipo == 'error'){
+        		$("#id_btn_modal_update_close").html('Fechar');
+                $("#id_modal_update_header_message").addClass('red');
+                $("#id_btn_modal_update_close").removeClass('disabled');
+                $("#id_modal_update_loading_icon").hide();
+        	}
+        
+        	var rotate = 0;
+        	setInterval(function () {
+                rotate += 35;
+                $('#id_modal_update_loading_icon').css('transform', 'rotate(' + rotate + 'deg)');
+            }, 200);
+            if(str_tipo == 'step_ini'){
+                $("#id_modal_update_progress").modal({
+                    blurring: true,
+                    closable: false,
+                }).modal('show');
+            }else if(str_tipo == 'step_end' || str_tipo == 'error'){
+                $("#id_modal_update_progress").modal({
+                    blurring: true,
+                    onHide: function(){
+                        if(str_action == 'logout'){
+                            nm_set_option('logout', '', '_top');    
+                        }
+            		},
+                }).modal('show');
+            }
+        }
+
+        function nm_set_option(str_opt, str_par, str_target)
+        {
+            var valid = true;
+            $('input:required').each(function (i, t){
+                if(! $(t).is(":visible")){ return; }
+                if( $(t).val() == '' || $(t).val() == null ){
+                    $(t).addClass('field-error');
+                    $(t).focus();
+                    valid = false;
+                }
+            });
+            if(!valid){
+                return;
+            }
+            if (str_opt == 'profile_new')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/admin_sys_allconections_create_wizard.php?rand=2e7aeeb5fe3b39f8";
+            }
+            else if (str_opt == 'profile_edit')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/admin_sys_allconections_create_wizard.php?conn_open=S&rand=f3359597ae190936";
+            }
+            else if (str_opt == 'profile_new_2')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/admin_sys_allconections_create_wizard_2.php?rand=1811fa964bdfebd6";
+            }
+            else if (str_opt == 'profile_edit_2')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/admin_sys_allconections_create_wizard_2.php?conn_open=S&rand=2e1ba7896ffa19dd";
+            }
+            else if (str_opt == 'diagnosis')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/"+ str_opt +".php?rand=b67983591bdb5ffc";
+            }
+            else if (str_opt == 'update')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/"+ str_opt +".php?rand=d85d2fcc20ffb873";
+            }
+            else if(str_opt == 'pub_dir')
+            {
+            	document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/"+ str_opt +".php?rand=11a2e2145e38e17a";
+            }
+            else if(str_opt == 'outdated_apps')
+            {
+            	document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/"+ str_opt +".php?rand=1e765120b72c82c6";
+            }
+            
+            else if(str_opt == 'logout')
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/nm_ini_manager2.php?rand=9d842f01d1b1f8ca";
+            }
+            else if (str_opt ==  'new_form_pass')
+            {
+            	document.form_prod.action = "/cadastro/_lib/prod/lib/php/devel/iface/login.php?rand=e9f216c1306f5fd6";
+            }
+            
+            else
+            {
+                document.form_prod.action = "/cadastro/_lib/prod/lib/php/nm_ini_manager3.php?rand=ab8cf7cfd2c56f54";
+            }
+            if (str_opt == 'api_delete_profile' && !confirm("Tem certeza que deseja deletar esse perfil?<br>A interface não irá mais criticar a criação desse perfil."))
+            {
+                return;
+            }
+
+            document.form_prod.option.value = str_opt;
+            document.form_prod.opt_par.value = str_par;
+            document.form_prod.target = str_target;
+            document.form_prod.submit();
+        }
+            </script>
+</head>
+<body class="nmPage">
+<div id='check_upd_msg' class="ui modal">
+      <div class="header">Nova vers&atilde;o do Ambiente de Produ&ccedil;&atilde;o!</div>
+      <div class="content">
+        <p id="text_content_update"></p>
+      </div>
+  <div class="actions">
+      <div class="ui cancel button">Ignorar</div>
+        <div class="ui primary approve button">Atualizar</div>
+  </div>
+</div>
+<div class="ui container" style="display: flex;flex-flow: column nowrap;justify-content: center;align-items: center;row-gap: 1.0rem;width: 100%;height: 100%;">
+
+<img src="../../img/scriptcase.png" width="250px" alt="Scriptcase" title="Scriptcase"/>
+<div class="login-container">
+<form name="form_prod" action="/cadastro/_lib/prod/lib/php/nm_ini_manager2.php?rand=684a6ecd842a2e10"
+      method="post" target="_top" class="ui form">
+<input type="hidden" name="option" value="login"/>
+<input type="hidden" name="opt_par" value=""/>
+        <div id="id_modal_default" class="ui modal tiny">
+            <i class="close icon"></i>
+            <div class="ui header red">
+            ERRO            </div>
+            <div class="image content">
+                <div class="description">
+                    <div class="ui header red ">
+                            O arquivo de idioma informado n&atilde;o existe.<br />                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <div id="butotnmodalclose" class="ui right button primary">
+                    Fechar                </div>
+            </div>
+        </div>
+        <script>
+            $('#id_modal_default').modal({blurring: true}).modal('show');
+        </script>
+            <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: #bfd1e3 url(../../img/bgLogin.jpg);
+            background-size: cover;
+        }
+        .nmFormField{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-flow: column nowrap;
+        }
+        #footer_info {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            color: #efefef9c;
+            font-size: 12px;
+            background: rgba(29,46,61,0.67);
+            height: 40px;
+            padding: 0 20px;
+        }
+        #footer_info .spacer {
+            flex-grow: 1;
+        }
+    </style>
+    <input type="hidden" name="hid_login" value="S"/>
+
+    <div class="group">
+        <h3 class="ui dividing header">
+            Ambiente de Produ&ccedil;&atilde;o        </h3>
+                        <div class="field">
+                    <label>Senha</label>
+                    <div class="ui icon input">
+                        <input type="password" name="field_pass" autocomplete="off"/>
+                        <i class="eye icon" style="cursor: pointer; pointer-events: auto;" onclick="toggePass(this);"></i>
+                    </div>
+                </div>
+                <div class="field" style="padding-bottom: 0.5rem;">
+                    <label>Idioma</label>
+                    <select class="ui dropdown" name="field_language" onChange="document.form_prod.submit()"/>
+                                                    <option
+                                value="pt-br" selected="selected">Portugu&ecirc;s (Brasil)</option>
+                                                    <option
+                                value="es-es">Español (España)</option>
+                                                    <option
+                                value="en-us">English (United States)</option>
+                                            </select>
+                </div>
+                </div>
+        <div class="group" style="padding: 2rem;background-color: #f9fafc;border-top: 1px solid #d1dde2;display: flex;flex-flow: row nowrap;justify-content: space-between;align-items: center;">
+        <a id="loginbutton" class="ui button primary large" href="javascript:document.form_prod.submit();">Entrar</a>
+                        <a id="recover_password" href="#"> Recuperar senha</a>
+                </div>
+    <div id="footer_info">
+        <div class="copyright-prod">
+            1997 - 2026 NetMake. Todos os direitos reservados.        </div>
+        <div class="spacer"></div>
+        <div class="version-prod">
+            Versão: 1.0.002 Build: 8        </div>
+    </div>
+        </form>
+    
+    <div id="id_modal_update_progress" class="ui modal tiny">
+        <div class="image content">
+            <div class="description">
+                <div id="id_modal_update_header_message" class="ui header small">
+                      <span id="id_modal_update_msg" style="float: left;padding-right: 10px;"></span> <i id="id_modal_update_loading_icon" class="sync alternate icon" styel="font-size: 1.3rem;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div id="id_btn_modal_update_close" class="ui right button primary cancel disabled small">
+                Fechar            </div>
+        </div>
+    </div>
+    
+    
+    </body>
+    </html>
+
