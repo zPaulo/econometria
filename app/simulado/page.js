@@ -8,7 +8,7 @@ export default function SimuladoPage() {
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({}); // { index: option_id }
-  const [timeLeft, setTimeLeft] = useState(120 * 60); // 120 minutes
+  const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 minutes
   const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {

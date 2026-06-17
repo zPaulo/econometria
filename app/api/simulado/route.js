@@ -5,8 +5,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request) {
   try {
-    const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get('limit')) || 50;
+    const limit = parseInt(searchParams.get('limit')) || 10;
 
     // Fetch random questions
     const questionsRes = await db.execute({
